@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import WorkoutPage from '../WorkoutPage/WorkoutPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -63,9 +64,9 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/workout"
           >
-            <InfoPage />
+            <WorkoutPage />
           </ProtectedRoute>
 
           <Route
