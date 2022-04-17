@@ -16,6 +16,31 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:workoutId/:exerciseNumber', (req, res) => {
+    
+    console.log('workout id in get', req.params.workoutId);
+    console.log('workout id in get', req.params.exerciseNumber);
+
+    const workoutId = req.params.workoutId;
+    const exerciseNumber = req.params.exerciseNumber;
+
+
+    const queryText = `
+    SELECT * FROM "workouts-exercises"
+    WHERE "workout_id" = $1 AND
+    "exercise_number_in_workout" = $2;`;
+
+    const values = [workoutId, exerciseNumber];
+
+    pool.query(queryText, values).then(result => {
+        console.log('Exercise one GET', result.rows)
+        res.send(result.rows)
+    }).catch(error => {
+        console.log('Error in workout specific get', error)
+        res.sendStatus(500)
+    })
+})
+
 /**
  * POST route template
  */
@@ -38,13 +63,14 @@ router.post('/', (req, res) => {
         console.log('Workout id', workoutId);
 
         const queryText = `
-        INSERT INTO "workouts-exercises" ("workout_id", "exercise_id", "set_number", "repetitions", "weight")
-        VALUES ($1, $2, $3, $4, $5);
+        INSERT INTO "workouts-exercises" ("workout_id", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight")
+        VALUES ($1, $2, $3, $4, $5, $6);
         `;
 
         for (let i = 0; i < req.body.length; i++) {
 
             const numberOfSets = Number(req.body[i].number_of_sets);
+            const exerciseNumberInWorkout = Number(req.body[i].exerciseNumberInWorkout)
             const exerciseId = Number(req.body[i].exercise_id);
             const numberOfReps = Number(req.body[i].number_of_reps);
             const weight = Number(req.body[i].weight)
@@ -54,7 +80,7 @@ router.post('/', (req, res) => {
             for (let i = 0; i < numberOfSets; i++) {
                 count++;
 
-                let values = [workoutId, exerciseId, count, numberOfReps, weight];
+                let values = [workoutId, exerciseNumberInWorkout, exerciseId, count, numberOfReps, weight];
 
                 pool.query(queryText, values)
                 // .then(result => {
@@ -67,6 +93,8 @@ router.post('/', (req, res) => {
             }
         }
 
+        res.send({workoutId})
+        
     }).catch(error => {
         res.sendStatus(500);
         console.log(error)

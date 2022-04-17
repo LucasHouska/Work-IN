@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import WorkoutPage from '../WorkoutPage/WorkoutPage';
+import ExercisePage from '../ExercisePage/ExercisePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +68,13 @@ function App() {
             path="/workout"
           >
             <WorkoutPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+          exact
+          path="/exercise/:workoutId/:exerciseNumber"
+          >
+            <ExercisePage /> 
           </ProtectedRoute>
 
           <Route

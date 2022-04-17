@@ -9,9 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-function ExerciseList() {
+function WorkoutList() {
 
-    const workout = useSelector(state => state.workout)
+    const workout = useSelector(state => state.workout.workoutReducer)
 
     console.log('workout', workout)
 
@@ -45,4 +45,4 @@ function ExerciseList() {
     )
 }
 
-export default ExerciseList;
+export default WorkoutList;

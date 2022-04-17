@@ -1,4 +1,4 @@
-
+import { combineReducers } from "redux";
 
 const workoutReducer = (state = [], action) => {
     if (action.type === 'ADD_EXERCISE_TO_WORKOUT') {
@@ -8,4 +8,23 @@ const workoutReducer = (state = [], action) => {
     return state;
 }
 
-export default workoutReducer;
+const workoutId = (state = 0, action) => {
+    if (action.type === 'SET_WORKOUT_ID') {
+        return action.payload;
+    }
+    return state;
+}
+
+const exerciseList = (state = [], action) => {
+    if (action.type === 'SET_WORKOUT') {
+        console.log('exerciseList reducer', action.payload)
+        return action.payload;
+    }
+    return state;
+}
+
+export default combineReducers({
+    workoutReducer,
+    workoutId,
+    exerciseList,
+  });;

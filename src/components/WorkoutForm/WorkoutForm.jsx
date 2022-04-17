@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
-function WorkoutForm() {
+function WorkoutForm({exerciseNumberInWorkout}) {
 
     const dispatch = useDispatch();
     const exercises = useSelector(state => state.exercises)
 
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
+        exerciseNumberInWorkout: exerciseNumberInWorkout,
         exercise_id: '',
         exercise_name: '',
         number_of_sets: '',
@@ -19,15 +20,20 @@ function WorkoutForm() {
 
     const addExerciseToWorkout = (event) => {
         event.preventDefault();
+
+        exerciseNumberInWorkout ++
+
         dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
         setExerciseToAddToWorkout({
+            exerciseNumberInWorkout: exerciseNumberInWorkout,
             exercise_id: '',
             exercise_name: '',
             number_of_sets: '',
             number_of_reps: '',
             weight: ''
         })
+
     }
 
     const handleExerciseInput = (event, value) => {
@@ -44,7 +50,7 @@ function WorkoutForm() {
 
     return (
         <>
-            <form onSubmit={addExerciseToWorkout}>
+            <form className="workout-form" onSubmit={addExerciseToWorkout}>
                 <Autocomplete
                     id="exercise-options"
                     options={exercises}
