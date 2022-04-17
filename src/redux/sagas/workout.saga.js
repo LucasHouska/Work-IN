@@ -1,16 +1,18 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* getExercises() {
-    let exercises = yield axios.get('/api/workout')
+function* postWorkout(action) {
+    console.log('curious...',action.payload)
 
-    console.log('exercises.data is', exercises.data)
+    yield axios.post('/api/workout', action.payload)
 
-    yield put({type: 'SET_EXERCISES', payload: exercises.data})
+    // console.log('postWorkout', response.data)
+
+    // yield put({type: 'SET_WORKOUT', payload: exercise.data})
 }
 
 function* workoutSaga() {
-    yield takeEvery('GET_EXERCISES', getExercises)
+    yield takeEvery('POST_WORKOUT', postWorkout)
 }
 
 export default workoutSaga;
