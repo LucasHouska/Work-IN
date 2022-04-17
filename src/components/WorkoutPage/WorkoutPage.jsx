@@ -16,9 +16,8 @@ function WorkoutPage() {
     const workout = useSelector(state => state.workout.workoutReducer);
     const workoutId = useSelector(state => state.workout.workoutId);
 
+    // used for keeping track of exercise order; used in WorkoutForm
     let exerciseNumberInWorkout = 1;
-
-    // let firstExercise = workout[0].exerciseNumberInWorkout;
 
     const postWorkout = () => {
         exerciseNumberInWorkout = 1;
