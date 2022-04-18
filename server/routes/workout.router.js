@@ -16,26 +16,23 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:workoutId/:exerciseNumber', (req, res) => {
+router.get('/:workoutId', (req, res) => {
     
     console.log('workout id in get', req.params.workoutId);
-    console.log('workout id in get', req.params.exerciseNumber);
 
-    const workoutId = req.params.workoutId;
-    const exerciseNumber = req.params.exerciseNumber;
+    const workoutId = Number(req.params.workoutId);
 
 
     const queryText = `
     SELECT "workouts-exercises".id, "workout_id", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight", "notes", "exercise_name", "exercise_type", "main_muscle_worked", "exercise_equipment_needed", "difficulty_level", "exercise_instructions", "exercise_benefits", "exercise_image_1", "exercise_image_2" 
     FROM "workouts-exercises"
     JOIN "exercises" ON "workouts-exercises".exercise_id = "exercises".id
-    WHERE "workout_id" = $1 AND
-    "exercise_number_in_workout" = $2
-    ORDER BY "set_number";`;
+    WHERE "workout_id" = $1
+    ORDER BY "exercise_number_in_workout", "set_number";`;
 
-    const values = [workoutId, exerciseNumber];
+    const value = [workoutId];
 
-    pool.query(queryText, values).then(result => {
+    pool.query(queryText, value).then(result => {
         console.log('Exercise one GET', result.rows)
         res.send(result.rows)
     }).catch(error => {

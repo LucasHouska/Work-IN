@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -19,7 +19,11 @@ function ExercisePage() {
 
     const workoutId = Number(useParams().workoutId);
     const exerciseNumber = Number(useParams().exerciseNumber);
-    const exerciseList = useSelector(state => state.workout.exerciseList)
+    const exerciseList = useSelector(state => state.workout.exerciseList);
+
+    const [currentExercise, setCurrentExercise] = useState([]);
+
+    console.log('Current Exercise', currentExercise);
 
 
     const handleNextExercise = () => {
@@ -28,12 +32,34 @@ function ExercisePage() {
 
 
     useEffect(() => {
-        dispatch({ type: `GET_WORKOUT`, payload: { workoutId, exerciseNumber } }) //
+        dispatch({ type: `GET_WORKOUT`, payload: workoutId }) //
     }, [])
+
+    useEffect(() => {
+
+        let temporaryCurrentExercise = [];
+
+        for (const exercise of exerciseList) {
+
+            console.log(exercise.exercise_number_in_workout)
+            console.log(exerciseNumber)
+            console.log(exercise)
+
+            if (exercise.exercise_number_in_workout === exerciseNumber) {
+
+                temporaryCurrentExercise.push(exercise);
+
+            }
+
+        }
+
+        setCurrentExercise(temporaryCurrentExercise);
+
+    }, [exerciseList])
 
     return (
         <>
-            <h1>{exerciseList[0]?.exercise_name.toUpperCase()}</h1>
+            <h1>{currentExercise[0]?.exercise_name.toUpperCase()}</h1>
 
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
@@ -45,11 +71,11 @@ function ExercisePage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {exerciseList && exerciseList.map((exercise) => (
-                            <TableRow key={exercise.id}>
-                                <TableCell align="center">{exercise.set_number}</TableCell>
-                                <TableCell align="center">{exercise.repetitions}</TableCell>
-                                <TableCell align="center">{exercise.weight}</TableCell>
+                        {currentExercise && currentExercise.map((exercise) => (
+                            <TableRow key={exercise?.id}>
+                                <TableCell align="center">{exercise?.set_number}</TableCell>
+                                <TableCell align="center">{exercise?.repetitions}</TableCell>
+                                <TableCell align="center">{exercise?.weight}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
