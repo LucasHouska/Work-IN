@@ -26,14 +26,25 @@ function ExercisePage() {
     console.log('Current Exercise', currentExercise);
 
 
+    const isItLast = () => {
+        let numberOfExercises = [];
+
+        let count = 1
+
+        for (const exercise of exerciseList) {
+            if(exercise.exercise_number_in_workout == count && numberOfExercises.includes(exercise.exercise_number_in_workout) === false) {
+                numberOfExercises.push(exercise.exercise_number_in_workout)
+                count ++;
+            }
+        }
+        console.log('numberOfExercises', numberOfExercises);
+    }
+
+
     const handleNextExercise = () => {
         history.push(`/exercise/${workoutId}/${exerciseNumber + 1}`)
     }
 
-
-    useEffect(() => {
-        dispatch({ type: `GET_WORKOUT`, payload: workoutId }) //
-    }, [])
 
     useEffect(() => {
 
@@ -55,7 +66,13 @@ function ExercisePage() {
 
         setCurrentExercise(temporaryCurrentExercise);
 
+        isItLast();
+
     }, [exerciseList])
+
+    useEffect(() => {
+        dispatch({ type: `GET_WORKOUT`, payload: workoutId }) //
+    }, [])
 
     return (
         <>

@@ -1,5 +1,13 @@
 import { combineReducers } from "redux";
 
+
+const exerciseNumber = (state = 2, action) => {
+    if(action.type === 'ADD_TO_EXERCISE_NUMBER') {
+        state = state + 1;
+    }
+    return state;
+}
+
 const workoutReducer = (state = [], action) => {
     if (action.type === 'ADD_EXERCISE_TO_WORKOUT') {
         console.log(...state, action.payload);
@@ -27,4 +35,5 @@ export default combineReducers({
     workoutReducer,
     workoutId,
     exerciseList,
+    exerciseNumber
   });;
