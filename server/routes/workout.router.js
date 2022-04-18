@@ -26,9 +26,12 @@ router.get('/:workoutId/:exerciseNumber', (req, res) => {
 
 
     const queryText = `
-    SELECT * FROM "workouts-exercises"
+    SELECT "workouts-exercises".id, "workout_id", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight", "notes", "exercise_name", "exercise_type", "main_muscle_worked", "exercise_equipment_needed", "difficulty_level", "exercise_instructions", "exercise_benefits", "exercise_image_1", "exercise_image_2" 
+    FROM "workouts-exercises"
+    JOIN "exercises" ON "workouts-exercises".exercise_id = "exercises".id
     WHERE "workout_id" = $1 AND
-    "exercise_number_in_workout" = $2;`;
+    "exercise_number_in_workout" = $2
+    ORDER BY "set_number";`;
 
     const values = [workoutId, exerciseNumber];
 
