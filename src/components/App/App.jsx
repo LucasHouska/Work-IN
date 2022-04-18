@@ -72,7 +72,7 @@ function App() {
 
           <ProtectedRoute 
           exact
-          path="/exercise/:workoutId/:exerciseNumber"
+          path="/exercise/:workoutId"
           >
             <ExercisePage /> 
           </ProtectedRoute>

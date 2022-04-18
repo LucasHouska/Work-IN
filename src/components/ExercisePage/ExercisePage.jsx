@@ -17,18 +17,27 @@ function ExercisePage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const workoutId = Number(useParams().workoutId);
-    const exerciseNumber = Number(useParams().exerciseNumber);
+    const workoutId = useParams().workoutId;
     const exerciseList = useSelector(state => state.workout.exerciseList)
+
+    const currentExercise = []
+    
+    for (const exercise of exerciseList) {
+        if(exercise.exercise_number_in_workout === 1) {
+            currentExercise.push(exercise);
+        }
+    }
+
+    console.log('Current Exercise', currentExercise);
 
 
     const handleNextExercise = () => {
-        history.push(`/exercise/${workoutId}/${exerciseNumber + 1}`)
+        history.push(`/exercise/${workoutId}`)
     }
 
 
     useEffect(() => {
-        dispatch({ type: `GET_WORKOUT`, payload: { workoutId, exerciseNumber } }) //
+        dispatch({ type: `GET_WORKOUT`, payload: workoutId }) //
     }, [])
 
     return (
@@ -45,7 +54,7 @@ function ExercisePage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {exerciseList && exerciseList.map((exercise) => (
+                        {exerciseList && currentExercise.map((exercise) => (
                             <TableRow key={exercise.id}>
                                 <TableCell align="center">{exercise.set_number}</TableCell>
                                 <TableCell align="center">{exercise.repetitions}</TableCell>
