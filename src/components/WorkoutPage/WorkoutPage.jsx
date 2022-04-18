@@ -26,7 +26,8 @@ function WorkoutPage() {
     }
 
     if (workoutId != 0) {
-        history.push(`/exercise/${workoutId}/1`) //useParams?
+        //useParams on Exercise Page
+        history.push(`/exercise/${workoutId}/1`)
     }
 
     return (

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,15 +9,22 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 
 function ExercisePage() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    const workoutId = useParams().workoutId;
-    const exerciseNumber = useParams().exerciseNumber;
+    const workoutId = Number(useParams().workoutId);
+    const exerciseNumber = Number(useParams().exerciseNumber);
     const exerciseList = useSelector(state => state.workout.exerciseList)
+
+
+    const handleNextExercise = () => {
+        history.push(`/exercise/${workoutId}/${exerciseNumber + 1}`)
+    }
 
 
     useEffect(() => {
@@ -38,16 +45,18 @@ function ExercisePage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {exerciseList.map((exercise) => (
-                            <TableRow key={exercise?.id}>
-                                <TableCell align="center">{exercise?.set_number}</TableCell>
-                                <TableCell align="center">{exercise?.repetitions}</TableCell>
-                                <TableCell align="center">{exercise?.weight}</TableCell>
+                        {exerciseList && exerciseList.map((exercise) => (
+                            <TableRow key={exercise.id}>
+                                <TableCell align="center">{exercise.set_number}</TableCell>
+                                <TableCell align="center">{exercise.repetitions}</TableCell>
+                                <TableCell align="center">{exercise.weight}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <Button onClick={handleNextExercise}>Next Exercise</Button>
         </>
     )
 }
