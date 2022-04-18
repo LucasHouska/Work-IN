@@ -17,12 +17,12 @@ function WorkoutPage() {
     const workoutId = useSelector(state => state.workout.workoutId);
 
     // used for keeping track of exercise order; used in WorkoutForm
-    let exerciseNumberInWorkout = 1;
+    // let exerciseNumberInWorkout = 1;
 
     const postWorkout = () => {
-        exerciseNumberInWorkout = 1;
-
         dispatch({ type: 'POST_WORKOUT', payload: workout })
+
+        // exerciseNumberInWorkout = 1;
     }
 
     if (workoutId != 0) {
@@ -34,7 +34,7 @@ function WorkoutPage() {
         <>
             <div>
                 <WorkoutForm
-                    exerciseNumberInWorkout={exerciseNumberInWorkout}
+                    // exerciseNumberInWorkout={exerciseNumberInWorkout}
                 />
                 <ExerciseList />
                 <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
