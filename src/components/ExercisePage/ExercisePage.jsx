@@ -23,6 +23,8 @@ function ExercisePage() {
 
     const [currentExercise, setCurrentExercise] = useState([]);
 
+    const [lastExercise, setLastExercise] = useState(false);
+
     console.log('Current Exercise', currentExercise);
 
 
@@ -37,7 +39,11 @@ function ExercisePage() {
                 count ++;
             }
         }
-        console.log('numberOfExercises', numberOfExercises);
+        console.log('numberOfExercises', numberOfExercises.length);
+
+        if(exerciseNumber === numberOfExercises.length) {
+            setLastExercise(true);
+        }
     }
 
 
@@ -45,16 +51,15 @@ function ExercisePage() {
         history.push(`/exercise/${workoutId}/${exerciseNumber + 1}`)
     }
 
+    const handleFinish = () => {
+        history.push('/finish');
+    }
 
     useEffect(() => {
 
         let temporaryCurrentExercise = [];
 
         for (const exercise of exerciseList) {
-
-            console.log(exercise.exercise_number_in_workout)
-            console.log(exerciseNumber)
-            console.log(exercise)
 
             if (exercise.exercise_number_in_workout === exerciseNumber) {
 
@@ -66,12 +71,14 @@ function ExercisePage() {
 
         setCurrentExercise(temporaryCurrentExercise);
 
-        isItLast();
+        
 
     }, [exerciseList])
 
     useEffect(() => {
-        dispatch({ type: `GET_WORKOUT`, payload: workoutId }) //
+        dispatch({ type: `GET_WORKOUT`, payload: workoutId });
+
+        isItLast();
     }, [])
 
     return (
@@ -99,7 +106,7 @@ function ExercisePage() {
                 </Table>
             </TableContainer>
 
-            <Button onClick={handleNextExercise}>Next Exercise</Button>
+            {lastExercise ? <Button onClick={handleFinish}>Finish</Button> : <Button onClick={handleNextExercise}>Next Exercise</Button>}
         </>
     )
 }
