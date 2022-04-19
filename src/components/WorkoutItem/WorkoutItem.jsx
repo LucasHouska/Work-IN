@@ -5,7 +5,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
 
-function ExerciseItem({exercise}) {
+function WorkoutItem({exercise}) {
 
     const dispatch = useDispatch();
 
@@ -29,4 +29,4 @@ function ExerciseItem({exercise}) {
     )
 }
 
-export default ExerciseItem;
+export default WorkoutItem;
