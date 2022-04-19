@@ -101,4 +101,22 @@ router.post('/', (req, res) => {
     })
 });
 
+router.delete('/:exercise_id', (req,res) => {
+    console.log('exercise:', req.params.exercise_id);
+
+    const queryText = `
+    DELETE FROM "workouts-exercises"
+    WHERE "id" = $1
+    RETURNING "workout_id";
+    `;
+
+    const value = [req.params.exercise_id];
+
+    pool.query(queryText, value).then(result => {
+        res.send(result.rows[0]);
+    }).catch(error => {
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;

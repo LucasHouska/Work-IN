@@ -19,10 +19,20 @@ function* getWorkout(action) {
     yield put({type: 'SET_WORKOUT', payload: exerciseList.data})
 }
 
+function* deleteSet(action) {
+    let response = yield axios.delete(`/api/workout/${action.payload}`)
+
+    console.log('workout id?', response.data)
+
+    yield put({type: 'GET_WORKOUT', payload: response.data.workout_id});
+}
+
 function* workoutSaga() {
     yield takeEvery('POST_WORKOUT', postWorkout);
     
     yield takeEvery('GET_WORKOUT', getWorkout);
+
+    yield takeEvery('DELETE_SET', deleteSet);
 }
 
 export default workoutSaga;

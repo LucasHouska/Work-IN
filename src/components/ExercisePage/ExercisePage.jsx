@@ -24,9 +24,19 @@ function ExercisePage() {
 
     const [currentExercise, setCurrentExercise] = useState([]);
 
+    const [edit, setEdit] = useState(false);
     const [lastExercise, setLastExercise] = useState(false);
 
     console.log('Current Exercise', currentExercise);
+
+    const handleEdit = (exercise) => {
+        setEdit(true);
+        
+    }
+
+    const handleDelete = (exercise) => {
+        dispatch({type: 'DELETE_SET', payload: exercise.id})
+    }
 
     const handleNextExercise = () => {
         history.push(`/exercise/${workoutId}/${index + 1}`)
@@ -96,6 +106,7 @@ function ExercisePage() {
                             <TableCell align="center">Sets</TableCell>
                             <TableCell align="center">Reps&nbsp;</TableCell>
                             <TableCell align="center">Weight&nbsp;</TableCell>
+                            <TableCell align="center"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -104,6 +115,8 @@ function ExercisePage() {
                                 <TableCell align="center">{exercise?.set_number}</TableCell>
                                 <TableCell align="center">{exercise?.repetitions}</TableCell>
                                 <TableCell align="center">{exercise?.weight}</TableCell>
+                                <TableCell align="right"><Button variant="contained" color="default" onClick={() => {handleEdit(exercise)}}>Edit</Button></TableCell>
+                                <TableCell align="center"><Button variant="contained" color="secondary" onClick={() => {handleDelete(exercise)}}>Delete</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
