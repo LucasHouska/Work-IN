@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
 
+
+
 function WorkoutItem({ exercise }) {
 
     const dispatch = useDispatch();
@@ -20,6 +22,9 @@ function WorkoutItem({ exercise }) {
         reps: exercise.number_of_reps,
         weight: exercise.weight
     })
+
+
+
 
     const handleDelete = (exercise) => {
         console.log('exercise:', exercise)
@@ -37,6 +42,9 @@ function WorkoutItem({ exercise }) {
 
         dispatch({ type: 'EDIT_WORKOUT', payload: exerciseToUpdate })
     }
+
+
+
 
     return (
         <>

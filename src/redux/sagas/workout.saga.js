@@ -5,6 +5,8 @@ function* postWorkout(action) {
     let workout = yield axios.post('/api/workout', action.payload)
 
     yield put({type: 'SET_WORKOUT_ID', payload: workout.data.workoutId})
+
+    yield put({type: 'SET_WORKOUT', payload: workout.data.workoutId})
 }
 
 function* getWorkout(action) {

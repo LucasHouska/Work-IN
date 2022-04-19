@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
+
+
+
 function WorkoutForm() {
 
     const dispatch = useDispatch();
+
     const exercises = useSelector(state => state.exercises);
     const exerciseNumber = useSelector(state => state.workout.exerciseNumber);
 
-    // Object template for adding an exercise to the workout
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
         exerciseNumberInWorkout: 1,
         exercise_id: '',
@@ -21,10 +24,10 @@ function WorkoutForm() {
     })
 
 
+
+
     const addExerciseToWorkout = (event) => {
         event.preventDefault();
-
-        console.log('exerciseNumber', exerciseNumber)
 
         dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
@@ -42,14 +45,18 @@ function WorkoutForm() {
     }
 
     const handleExerciseInput = (event, value) => {
-        console.log(value)
-
         setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, exercise_id: value.id, exercise_name: value.exercise_name })
     }
+
+
+
 
     useEffect(() => {
         dispatch({ type: 'GET_EXERCISES' })
     }, []);
+
+
+
 
     return (
         <>

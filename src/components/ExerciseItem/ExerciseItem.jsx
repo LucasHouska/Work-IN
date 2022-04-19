@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
+
 function ExerciseItem({ exercise }) {
 
     const dispatch = useDispatch();
@@ -17,21 +18,25 @@ function ExerciseItem({ exercise }) {
         weight: exercise.weight
     })
 
+
+
+    
     const handleDelete = (exercise) => {
         dispatch({ type: 'DELETE_SET', payload: exercise.id })
     }
+
 
     const handleEdit = () => {
         setEdit(true);
     }
 
+
     const handleSave = () => {
         setEdit(false);
 
-        console.log('updated set:', setToUpdate)
-
         dispatch({type: 'UPDATE_SET', payload: setToUpdate})
     }
+
 
     return (
         <>

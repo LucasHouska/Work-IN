@@ -16,12 +16,17 @@ function WorkoutPage() {
     const workout = useSelector(state => state.workout.workoutReducer);
 
 
+
+
     const postWorkout = () => {
 
         dispatch({ type: 'POST_WORKOUT', payload: workout })
 
         history.push('/exercise/0')
     }
+
+
+
 
     return (
         <>

@@ -24,7 +24,6 @@ import './App.css';
 import WorkoutPage from '../WorkoutPage/WorkoutPage';
 import ExercisePage from '../ExercisePage/ExercisePage';
 import FinishPage from '../FinishPage/FinishPage';
-import ExerciseRoute from '../ExerciseRoute/ExerciseRoute';
 
 function App() {
   const dispatch = useDispatch();
