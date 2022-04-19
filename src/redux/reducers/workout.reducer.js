@@ -12,6 +12,9 @@ const workoutReducer = (state = [], action) => {
     if (action.type === 'ADD_EXERCISE_TO_WORKOUT') {
         console.log(...state, action.payload);
         return [...state, action.payload]
+    } else if(action.type === 'DELETE_EXERCISE_FROM_WORKOUT') {
+        return state.filter(exercise => exercise.exerciseNumberInWorkout != action.payload).sort();
+        
     }
     return state;
 }
