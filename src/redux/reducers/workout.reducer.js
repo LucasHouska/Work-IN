@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 
 const exerciseNumber = (state = 2, action) => {
-    if(action.type === 'ADD_TO_EXERCISE_NUMBER') {
+    if (action.type === 'ADD_TO_EXERCISE_NUMBER') {
         state = state + 1;
     }
     return state;
@@ -12,10 +12,29 @@ const workoutReducer = (state = [], action) => {
     if (action.type === 'ADD_EXERCISE_TO_WORKOUT') {
         console.log(...state, action.payload);
         return [...state, action.payload]
-    } else if(action.type === 'DELETE_EXERCISE_FROM_WORKOUT') {
+    } else if (action.type === 'DELETE_EXERCISE_FROM_WORKOUT') {
         return state.filter(exercise => exercise.exerciseNumberInWorkout != action.payload).sort();
-    } else if(action.type === 'EDIT WORKOUT') {
-        console.log('yup');
+    } else if (action.type === 'EDIT_WORKOUT') {
+        let exerciseToIndex = 0;
+        let index = state.indexOf(exerciseToIndex);
+        let temporaryState = [...state];
+
+        for (const exercise of state) {
+            if (exercise.exerciseNumberInWorkout == action.payload.exerciseNumberInWorkout) {
+                exerciseToIndex = exercise;
+            }
+        }
+
+        temporaryState.splice(index, 1, {
+            exerciseNumberInWorkout: action.payload.exerciseNumberInWorkout,
+            exercise_id: action.payload.exercise_id,
+            exercise_name: action.payload.exercise_name,
+            number_of_sets: action.payload.sets,
+            number_of_reps: action.payload.reps,
+            weight: action.payload.weight
+        });
+
+        return temporaryState;
     }
     return state;
 }
@@ -40,4 +59,4 @@ export default combineReducers({
     workoutId,
     exerciseList,
     exerciseNumber
-  });;
+});;
