@@ -18,19 +18,20 @@ function ExercisePage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const workoutId = Number(useParams().workoutId);
+    // const workoutIdNum = Number(useParams.workoutIdNum);
     const index = Number(useParams().exerciseNumber);
     const exerciseList = useSelector(state => state.workout.exerciseList);
-    // const workoutReducer = useSelector(state => state.workout.workoutReducer);
+    const workoutId = useSelector(state => state.workout.workoutId)
 
     const [currentExercise, setCurrentExercise] = useState([]);
 
     const [lastExercise, setLastExercise] = useState(false);
 
     console.log('Current Exercise', currentExercise);
+    console.log('workoutId', workoutId);
 
     const handleNextExercise = () => {
-        history.push(`/exercise/${workoutId}/${index + 1}`)
+        history.push(`/exercise/${index + 1}/${workoutIdNum}`)
     }
 
     const handleFinish = () => {
@@ -84,7 +85,7 @@ function ExercisePage() {
         dispatch({ type: `GET_WORKOUT`, payload: workoutId });
 
         exerciseOrder();
-    }, [])
+    }, [workoutId])
 
     return (
         <>

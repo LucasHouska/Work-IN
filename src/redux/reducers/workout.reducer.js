@@ -42,6 +42,8 @@ const workoutReducer = (state = [], action) => {
 const workoutId = (state = 0, action) => {
     if (action.type === 'SET_WORKOUT_ID') {
         return action.payload;
+    } else if(action.type === 'RESET_WORKOUT_ID') {
+        return 0;
     }
     return state;
 }
