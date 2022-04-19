@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import ExerciseItem from '../ExerciseItem/ExerciseItem';
 
 
 function ExercisePage() {
@@ -24,19 +25,9 @@ function ExercisePage() {
 
     const [currentExercise, setCurrentExercise] = useState([]);
 
-    const [edit, setEdit] = useState(false);
     const [lastExercise, setLastExercise] = useState(false);
 
     console.log('Current Exercise', currentExercise);
-
-    const handleEdit = (exercise) => {
-        setEdit(true);
-        
-    }
-
-    const handleDelete = (exercise) => {
-        dispatch({type: 'DELETE_SET', payload: exercise.id})
-    }
 
     const handleNextExercise = () => {
         history.push(`/exercise/${workoutId}/${index + 1}`)
@@ -111,13 +102,10 @@ function ExercisePage() {
                     </TableHead>
                     <TableBody>
                         {currentExercise && currentExercise.map((exercise) => (
-                            <TableRow key={exercise?.id}>
-                                <TableCell align="center">{exercise?.set_number}</TableCell>
-                                <TableCell align="center">{exercise?.repetitions}</TableCell>
-                                <TableCell align="center">{exercise?.weight}</TableCell>
-                                <TableCell align="right"><Button variant="contained" color="default" onClick={() => {handleEdit(exercise)}}>Edit</Button></TableCell>
-                                <TableCell align="center"><Button variant="contained" color="secondary" onClick={() => {handleDelete(exercise)}}>Delete</Button></TableCell>
-                            </TableRow>
+                            <ExerciseItem 
+                            key={exercise?.id}
+                            exercise = {exercise}
+                            />
                         ))}
                     </TableBody>
                 </Table>

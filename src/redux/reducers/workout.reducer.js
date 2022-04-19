@@ -14,7 +14,8 @@ const workoutReducer = (state = [], action) => {
         return [...state, action.payload]
     } else if(action.type === 'DELETE_EXERCISE_FROM_WORKOUT') {
         return state.filter(exercise => exercise.exerciseNumberInWorkout != action.payload).sort();
-        
+    } else if(action.type === 'EDIT WORKOUT') {
+        console.log('yup');
     }
     return state;
 }

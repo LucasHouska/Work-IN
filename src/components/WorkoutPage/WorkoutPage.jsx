@@ -22,7 +22,8 @@ function WorkoutPage() {
         dispatch({ type: 'POST_WORKOUT', payload: workout })
     }
 
-    if (workoutId != 0) {
+    //Or: if(workoutId != 0)
+    if (workoutId) {
         //useParams on Exercise Page
         history.push(`/exercise/${workoutId}/0`)
     }
@@ -30,9 +31,7 @@ function WorkoutPage() {
     return (
         <>
             <div>
-                <WorkoutForm
-                    // exerciseNumberInWorkout={exerciseNumberInWorkout}
-                />
+                <WorkoutForm />
                 <WorkoutList />
                 <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
             </div>

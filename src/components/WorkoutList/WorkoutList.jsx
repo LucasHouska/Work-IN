@@ -24,6 +24,7 @@ function WorkoutList() {
                             <TableCell align="right">Reps&nbsp;</TableCell>
                             <TableCell align="right">Weight&nbsp;</TableCell>
                             <TableCell align="center"></TableCell>
+                            <TableCell align="center"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

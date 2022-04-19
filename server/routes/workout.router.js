@@ -1,11 +1,12 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const queryText = `SELECT "id", "exercise_name" FROM "exercises"`
 
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:workoutId', (req, res) => {
+router.get('/:workoutId', rejectUnauthenticated, (req, res) => {
     
     console.log('workout id in get', req.params.workoutId);
 
@@ -44,7 +45,7 @@ router.get('/:workoutId', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     // POST route code here
 
     console.log('body', req.body)
@@ -101,7 +102,30 @@ router.post('/', (req, res) => {
     })
 });
 
-router.delete('/:exercise_id', (req,res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('put:', req.body)
+
+    const queryText = `
+    UPDATE "workouts-exercises"
+    SET "repetitions" = $1,
+    "weight" = $2
+    WHERE "id" = $3
+    RETURNING "workout_id"
+    `
+
+    const values = [Number(req.body.reps), Number(req.body.weight), req.body.id]
+
+    pool.query(queryText, values).then(result => {
+        const workoutId = result.rows[0].workout_id;
+
+        res.send({workoutId});
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+})
+
+router.delete('/:exercise_id', rejectUnauthenticated, (req,res) => {
     console.log('exercise:', req.params.exercise_id);
 
     const queryText = `
