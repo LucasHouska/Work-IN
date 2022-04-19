@@ -11,23 +11,20 @@ import WorkoutForm from "../WorkoutForm/WorkoutForm";
 function WorkoutPage() {
 
     const history = useHistory();
-
     const dispatch = useDispatch();
+
     const workout = useSelector(state => state.workout.workoutReducer);
     const workoutId = useSelector(state => state.workout.workoutId);
 
-    // used for keeping track of exercise order; used in WorkoutForm
-    // let exerciseNumberInWorkout = 1;
 
     const postWorkout = () => {
-        dispatch({ type: 'POST_WORKOUT', payload: workout })
 
-        // exerciseNumberInWorkout = 1;
+        dispatch({ type: 'POST_WORKOUT', payload: workout })
     }
 
     if (workoutId != 0) {
         //useParams on Exercise Page
-        history.push(`/exercise/${workoutId}/1`)
+        history.push(`/exercise/${workoutId}/0`)
     }
 
     return (

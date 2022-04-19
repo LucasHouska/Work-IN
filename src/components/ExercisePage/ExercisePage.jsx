@@ -18,8 +18,9 @@ function ExercisePage() {
     const history = useHistory();
 
     const workoutId = Number(useParams().workoutId);
-    const exerciseNumber = Number(useParams().exerciseNumber);
+    const index = Number(useParams().exerciseNumber);
     const exerciseList = useSelector(state => state.workout.exerciseList);
+    // const workoutReducer = useSelector(state => state.workout.workoutReducer);
 
     const [currentExercise, setCurrentExercise] = useState([]);
 
@@ -27,41 +28,40 @@ function ExercisePage() {
 
     console.log('Current Exercise', currentExercise);
 
-
-    const isItLast = () => {
-        let numberOfExercises = [];
-
-        let count = 1
-
-        for (const exercise of exerciseList) {
-            if(exercise.exercise_number_in_workout == count && numberOfExercises.includes(exercise.exercise_number_in_workout) === false) {
-                numberOfExercises.push(exercise.exercise_number_in_workout)
-                count ++;
-            }
-        }
-        console.log('numberOfExercises', numberOfExercises.length);
-
-        if(exerciseNumber === numberOfExercises.length) {
-            setLastExercise(true);
-        }
-    }
-
-
     const handleNextExercise = () => {
-        history.push(`/exercise/${workoutId}/${exerciseNumber + 1}`)
+        history.push(`/exercise/${workoutId}/${index + 1}`)
     }
 
     const handleFinish = () => {
         history.push('/finish');
     }
 
-    useEffect(() => {
 
+    const exerciseOrder = () => {
+        let exerciseNumbersInOrder = [];
         let temporaryCurrentExercise = [];
+        let count = 1;
+
 
         for (const exercise of exerciseList) {
+            if (exerciseNumbersInOrder.includes(exercise.exercise_number_in_workout) === false) {
+                exerciseNumbersInOrder.push(exercise.exercise_number_in_workout)
+                count++;
+            } 
+            else {
+                count++;
+            }
+        }
 
-            if (exercise.exercise_number_in_workout === exerciseNumber) {
+        console.log('exerciseNumbersInOrder', exerciseNumbersInOrder);
+
+        if (index === (exerciseNumbersInOrder.length - 1)) {
+            setLastExercise(true);
+        }
+
+
+        for (const exercise of exerciseList) {
+            if (exercise.exercise_number_in_workout === exerciseNumbersInOrder[index]) {
 
                 temporaryCurrentExercise.push(exercise);
 
@@ -70,15 +70,19 @@ function ExercisePage() {
         }
 
         setCurrentExercise(temporaryCurrentExercise);
+    }
 
-        
+
+    useEffect(() => {
+
+        exerciseOrder();
 
     }, [exerciseList])
 
     useEffect(() => {
         dispatch({ type: `GET_WORKOUT`, payload: workoutId });
 
-        isItLast();
+        exerciseOrder();
     }, [])
 
     return (

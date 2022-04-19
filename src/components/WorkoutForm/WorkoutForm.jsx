@@ -26,10 +26,6 @@ function WorkoutForm() {
 
         console.log('exerciseNumber', exerciseNumber)
 
-        // exerciseNumberInWorkout lives in WorkoutPage
-        //used for keeping track of exercise order
-        // exerciseNumberInWorkout = exerciseNumberInWorkout + 1;
-
         dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
         setExerciseToAddToWorkout({
