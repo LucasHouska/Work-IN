@@ -13,6 +13,9 @@ function WorkoutItem({ exercise }) {
 
     const [edit, setEdit] = useState(false);
     const [exerciseToUpdate, setExerciseToUpdate] = useState({
+        exerciseNumberInWorkout: exercise.exerciseNumberInWorkout,
+        exercise_id: exercise.exercise_id,
+        exercise_name: exercise.exercise_name,
         sets: exercise.number_of_sets,
         reps: exercise.number_of_reps,
         weight: exercise.weight

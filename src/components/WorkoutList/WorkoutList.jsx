@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
 import Table from '@material-ui/core/Table';
@@ -12,6 +13,10 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 function WorkoutList() {
 
     const workout = useSelector(state => state.workout.workoutReducer)
+
+    useEffect(() => {
+
+    }, [workout])
 
     return (
         <>
