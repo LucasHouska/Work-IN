@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Button } from '@material-ui/core';
 
-import ExerciseList from "../ExerciseList/ExerciseList";
+import WorkoutList from "../WorkoutList/WorkoutList";
 import WorkoutForm from "../WorkoutForm/WorkoutForm";
 
 
@@ -33,7 +33,7 @@ function WorkoutPage() {
                 <WorkoutForm
                     // exerciseNumberInWorkout={exerciseNumberInWorkout}
                 />
-                <ExerciseList />
+                <WorkoutList />
                 <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
             </div>
         </>

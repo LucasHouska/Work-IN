@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import ExerciseItem from '../ExerciseItem/ExerciseItem';
+import WorkoutItem from '../WorkoutItem/WorkoutItem';
 
 function WorkoutList() {
 
@@ -28,7 +28,7 @@ function WorkoutList() {
                     </TableHead>
                     <TableBody>
                         {workout.map((exercise) => (
-                            <ExerciseItem 
+                            <WorkoutItem 
                             key={exercise.exercise_id}
                             exercise = {exercise}
                             />
