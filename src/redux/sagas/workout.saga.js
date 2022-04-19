@@ -4,8 +4,6 @@ import axios from 'axios';
 function* postWorkout(action) {
     let workout = yield axios.post('/api/workout', action.payload)
 
-    console.log('workoutId in postWorkout', workout.data.workoutId)
-
     yield put({type: 'SET_WORKOUT_ID', payload: workout.data.workoutId})
 }
 
@@ -17,6 +15,16 @@ function* getWorkout(action) {
     console.log('exerciseList in getWorkout is', exerciseList.data);
 
     yield put({type: 'SET_WORKOUT', payload: exerciseList.data})
+}
+
+function* updateSet(action) {
+    console.log(action.payload)
+
+    let response = yield axios.put(`/api/workout`, action.payload);
+
+    console.log('response', response.data.workoutId)
+
+    yield put({type: 'GET_WORKOUT', payload: response.data.workoutId})
 }
 
 function* deleteSet(action) {
@@ -31,6 +39,8 @@ function* workoutSaga() {
     yield takeEvery('POST_WORKOUT', postWorkout);
     
     yield takeEvery('GET_WORKOUT', getWorkout);
+
+    yield takeEvery('UPDATE_SET', updateSet);
 
     yield takeEvery('DELETE_SET', deleteSet);
 }
