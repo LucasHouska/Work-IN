@@ -35,6 +35,9 @@ const workoutReducer = (state = [], action) => {
         });
 
         return temporaryState;
+
+    } else if(action.type === 'CLEAR_WORKOUT') {
+        return [];
     }
     return state;
 }

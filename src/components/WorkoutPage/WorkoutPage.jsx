@@ -14,18 +14,18 @@ function WorkoutPage() {
     const dispatch = useDispatch();
 
     const workout = useSelector(state => state.workout.workoutReducer);
-    const workoutId = useSelector(state => state.workout.workoutId);
+    // const workoutId = useSelector(state => state.workout.workoutId);
 
 
 
 
     const postWorkout = () => {
 
-        dispatch({ type: 'POST_WORKOUT', payload: workout })
+        dispatch({ type: 'POST_WORKOUT', payload: workout, callback: moveToExercise })
 
     }
 
-    if(workoutId != 0) {
+    const moveToExercise = (workoutId) => {
         history.push(`/exercise/${workoutId}/0`)
     }
 

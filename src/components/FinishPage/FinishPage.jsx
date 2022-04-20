@@ -10,12 +10,12 @@ function FinishPage() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    
+
 
     const handleClose = () => {
-        history.push('/workout')
+        dispatch({ type: 'CLEAR_WORKOUT' })
 
-        dispatch({ type: 'RESET_WORKOUT_ID' })
+        history.push('/workout')
     }
 
 

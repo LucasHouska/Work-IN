@@ -1,0 +1,9 @@
+.exercise-name {
+    text-align: center;
+}
+
+.details {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
