@@ -20,23 +20,23 @@ function ExercisePage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // const workoutIdNum = Number(useParams.workoutIdNum);
+    const workoutId = Number(useParams().workoutId);
     const index = Number(useParams().exerciseNumber);
     const exerciseList = useSelector(state => state.workout.exerciseList);
-    const workoutId = useSelector(state => state.workout.workoutId)
+    // const workoutId = useSelector(state => state.workout.workoutId)
 
     const [currentExercise, setCurrentExercise] = useState([]);
 
     const [lastExercise, setLastExercise] = useState(false);
 
-    console.log('Current Exercise', currentExercise);
-    console.log('workoutId', workoutId);
+    // console.log('Current Exercise', currentExercise);
+    // console.log('workoutId', workoutId);
 
 
 
 
     const handleNextExercise = () => {
-        history.push(`/exercise/${index + 1}/${workoutIdNum}`)
+        history.push(`/exercise/${workoutId}/${index + 1}/`)
     }
 
     const handleFinish = () => {
@@ -44,6 +44,8 @@ function ExercisePage() {
     }
 
 
+    //In case the user deletes an exercise in the WorkoutList, this function 
+    //ensures that the exercises will still render in order written
     const exerciseOrder = () => {
         let exerciseNumbersInOrder = [];
         let temporaryCurrentExercise = [];
@@ -52,16 +54,16 @@ function ExercisePage() {
         for (const exercise of exerciseList) {
             if (exerciseNumbersInOrder.includes(exercise.exercise_number_in_workout) === false) {
                 exerciseNumbersInOrder.push(exercise.exercise_number_in_workout)
-                count++;
+                count = count++;
             }
             else {
-                count++;
+                count = count++;
             }
         }
 
-
         for (const exercise of exerciseList) {
             if (exercise.exercise_number_in_workout === exerciseNumbersInOrder[index]) {
+                console.log(exercise)
 
                 temporaryCurrentExercise.push(exercise);
 
@@ -89,7 +91,7 @@ function ExercisePage() {
 
     useEffect(() => {
         dispatch({ type: `GET_WORKOUT`, payload: workoutId });
-        
+
     }, [workoutId])
 
 

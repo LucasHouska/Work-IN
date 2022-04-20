@@ -6,33 +6,23 @@ function* postWorkout(action) {
 
     yield put({type: 'SET_WORKOUT_ID', payload: workout.data.workoutId})
 
-    yield put({type: 'SET_WORKOUT', payload: workout.data.workoutId})
+    yield put({type: 'GET_WORKOUT', payload: workout.data.workoutId})
 }
 
 function* getWorkout(action) {
-    console.log('getWorkout payload', action.payload)
-
     let exerciseList = yield axios.get(`/api/workout/${action.payload}`)
-
-    console.log('exerciseList in getWorkout is', exerciseList.data);
 
     yield put({type: 'SET_WORKOUT', payload: exerciseList.data})
 }
 
 function* updateSet(action) {
-    console.log(action.payload)
-
     let response = yield axios.put(`/api/workout`, action.payload);
-
-    console.log('response', response.data.workoutId)
 
     yield put({type: 'GET_WORKOUT', payload: response.data.workoutId})
 }
 
 function* deleteSet(action) {
     let response = yield axios.delete(`/api/workout/${action.payload}`)
-
-    console.log('workout id?', response.data)
 
     yield put({type: 'GET_WORKOUT', payload: response.data.workout_id});
 }

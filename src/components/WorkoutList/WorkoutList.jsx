@@ -16,16 +16,6 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 function WorkoutList() {
 
     const workout = useSelector(state => state.workout.workoutReducer);
-    const workoutId = useSelector(state => state.workout.workoutId);
-
-
-
-
-    useEffect(() => {
-
-    }, [workout, workoutId])
-
-
 
 
     return (

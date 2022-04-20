@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
@@ -10,9 +10,7 @@ function FinishPage() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
-
-
+    
 
     const handleClose = () => {
         history.push('/workout')
