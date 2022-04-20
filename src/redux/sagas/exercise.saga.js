@@ -4,8 +4,6 @@ import axios from 'axios';
 function* getExercises() {
     let exercises = yield axios.get('/api/workout')
 
-    console.log('exercises.data is', exercises.data)
-
     yield put({type: 'SET_EXERCISES', payload: exercises.data})
 }
 

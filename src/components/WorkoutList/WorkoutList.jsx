@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Table from '@material-ui/core/Table';
@@ -10,13 +10,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import WorkoutItem from '../WorkoutItem/WorkoutItem';
 
+
+
+
 function WorkoutList() {
 
-    const workout = useSelector(state => state.workout.workoutReducer)
+    const workout = useSelector(state => state.workout.workoutReducer);
 
-    useEffect(() => {
-
-    }, [workout])
 
     return (
         <>
@@ -34,9 +34,9 @@ function WorkoutList() {
                     </TableHead>
                     <TableBody>
                         {workout.map((exercise) => (
-                            <WorkoutItem 
-                            key={exercise.exercise_id}
-                            exercise = {exercise}
+                            <WorkoutItem
+                                key={exercise.exercise_id}
+                                exercise={exercise}
                             />
                         ))}
                     </TableBody>
