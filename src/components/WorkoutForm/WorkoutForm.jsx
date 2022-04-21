@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
@@ -10,9 +11,12 @@ import { Autocomplete } from '@material-ui/lab';
 function WorkoutForm() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const exercises = useSelector(state => state.exercises);
     const exerciseNumber = useSelector(state => state.workout.exerciseNumber);
+    const user = useSelector(store => store.user);
+
 
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
         exerciseNumberInWorkout: 1,
@@ -48,7 +52,9 @@ function WorkoutForm() {
         setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, exercise_id: value.id, exercise_name: value.exercise_name })
     }
 
-
+    const goToCreateExercise = () => {
+        history.push('/create-exercise')
+    }
 
 
     useEffect(() => {
@@ -72,6 +78,7 @@ function WorkoutForm() {
                 <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToWorkout.number_of_reps} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
                 <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToWorkout.weight} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
                 <Button variant="contained" type="submit">Add Exercise</Button>
+                {user.access_level > 0 && <Button variant="contained" onClick={goToCreateExercise}>Create a new Exercise</Button>}
             </form>
         </>
     )

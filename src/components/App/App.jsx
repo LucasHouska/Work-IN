@@ -24,6 +24,7 @@ import './App.css';
 import WorkoutPage from '../WorkoutPage/WorkoutPage';
 import ExercisePage from '../ExercisePage/ExercisePage';
 import FinishPage from '../FinishPage/FinishPage';
+import CreateExercise from '../CreateExercise/CreateExercise';
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,16 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+          exact
+          path="/create-exercise"
+          >
+            {user.access_level > 0 ?
+            <CreateExercise /> 
+            : 
+            <Redirect to="/home" />}
           </ProtectedRoute>
 
           <ProtectedRoute

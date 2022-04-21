@@ -37,7 +37,9 @@ function WorkoutPage() {
             <div>
                 <WorkoutForm />
                 <WorkoutList />
-                <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
+                <div className="begin">
+                    <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
+                </div>
             </div>
         </>
     )
