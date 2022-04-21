@@ -20,6 +20,7 @@ Container
 
 .container {
   padding: 20px;
+  text-align: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -109,4 +110,10 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+#max-display {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
 }

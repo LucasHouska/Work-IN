@@ -40,3 +40,9 @@
 .navLink:hover {
   background-color: #008183;
 }
+
+.warm-welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

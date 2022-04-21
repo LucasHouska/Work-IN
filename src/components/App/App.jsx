@@ -25,6 +25,7 @@ import WorkoutPage from '../WorkoutPage/WorkoutPage';
 import ExercisePage from '../ExercisePage/ExercisePage';
 import FinishPage from '../FinishPage/FinishPage';
 import CreateExercise from '../CreateExercise/CreateExercise';
+import MaxPage from '../MaxPage/MaxPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -94,6 +95,13 @@ function App() {
           path="/finish"
           >
             <FinishPage /> 
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+          exact
+          path="/max"
+          >
+            <MaxPage /> 
           </ProtectedRoute>
 
           <Route
