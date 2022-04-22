@@ -8,7 +8,7 @@ const router = express.Router();
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
-    SELECT "id", "name_of_exercise", "weight" FROM "maxes"
+    SELECT "id", "name_of_exercise", "weight", "favorite" FROM "maxes"
     WHERE "user_id" = $1;`;
 
     const value = [req.user.id];
