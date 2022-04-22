@@ -17,12 +17,20 @@ function* getMaxes() {
     yield put({type: 'SET_MAXES', payload: maxes.data});
 }
 
+function* updateFavorite(action) {
+    yield axios.put('/api/exercise', action.payload);
+
+    yield put({type: 'GET_MAXES'})
+}
+
 function* exerciseSaga() {
     yield takeEvery('GET_EXERCISES', getExercises);
 
     yield takeEvery('CREATE_EXERCISE', createExercise);
 
     yield takeEvery('GET_MAXES', getMaxes);
+
+    yield takeEvery('UPDATE_FAVORITE', updateFavorite)
 }
 
 export default exerciseSaga;

@@ -7,6 +7,7 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
+    
     const queryText = `
     SELECT "id", "name_of_exercise", "weight", "favorite" FROM "maxes"
     WHERE "user_id" = $1;`;
@@ -23,7 +24,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 });
 
- router.post('/create-exercise', rejectUnauthenticated, (req, res) => {
+router.post('/create-exercise', rejectUnauthenticated, (req, res) => {
+
     const queryText = `
     INSERT INTO "exercises" ("exercise_name", "exercise_type", "main_muscle_worked", "exercise_equipment_needed", "difficulty_level",
     "exercise_instructions", "exercise_benefits", "exercise_image_1", "exercise_image_2")
@@ -41,6 +43,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             console.log(error);
         })
     }
+})
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `
+    UPDATE "maxes"
+    SET "favorite" = $1
+    WHERE "id" = $2;
+    `;
+
+    const values = [!req.body.favorite, req.body.id]
+
+    pool.query(queryText, values).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;

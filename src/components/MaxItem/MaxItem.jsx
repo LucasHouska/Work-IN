@@ -8,12 +8,10 @@ function MaxItem({ max }) {
 
     const dispatch = useDispatch();
 
-    const [favorite, setFavorite] = useState(false);
-
     const handleFavorite = () => {
 
+        dispatch({type: 'UPDATE_FAVORITE', payload: max})
 
-        setFavorite(!favorite);
     }
 
     return (
