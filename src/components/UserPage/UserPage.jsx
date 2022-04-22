@@ -13,9 +13,7 @@ function UserPage() {
   const maxes = useSelector(state => state.exercises.maxReducer)
   const user = useSelector((store) => store.user);
 
-  const [exerciseOne, setExerciseOne] = useState({});
-  const [exerciseTwo, setExerciseTwo] = useState({});
-  const [exerciseThree, setExerciseThree] = useState({});
+  const [favorites, setFavorites] = useState([]);
 
   const goToMaxes = () => {
     history.push('/max');
@@ -32,15 +30,10 @@ function UserPage() {
 
   useEffect(() => {
 
-    //Considering changing this to "Top 3", which would be set on Max and display them in max display
     for (const max of maxes) {
-      if (max.name_of_exercise === 'Bench') {
-        setExerciseOne(max);
-      } else if (max.name_of_exercise === 'Squat') {
-        setExerciseTwo(max);
-      } else if (max.name_of_exercise === 'Clean') {
-        setExerciseThree(max);
-      }
+      if (max.favorite === true) {
+        setFavorites([...favorites, max]);
+      } 
     }
   }, [maxes])
 
@@ -52,9 +45,14 @@ function UserPage() {
         {/* In the future,  */}
         <h3>Maxes</h3>
         <div id="max-display">
-          <p>{exerciseOne.name_of_exercise}: <span>{exerciseOne.weight}</span></p>
+          {favorites[0] && favorites.map(max => {
+            return (
+              <p key={max.id}>{max.name_of_exercise}: <span>{max.weight}</span></p>
+            )
+          })}
+          {/* <p>{exerciseOne.name_of_exercise}: <span>{exerciseOne.weight}</span></p>
           <p>{exerciseTwo.name_of_exercise}: <span>{exerciseTwo.weight}</span></p>
-          <p>{exerciseThree.name_of_exercise}: <span>{exerciseThree.weight}</span></p>
+          <p>{exerciseThree.name_of_exercise}: <span>{exerciseThree.weight}</span></p> */}
         </div>
         <Button variant="outlined" color="primary" onClick={goToMaxes}>Max</Button>
       </div>
