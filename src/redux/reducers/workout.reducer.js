@@ -64,4 +64,4 @@ export default combineReducers({
     workoutId,
     exerciseList,
     exerciseNumber
-});;
+});
