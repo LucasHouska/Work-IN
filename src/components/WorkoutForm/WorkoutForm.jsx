@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { Button, TextField } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 
@@ -13,7 +13,7 @@ function WorkoutForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const exercises = useSelector(state => state.exercises);
+    const exercises = useSelector(state => state.exercises.exerciseReducer);
     const exerciseNumber = useSelector(state => state.workout.exerciseNumber);
     const user = useSelector(store => store.user);
 

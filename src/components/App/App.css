@@ -20,6 +20,7 @@ Container
 
 .container {
   padding: 20px;
+  text-align: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -109,4 +110,27 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+#maxes-title {
+  text-align: center;
+}
+
+.max-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.max-item {
+  text-align: center;
+  margin-bottom: 50px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+#max-display {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px 
 }
