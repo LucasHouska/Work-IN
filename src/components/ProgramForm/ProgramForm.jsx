@@ -23,7 +23,7 @@ function ProgramForm() {
     const user = useSelector(store => store.user);
 
 
-    const [programDay, setProgramDay] = useState('')
+    const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
 
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
@@ -44,21 +44,23 @@ function ProgramForm() {
     const addExerciseToWorkout = (event) => {
         event.preventDefault();
 
-        dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
+        // dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
-        setExerciseToAddToWorkout({
-            weeks: '',
-            start_date: '',
-            program_day: programDay,
-            exerciseNumberInWorkout: exerciseNumber,
-            exercise_id: '',
-            exercise_name: '',
-            number_of_sets: '',
-            number_of_reps: '',
-            weight: ''
-        })
+        // setExerciseToAddToWorkout({
+        //     weeks: '',
+        //     start_date: '',
+        //     program_day: programDay,
+        //     exerciseNumberInWorkout: exerciseNumber,
+        //     exercise_id: '',
+        //     exercise_name: '',
+        //     number_of_sets: '',
+        //     number_of_reps: '',
+        //     weight: ''
+        // })
 
-        dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+        console.log('program workout', exerciseToAddToWorkout)
+
+        // dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
 
     }
 
@@ -82,10 +84,10 @@ function ProgramForm() {
 
         setProgramDay(day);
 
-        console.log(day);
-
-        console.log('frequency', day)
+        setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, program_day: day })
     };
+
+    console.log(programDay);
 
     const goToCreateExercise = () => {
         history.push('/create-exercise')
