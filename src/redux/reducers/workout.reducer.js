@@ -95,10 +95,22 @@ const programReducer = (state = [], action) => {
     return state;
 }
 
+const weeksReducer = (state = {weeks: 0, startDate: '', frequency: 0}, action) => {
+    if(action.type === 'HOLD_WEEKS') {
+        return {...state, weeks: action.payload};
+    } else if(action.type === 'HOLD_START_DATE') {
+        return {...state, startDate: action.payload};
+    } else if(action.type === 'HOLD_FREQUENCY') {
+        return {...state, frequency: action.payload};
+    }
+    return state;
+}
+
 export default combineReducers({
     workoutReducer,
     workoutId,
     exerciseList,
     exerciseNumber,
-    programReducer
+    programReducer,
+    weeksReducer
 });

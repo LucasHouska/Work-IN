@@ -13,14 +13,15 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-function ProgramForm({programDay, setProgramDay}) {
+function ProgramForm({ programDay, setProgramDay }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const exercises = useSelector(state => state.exercises.exerciseReducer);
-    const exerciseNumber = useSelector(state => state.workout.exerciseNumber);
+    const exercises = useSelector(store => store.exercises.exerciseReducer);
+    const exerciseNumber = useSelector(store => store.workout.exerciseNumber);
     const user = useSelector(store => store.user);
+    const time = useSelector(store => store.workout.weeksReducer)
 
     //Move weeks and start date to reducer to hold it over renders
     // let numberOfWeeks = 0;
@@ -42,16 +43,17 @@ function ProgramForm({programDay, setProgramDay}) {
     })
 
 
-
+ console.log('time', time)
 
     const addExerciseToProgram = (event) => {
         event.preventDefault();
 
         dispatch({ type: 'ADD_EXERCISE_TO_PROGRAM', payload: exerciseToAddToProgram });
 
+
         setExerciseToAddToProgram({
-            number_of_weeks: '',
-            start_date: '',
+            number_of_weeks: time.weeks,
+            start_date: time.startDate,
             program_day: programDay,
             exerciseNumberInWorkout: exerciseNumber,
             exercise_id: '',
@@ -80,6 +82,8 @@ function ProgramForm({programDay, setProgramDay}) {
             programDays.push(i);
         }
         setFrequencyToDays(programDays);
+
+        dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value)})
     }
 
     const handleDayChange = (event) => {
@@ -96,6 +100,9 @@ function ProgramForm({programDay, setProgramDay}) {
         setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_weeks: weeks });
 
         // numberOfWeeks = weeks;
+
+        dispatch({ type: 'HOLD_WEEKS', payload: weeks})
+
     }
 
 
@@ -114,15 +121,16 @@ function ProgramForm({programDay, setProgramDay}) {
     return (
         <>
             <form className="program-form" onSubmit={addExerciseToProgram}>
-                <TextField id="number-of-weeks" type="number" label="Weeks" value={exerciseToAddToProgram.number_of_weeks} variant="standard" onChange={handleChangeWeeks} />
-                <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={exerciseToAddToProgram.start_date} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value })} />
-                <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} type="number" label="Frequency" variant="standard" onChange={handleFrequencyChange} />
+                <TextField id="number-of-weeks" type="number" label="Weeks" value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
+                {/* event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value }) */}
+                <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => {dispatch({ type: 'HOLD_START_DATE', payload: event.target.value})}} /> 
+                <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} type="number" label="Frequency" value={time.frequency} variant="standard" onChange={handleFrequencyChange} />
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                         {frequencyToDays && frequencyToDays.map((day, i) => {
                             return (
-                                <FormControlLabel key = {i}  labelPlacement="top" value={day} control={<Radio />} label={day}/>
+                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
                             )
                         })}
                     </RadioGroup>
