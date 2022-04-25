@@ -13,7 +13,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-function ProgramForm() {
+function ProgramForm({programDay, setProgramDay}) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -22,9 +22,11 @@ function ProgramForm() {
     const exerciseNumber = useSelector(state => state.workout.exerciseNumber);
     const user = useSelector(store => store.user);
 
+    //Move weeks and start date to reducer to hold it over renders
     // let numberOfWeeks = 0;
 
-    const [programDay, setProgramDay] = useState(1)
+    //moved to props
+    // const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
 
     const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
@@ -114,7 +116,7 @@ function ProgramForm() {
             <form className="program-form" onSubmit={addExerciseToProgram}>
                 <TextField id="number-of-weeks" type="number" label="Weeks" value={exerciseToAddToProgram.number_of_weeks} variant="standard" onChange={handleChangeWeeks} />
                 <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={exerciseToAddToProgram.start_date} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value })} />
-                <div id="frequency"><TextField id="frequency" type="number" label="Frequency" variant="standard" onChange={handleFrequencyChange} /><h4>/week</h4></div>
+                <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} type="number" label="Frequency" variant="standard" onChange={handleFrequencyChange} />
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
