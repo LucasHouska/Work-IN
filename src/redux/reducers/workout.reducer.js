@@ -65,6 +65,8 @@ const programReducer = (state = [], action) => {
     if (action.type === 'ADD_EXERCISE_TO_PROGRAM') {
         console.log(...state, action.payload);
         return [...state, action.payload]
+    } else if(action.type === 'SET_PROGRAM') {
+        return action.payload;
     } else if (action.type === 'DELETE_EXERCISE_FROM_PROGRAM') {
         return state.filter(exercise => exercise.exerciseNumberInWorkout != action.payload).sort();
     } else if (action.type === 'EDIT_PROGRAM') {
