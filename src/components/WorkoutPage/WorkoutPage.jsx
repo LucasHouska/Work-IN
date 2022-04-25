@@ -21,6 +21,7 @@ function WorkoutPage() {
     const workout = useSelector(state => state.workout.workoutReducer);
     const program = useSelector(state => state.workout.programReducer);
 
+    const [programExercises, setProgramExercises] = useState([]);
     const [programDays, setProgramDays] = useState([]);
     const [programDay, setProgramDay] = useState(1);
 
@@ -42,13 +43,30 @@ function WorkoutPage() {
         setProgramDay(day);
     };
 
+    console.log('program exercises', programExercises);
+
+
+
+    useEffect(() => {
+
+        console.log('works?')
+        let exercisesForProgramDay = [];
+
+        for (const exercise of program) {
+            if (exercise.program_day === programDay) {
+                exercisesForProgramDay.push(exercise);
+            }
+        }
+        
+        setProgramExercises(exercisesForProgramDay);
+
+    }, [programDay])
 
 
     useEffect(() => {
         let numberOfDays = [];
 
         for (const day of program) {
-            console.log(day)
             if (numberOfDays.includes(day.program_day) === false) {
                 numberOfDays.push(day.program_day);
             }
@@ -70,9 +88,9 @@ function WorkoutPage() {
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
-                        {programDays && programDays.map((day, i) => {
+                        {programDays.map((exercise, i) => {
                             return (
-                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
+                                <FormControlLabel key={i} labelPlacement="top" value={exercise} control={<Radio />} label={exercise.program_day} />
                             )
                         })}
                     </RadioGroup>
