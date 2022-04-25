@@ -134,3 +134,7 @@ input {
   justify-content: space-around;
   margin: 50px 
 }
+
+#frequency {
+  display: inline-flex;
+}

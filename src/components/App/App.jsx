@@ -26,6 +26,7 @@ import ExercisePage from '../ExercisePage/ExercisePage';
 import FinishPage from '../FinishPage/FinishPage';
 import CreateExercise from '../CreateExercise/CreateExercise';
 import MaxPage from '../MaxPage/MaxPage';
+import ProgramPage from '../ProgramPage/ProgramPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,14 +66,14 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          <ProtectedRoute 
-          exact
-          path="/create-exercise"
+          <ProtectedRoute
+            exact
+            path="/create-exercise"
           >
             {user.access_level > 0 ?
-            <CreateExercise /> 
-            : 
-            <Redirect to="/home" />}
+              <CreateExercise />
+              :
+              <Redirect to="/home" />}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -83,25 +84,32 @@ function App() {
             <WorkoutPage />
           </ProtectedRoute>
 
-         <ProtectedRoute 
-          exact
-          path="/exercise/:workoutId/:exerciseNumber"
+          <ProtectedRoute
+            exact
+            path="/exercise/:workoutId/:exerciseNumber"
           >
-            <ExercisePage /> 
+            <ExercisePage />
           </ProtectedRoute>
 
-          <ProtectedRoute 
-          exact
-          path="/finish"
+          <ProtectedRoute
+            exact
+            path="/finish"
           >
-            <FinishPage /> 
+            <FinishPage />
           </ProtectedRoute>
 
-          <ProtectedRoute 
-          exact
-          path="/max"
+          <ProtectedRoute
+            exact
+            path="/max"
           >
-            <MaxPage /> 
+            <MaxPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/program"
+          >
+            <ProgramPage />
           </ProtectedRoute>
 
           <Route
