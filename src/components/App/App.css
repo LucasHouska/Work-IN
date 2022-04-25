@@ -138,3 +138,14 @@ input {
 #frequency {
   display: inline-flex;
 }
+
+#workout-page {
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  align-items: center;
+}
+
+#workout-form {
+  display: inline-flex;
+}

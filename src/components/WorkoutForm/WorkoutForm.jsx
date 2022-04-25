@@ -67,16 +67,20 @@ function WorkoutForm() {
     return (
         <>
             <form className="workout-form" onSubmit={addExerciseToWorkout}>
-                <Autocomplete
-                    id="exercise-options"
-                    options={exercises}
-                    getOptionLabel={(option) => option.exercise_name}
-                    onChange={handleExerciseInput}
-                    renderInput={(params) => <TextField {...params} label="Exercises" margin="normal" />}
-                />
-                <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToWorkout.number_of_sets} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_sets: Number(event.target.value) })} />
-                <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToWorkout.number_of_reps} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
-                <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToWorkout.weight} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
+                <div id='workout-form'>
+                    <Autocomplete
+                        id="exercise-options"
+                        options={exercises}
+                        getOptionLabel={(option) => option.exercise_name}
+                        onChange={handleExerciseInput}
+                        style = {{width: 300}}
+                        renderInput={(params) => <TextField {...params} label="Exercises"  />}
+                    />
+                    <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToWorkout.number_of_sets} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_sets: Number(event.target.value) })} />
+                    <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToWorkout.number_of_reps} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
+                    <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToWorkout.weight} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
+                </div>
+                <br />
                 <Button variant="contained" type="submit">Add Exercise</Button>
                 {user.access_level > 0 && <Button variant="contained" onClick={goToCreateExercise}>Create a new Exercise</Button>}
             </form>

@@ -84,7 +84,7 @@ function WorkoutPage() {
 
     return (
         <>
-            <div>
+            <div id="workout-page">
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
@@ -95,8 +95,9 @@ function WorkoutPage() {
                         })}
                     </RadioGroup>
                 </FormControl>
+                <h2>OR</h2>
                 <WorkoutForm />
-                <WorkoutList />
+                <WorkoutList programDay={programDay}/>
                 <div className="begin">
                     <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
                 </div>

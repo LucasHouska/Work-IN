@@ -13,7 +13,7 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 
 
 
-function WorkoutList() {
+function WorkoutList({programDay}) {
 
     const workout = useSelector(state => state.workout.workoutReducer);
 
