@@ -23,13 +23,13 @@ function ProgramForm() {
     const user = useSelector(store => store.user);
 
 
-    const [frequency, setFrequency] = useState('')
+    const [programDay, setProgramDay] = useState('')
     const [frequencyToDays, setFrequencyToDays] = useState([]);
 
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
         weeks: '',
         start_date: '',
-        // frequency: '',
+        program_day: programDay,
         exerciseNumberInWorkout: 1,
         exercise_id: '',
         exercise_name: '',
@@ -49,7 +49,7 @@ function ProgramForm() {
         setExerciseToAddToWorkout({
             weeks: '',
             start_date: '',
-            // frequency: '',
+            program_day: programDay,
             exerciseNumberInWorkout: exerciseNumber,
             exercise_id: '',
             exercise_name: '',
@@ -67,7 +67,6 @@ function ProgramForm() {
     };
 
     const handleFrequencyChange = (event) => {
-        setFrequency(Number(event.target.value));
 
         let renderFrequency = Number(event.target.value) + 1;
         let programDays = [];
@@ -79,9 +78,13 @@ function ProgramForm() {
     }
 
     const handleDayChange = (event) => {
-        setFrequency(event.target.value);
+        const day = Number(event.target.value)
 
-        console.log(Number(event.target.value));
+        setProgramDay(day);
+
+        console.log(day);
+
+        console.log('frequency', day)
     };
 
     const goToCreateExercise = () => {
@@ -101,10 +104,10 @@ function ProgramForm() {
             <form className="program-form" onSubmit={addExerciseToWorkout}>
                 <TextField id="number-of-weeks" type="number" label="Weeks" value={exerciseToAddToWorkout.weeks} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weeks: Number(event.target.value) })} />
                 <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={exerciseToAddToWorkout.start_date} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, start_date: event.target.value })} />
-                <div id="frequency"><TextField id="frequency" type="number" label="Frequency" value={frequency} variant="standard" onChange={handleFrequencyChange} /><h4>/week</h4></div>
+                <div id="frequency"><TextField id="frequency" type="number" label="Frequency" variant="standard" onChange={handleFrequencyChange} /><h4>/week</h4></div>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
-                    <RadioGroup row aria-label="Day" name="day" value={Number(frequency)} onChange={handleDayChange}>
+                    <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange} defaultValue={1}>
                         {frequencyToDays && frequencyToDays.map((day, i) => {
                             return (
                                 <FormControlLabel key = {i}  labelPlacement="top" value={day} control={<Radio />} label={day}/>
