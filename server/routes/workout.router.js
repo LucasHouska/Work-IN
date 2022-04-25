@@ -5,7 +5,9 @@ const router = express.Router();
 
 
 router.get('/program', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM "program"`
+    const queryText = `
+    SELECT * FROM "program" 
+    JOIN "exercises" ON "program".exercise_id = "exercises".id`
 
     pool.query(queryText).then(result => {
         res.send(result.rows);

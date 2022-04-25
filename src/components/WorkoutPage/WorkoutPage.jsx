@@ -60,6 +60,8 @@ function WorkoutPage() {
         
         setProgramExercises(exercisesForProgramDay);
 
+        dispatch({type: 'EXERCISES_FOR_PROGRAM_DAY', payload: exercisesForProgramDay})
+
     }, [programDay])
 
 
@@ -86,7 +88,7 @@ function WorkoutPage() {
         <>
             <div id="workout-page">
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Day</FormLabel>
+                    <FormLabel component="legend">Program Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                         {programDays.map((exercise, i) => {
                             return (
