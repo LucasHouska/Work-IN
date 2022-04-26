@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Table from '@material-ui/core/Table';
@@ -13,10 +13,36 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 
 
 
-function WorkoutList({programDay}) {
+function ProgramList({programDay, setProgramDay}) {
 
-    const workout = useSelector(state => state.workout.workoutReducer);
+    const program = useSelector(state => state.workout.programReducer);
 
+    const [day, setDay] = useState([]);
+
+
+    useEffect(() => {
+
+        let temporaryProgramDay = [];
+
+        for (const exercise of program) {
+            if(exercise.program_day == programDay) {
+                temporaryProgramDay.push(exercise);
+            }
+            setDay(temporaryProgramDay);
+        }
+
+    }, [program])
+
+    useEffect(() => {
+        let temporaryProgramDay = [];
+
+        for (const exercise of program) {
+            if(exercise.program_day == programDay) {
+                temporaryProgramDay.push(exercise);
+            }
+            setDay(temporaryProgramDay);
+        }
+    }, [programDay])
 
     return (
         <>
@@ -33,7 +59,7 @@ function WorkoutList({programDay}) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {workout.map((exercise) => (
+                        {day.map((exercise) => (
                             <WorkoutItem
                                 key={exercise.exercise_id}
                                 exercise={exercise}
@@ -46,4 +72,4 @@ function WorkoutList({programDay}) {
     )
 }
 
-export default WorkoutList;
+export default ProgramList;

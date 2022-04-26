@@ -3,9 +3,20 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
+router.get('/program', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    SELECT * FROM "program" 
+    JOIN "exercises" ON "program".exercise_id = "exercises".id`
+
+    pool.query(queryText).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+})
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const queryText = `SELECT "id", "exercise_name" FROM "exercises"`
@@ -42,9 +53,6 @@ router.get('/:workoutId', rejectUnauthenticated, (req, res) => {
     })
 })
 
-/**
- * POST route template
- */
 router.post('/', rejectUnauthenticated, (req, res) => {
     // POST route code here
 
@@ -101,6 +109,27 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.log(error)
     })
 });
+
+router.post('/program', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    INSERT INTO "program" ("program_day", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight")
+    VALUES ($1, $2, $3, $4, $5, $6);`;
+
+    const program = req.body;
+
+    console.log(program)
+
+    for (const day of program) {
+        const values = [day.program_day, day.exerciseNumberInWorkout, day.exercise_id, day.number_of_sets, day.number_of_reps, day.weight];
+
+        pool.query(queryText, values).then(result => {
+
+        }).catch(error => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    }
+})
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('put:', req.body)

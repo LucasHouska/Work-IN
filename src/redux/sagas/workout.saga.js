@@ -30,6 +30,22 @@ function* deleteSet(action) {
     yield put({type: 'GET_WORKOUT', payload: response.data.workout_id});
 }
 
+
+
+function* getProgram() {
+    let program = yield axios.get('/api/workout/program');
+
+    console.log('program:', program.data);
+
+    yield put({ type: 'SET_PROGRAM', payload: program.data});
+}
+
+function* postProgram(action) {
+    yield axios.post('/api/workout/program', action.payload)
+
+    yield action.callback();
+}
+
 function* workoutSaga() {
     yield takeEvery('POST_WORKOUT', postWorkout);
     
@@ -38,6 +54,10 @@ function* workoutSaga() {
     yield takeEvery('UPDATE_SET', updateSet);
 
     yield takeEvery('DELETE_SET', deleteSet);
+
+    yield takeEvery('GET_PROGRAM', getProgram);
+
+    yield takeEvery('POST_PROGRAM', postProgram);
 }
 
 export default workoutSaga;

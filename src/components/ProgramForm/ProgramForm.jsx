@@ -13,23 +13,27 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-function ProgramForm() {
+function ProgramForm({ programDay, setProgramDay }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const exercises = useSelector(state => state.exercises.exerciseReducer);
-    const exerciseNumber = useSelector(state => state.workout.exerciseNumber);
+    const exercises = useSelector(store => store.exercises.exerciseReducer);
+    const exerciseNumber = useSelector(store => store.workout.exerciseNumber);
     const user = useSelector(store => store.user);
+    const time = useSelector(store => store.workout.weeksReducer)
 
+    //Move weeks and start date to reducer to hold it over renders
+    // let numberOfWeeks = 0;
 
-    const [frequency, setFrequency] = useState('')
+    //moved to props
+    // const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
 
-    const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
-        weeks: '',
+    const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
+        number_of_weeks: '',
         start_date: '',
-        // frequency: '',
+        program_day: programDay,
         exerciseNumberInWorkout: 1,
         exercise_id: '',
         exercise_name: '',
@@ -39,17 +43,18 @@ function ProgramForm() {
     })
 
 
+ console.log('time', time)
 
-
-    const addExerciseToWorkout = (event) => {
+    const addExerciseToProgram = (event) => {
         event.preventDefault();
 
-        dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
+        dispatch({ type: 'ADD_EXERCISE_TO_PROGRAM', payload: exerciseToAddToProgram });
 
-        setExerciseToAddToWorkout({
-            weeks: '',
-            start_date: '',
-            // frequency: '',
+
+        setExerciseToAddToProgram({
+            number_of_weeks: time.weeks,
+            start_date: time.startDate,
+            program_day: programDay,
             exerciseNumberInWorkout: exerciseNumber,
             exercise_id: '',
             exercise_name: '',
@@ -58,16 +63,17 @@ function ProgramForm() {
             weight: ''
         })
 
+        console.log('program workout', exerciseToAddToProgram)
+
         dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
 
     }
 
     const handleExerciseInput = (event, value) => {
-        setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, exercise_id: value.id, exercise_name: value.exercise_name })
+        setExerciseToAddToProgram({ ...exerciseToAddToProgram, exercise_id: value.id, exercise_name: value.exercise_name })
     };
 
     const handleFrequencyChange = (event) => {
-        setFrequency(Number(event.target.value));
 
         let renderFrequency = Number(event.target.value) + 1;
         let programDays = [];
@@ -76,13 +82,29 @@ function ProgramForm() {
             programDays.push(i);
         }
         setFrequencyToDays(programDays);
+
+        dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value)})
     }
 
     const handleDayChange = (event) => {
-        setFrequency(event.target.value);
+        const day = Number(event.target.value)
 
-        console.log(Number(event.target.value));
+        setProgramDay(day);
+
+        setExerciseToAddToProgram({ ...exerciseToAddToProgram, program_day: day })
     };
+
+    const handleChangeWeeks = (event) => {
+        let weeks = Number(event.target.value);
+
+        setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_weeks: weeks });
+
+        // numberOfWeeks = weeks;
+
+        dispatch({ type: 'HOLD_WEEKS', payload: weeks})
+
+    }
+
 
     const goToCreateExercise = () => {
         history.push('/create-exercise')
@@ -98,16 +120,17 @@ function ProgramForm() {
 
     return (
         <>
-            <form className="program-form" onSubmit={addExerciseToWorkout}>
-                <TextField id="number-of-weeks" type="number" label="Weeks" value={exerciseToAddToWorkout.weeks} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weeks: Number(event.target.value) })} />
-                <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={exerciseToAddToWorkout.start_date} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, start_date: event.target.value })} />
-                <div id="frequency"><TextField id="frequency" type="number" label="Frequency" value={frequency} variant="standard" onChange={handleFrequencyChange} /><h4>/week</h4></div>
+            <form className="program-form" onSubmit={addExerciseToProgram}>
+                <TextField id="number-of-weeks" type="number" label="Weeks" value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
+                {/* event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value }) */}
+                <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => {dispatch({ type: 'HOLD_START_DATE', payload: event.target.value})}} /> 
+                <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} type="number" label="Frequency" value={time.frequency} variant="standard" onChange={handleFrequencyChange} />
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
-                    <RadioGroup row aria-label="Day" name="day" value={Number(frequency)} onChange={handleDayChange}>
+                    <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                         {frequencyToDays && frequencyToDays.map((day, i) => {
                             return (
-                                <FormControlLabel key = {i}  labelPlacement="top" value={day} control={<Radio />} label={day}/>
+                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
                             )
                         })}
                     </RadioGroup>
@@ -119,9 +142,9 @@ function ProgramForm() {
                     onChange={handleExerciseInput}
                     renderInput={(params) => <TextField {...params} label="Exercises" margin="normal" />}
                 />
-                <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToWorkout.number_of_sets} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_sets: Number(event.target.value) })} />
-                <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToWorkout.number_of_reps} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
-                <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToWorkout.weight} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
+                <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToProgram.number_of_sets} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_sets: Number(event.target.value) })} />
+                <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToProgram.number_of_reps} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_reps: Number(event.target.value) })} />
+                <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToProgram.weight} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
                 <Button variant="contained" type="submit">Add Exercise</Button>
                 {user.access_level > 0 && <Button variant="contained" onClick={goToCreateExercise}>Create a new Exercise</Button>}
             </form>
