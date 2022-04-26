@@ -13,6 +13,7 @@ const workoutReducer = (state = [], action) => {
         console.log(...state, action.payload);
         return [...state, action.payload]
     } else if(action.type === 'EXERCISES_FOR_PROGRAM_DAY') {
+        console.log('exercises from a program day:', action.payload)
         return action.payload;
     } else if (action.type === 'DELETE_EXERCISE_FROM_WORKOUT') {
         return state.filter(exercise => exercise.exerciseNumberInWorkout != action.payload).sort();

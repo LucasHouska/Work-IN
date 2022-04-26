@@ -4,7 +4,7 @@ import axios from 'axios';
 function* postWorkout(action) {
     let workout = yield axios.post('/api/workout', action.payload)
 
-    yield console.log(action.payload.workoutId)
+    console.log(workout.data.workoutId)
 
     yield put({type: 'GET_WORKOUT', payload: workout.data.workoutId})
 

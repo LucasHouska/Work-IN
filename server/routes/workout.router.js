@@ -12,7 +12,7 @@ router.get('/program', rejectUnauthenticated, (req, res) => {
     pool.query(queryText).then(result => {
         res.send(result.rows);
     }).catch(error => {
-        console.log(error);
+        console.log('Error in program GET on workout router', error);
         res.sendStatus(500);
     })
 })

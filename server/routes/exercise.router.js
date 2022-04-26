@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/progress/:exercise_id', rejectUnauthenticated, (req, res) => {
-    console.log(Number(req.params.exercise_id))
+    console.log('what is this', Number(req.params.exercise_id))
 
     const queryText = `
     SELECT "workouts".date, "workouts-exercises".weight FROM "workouts"
@@ -21,7 +21,7 @@ router.get('/progress/:exercise_id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, values).then(result => {
         res.send(result.rows);
     }).catch(error => {
-        console.log(error);
+        console.log('Error in progress GET', error);
         res.sendStatus(500);
     })
 })
@@ -38,8 +38,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, value).then(result => {
         res.send(result.rows);
     }).catch(error => {
+        console.log('Error in max GET in exercise router', error);
         res.sendStatus(500);
-        console.log(error);
     })
 
 });
