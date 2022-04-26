@@ -4,19 +4,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/program', rejectUnauthenticated, (req, res) => {
-    const queryText = `
-    SELECT * FROM "program" 
-    JOIN "exercises" ON "program".exercise_id = "exercises".id`
-
-    pool.query(queryText).then(result => {
-        res.send(result.rows);
-    }).catch(error => {
-        console.log('Error in program GET on workout router', error);
-        res.sendStatus(500);
-    })
-})
-
 router.get('/:workoutId', rejectUnauthenticated, (req, res) => {
 
     console.log('workout id in get', req.params.workoutId);
@@ -107,8 +94,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.send({ workoutId })
 
     }).catch(error => {
+        console.log('Error in workoutPOST', error)
         res.sendStatus(500);
-        console.log(error)
     })
 });
 

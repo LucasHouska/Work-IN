@@ -4,8 +4,6 @@ import axios from 'axios';
 function* postWorkout(action) {
     let workout = yield axios.post('/api/workout', action.payload)
 
-    console.log(workout.data.workoutId)
-
     yield put({type: 'GET_WORKOUT', payload: workout.data.workoutId})
 
     //If I use this post again, add an if statement in front if(callback)
@@ -13,6 +11,8 @@ function* postWorkout(action) {
 }
 
 function* getWorkout(action) {
+    console.log('This is the workout id in getWorkout', action.payload)
+
     let exerciseList = yield axios.get(`/api/workout/${action.payload}`)
 
     yield put({type: 'SET_WORKOUT', payload: exerciseList.data})
