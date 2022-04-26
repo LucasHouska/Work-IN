@@ -47,9 +47,9 @@ function UserPage() {
       <div>
         <h2>Your Maxes</h2>
         <div id="max-display">
-          {favorites.map(max => {
+          {favorites.map((max, i) => {
             return (
-              <div className="max-item">
+              <div className="max-item" key={i}>
                 <h3>{max.name_of_exercise}</h3>
                 <p>{max.weight}</p>
             </div>
