@@ -4,8 +4,6 @@ import axios from 'axios';
 function* postWorkout(action) {
     let workout = yield axios.post('/api/workout', action.payload)
 
-    // yield put({type: 'SET_WORKOUT_ID', payload: workout.data.workoutId})
-
     yield put({type: 'GET_WORKOUT', payload: workout.data.workoutId})
 
     //If I use this post again, add an if statement in front if(callback)
@@ -13,6 +11,8 @@ function* postWorkout(action) {
 }
 
 function* getWorkout(action) {
+    console.log('This is the workout id in getWorkout', action.payload)
+
     let exerciseList = yield axios.get(`/api/workout/${action.payload}`)
 
     yield put({type: 'SET_WORKOUT', payload: exerciseList.data})
@@ -32,20 +32,6 @@ function* deleteSet(action) {
 
 
 
-function* getProgram() {
-    let program = yield axios.get('/api/workout/program');
-
-    console.log('program:', program.data);
-
-    yield put({ type: 'SET_PROGRAM', payload: program.data});
-}
-
-function* postProgram(action) {
-    yield axios.post('/api/workout/program', action.payload)
-
-    yield action.callback();
-}
-
 function* workoutSaga() {
     yield takeEvery('POST_WORKOUT', postWorkout);
     
@@ -54,10 +40,6 @@ function* workoutSaga() {
     yield takeEvery('UPDATE_SET', updateSet);
 
     yield takeEvery('DELETE_SET', deleteSet);
-
-    yield takeEvery('GET_PROGRAM', getProgram);
-
-    yield takeEvery('POST_PROGRAM', postProgram);
 }
 
 export default workoutSaga;

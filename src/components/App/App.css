@@ -153,3 +153,10 @@ input {
 #workout-form-inputs {
   display: inline-flex;
 }
+
+#progress-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}

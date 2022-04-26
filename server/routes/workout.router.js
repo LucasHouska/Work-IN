@@ -4,19 +4,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/program', rejectUnauthenticated, (req, res) => {
-    const queryText = `
-    SELECT * FROM "program" 
-    JOIN "exercises" ON "program".exercise_id = "exercises".id`
-
-    pool.query(queryText).then(result => {
-        res.send(result.rows);
-    }).catch(error => {
-        console.log(error);
-        res.sendStatus(500);
-    })
-})
-
 router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const queryText = `SELECT "id", "exercise_name" FROM "exercises"`
@@ -32,7 +19,9 @@ router.get('/:workoutId', rejectUnauthenticated, (req, res) => {
 
     console.log('workout id in get', req.params.workoutId);
 
-    const workoutId = Number(req.params.workoutId);
+    const workoutId = req.params.workoutId;
+
+    console.log('workoutId in specified GET', workoutId)
 
 
     const queryText = `
@@ -48,7 +37,7 @@ router.get('/:workoutId', rejectUnauthenticated, (req, res) => {
         console.log('Exercise one GET', result.rows)
         res.send(result.rows)
     }).catch(error => {
-        console.log('Error in workout specific get', error)
+        console.log('Error in workout specific GET', error)
         res.sendStatus(500)
     })
 })
@@ -84,6 +73,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             const numberOfReps = Number(req.body[i].number_of_reps);
             const weight = Number(req.body[i].weight)
 
+
+
             let count = 0;
 
             for (let i = 0; i < numberOfSets; i++) {
@@ -91,13 +82,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
                 let values = [workoutId, exerciseNumberInWorkout, exerciseId, count, numberOfReps, weight];
 
-                pool.query(queryText, values)
-                // .then(result => {
-
-                // }).catch(error => {
-                //     res.sendStatus(500)
-                //     console.log(error);
-                // })
+                pool.query(queryText, values).then(result => {
+                    console.log('result', result);
+                }).catch(error => {
+                    console.log(error);
+                    // res.sendStatus(500)
+                })
                 console.log(count);
             }
         }
@@ -105,31 +95,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.send({ workoutId })
 
     }).catch(error => {
+        console.log('Error in workoutPOST', error)
         res.sendStatus(500);
-        console.log(error)
     })
 });
-
-router.post('/program', rejectUnauthenticated, (req, res) => {
-    const queryText = `
-    INSERT INTO "program" ("program_day", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight")
-    VALUES ($1, $2, $3, $4, $5, $6);`;
-
-    const program = req.body;
-
-    console.log(program)
-
-    for (const day of program) {
-        const values = [day.program_day, day.exerciseNumberInWorkout, day.exercise_id, day.number_of_sets, day.number_of_reps, day.weight];
-
-        pool.query(queryText, values).then(result => {
-
-        }).catch(error => {
-            console.log(error);
-            res.sendStatus(500);
-        })
-    }
-})
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('put:', req.body)

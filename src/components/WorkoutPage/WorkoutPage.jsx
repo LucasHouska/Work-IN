@@ -28,6 +28,7 @@ function WorkoutPage() {
 
 
     const postWorkout = () => {
+        console.log('workout in front end of post', workout)
 
         dispatch({ type: 'POST_WORKOUT', payload: workout, callback: moveToExercise })
 
@@ -90,9 +91,9 @@ function WorkoutPage() {
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Program Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
-                        {programDays.map((exercise, i) => {
+                        {programDays.map((day, i) => {
                             return (
-                                <FormControlLabel key={i} labelPlacement="top" value={exercise} control={<Radio />} label={exercise} />
+                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
                             )
                         })}
                     </RadioGroup>
