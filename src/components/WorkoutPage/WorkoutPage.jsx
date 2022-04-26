@@ -28,6 +28,7 @@ function WorkoutPage() {
 
 
     const postWorkout = () => {
+        console.log('workout in front end of post', workout)
 
         dispatch({ type: 'POST_WORKOUT', payload: workout, callback: moveToExercise })
 

@@ -9,8 +9,10 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
  router.get('/program', rejectUnauthenticated, (req, res) => {
     const queryText = `
-    SELECT * FROM "program" 
-    JOIN "exercises" ON "program".exercise_id = "exercises".id`
+    SELECT "program".id, "program".program_day, "program"."exerciseNumberInWorkout", "program".exercise_id, "program".number_of_sets, 
+    "program".number_of_reps, "program".weight 
+    FROM "program" 
+    JOIN "exercises" ON "program".exercise_id = "exercises".id;`
 
     pool.query(queryText).then(result => {
         res.send(result.rows);
@@ -20,12 +22,13 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     })
 })
 
+
 /**
  * POST route template
  */
  router.post('/program', rejectUnauthenticated, (req, res) => {
     const queryText = `
-    INSERT INTO "program" ("program_day", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight")
+    INSERT INTO "program" ("program_day", "exerciseNumberInWorkout", "exercise_id", "number_of_sets", "number_of_reps", "weight")
     VALUES ($1, $2, $3, $4, $5, $6);`;
 
     const program = req.body;
