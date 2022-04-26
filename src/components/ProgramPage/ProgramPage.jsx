@@ -11,17 +11,16 @@ import Button from '@material-ui/core/Button'
 function ProgramPage() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const program = useSelector(state => state.workout.programReducer)
 
     const [programDay, setProgramDay] = useState(1)
 
     const postProgram = () => {
-        dispatch({ type: 'POST_PROGRAM', payload: program, callback: moveToProfile });
-    }
+        dispatch({ type: 'POST_PROGRAM', payload: program });
 
-    const moveToProfile = () => {
-        history.push(`/user`);
+        history.push('/user');
     }
 
 

@@ -11,9 +11,12 @@ function* getProgram() {
 }
 
 function* postProgram(action) {
-    yield axios.post('/api/program/program', action.payload)
+    try {
+    yield axios.post('/api/program/program', action.payload);
 
-    yield action.callback();
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 function* programSaga() {

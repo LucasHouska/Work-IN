@@ -58,6 +58,9 @@ function UserPage() {
         </div>
         <Button variant="outlined" color="primary" onClick={goToMaxes}>Max</Button>
       </div>
+      <div id="program-display">
+          {/* Add view to the user's current program */}
+      </div>
       <br />
       <Button variant="contained" color="primary" onClick={goToProgram}>Program</Button>
 
