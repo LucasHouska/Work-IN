@@ -27,6 +27,7 @@ import FinishPage from '../FinishPage/FinishPage';
 import CreateExercise from '../CreateExercise/CreateExercise';
 import MaxPage from '../MaxPage/MaxPage';
 import ProgramPage from '../ProgramPage/ProgramPage';
+import ProgressPage from '../ProgressPage/ProgressPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -96,6 +97,13 @@ function App() {
             path="/finish"
           >
             <FinishPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/progress"
+          >
+            <ProgressPage />
           </ProtectedRoute>
 
           <ProtectedRoute
