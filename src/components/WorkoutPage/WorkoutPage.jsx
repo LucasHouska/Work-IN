@@ -23,7 +23,7 @@ function WorkoutPage() {
 
     const [programExercises, setProgramExercises] = useState([]);
     const [programDays, setProgramDays] = useState([]);
-    const [programDay, setProgramDay] = useState(1);
+    const [programDay, setProgramDay] = useState(0);
 
 
 
@@ -57,10 +57,10 @@ function WorkoutPage() {
                 exercisesForProgramDay.push(exercise);
             }
         }
-        
+
         setProgramExercises(exercisesForProgramDay);
 
-        dispatch({type: 'EXERCISES_FOR_PROGRAM_DAY', payload: exercisesForProgramDay})
+        dispatch({ type: 'EXERCISES_FOR_PROGRAM_DAY', payload: exercisesForProgramDay })
 
     }, [programDay])
 
@@ -73,7 +73,7 @@ function WorkoutPage() {
                 numberOfDays.push(day.program_day);
             }
         }
-        
+
         setProgramDays(numberOfDays)
 
     }, [program])
@@ -92,16 +92,16 @@ function WorkoutPage() {
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                         {programDays.map((exercise, i) => {
                             return (
-                                <FormControlLabel key={i} labelPlacement="top" value={exercise} control={<Radio />} label={exercise.program_day} />
+                                <FormControlLabel key={i} labelPlacement="top" value={exercise} control={<Radio />} label={exercise} />
                             )
                         })}
                     </RadioGroup>
                 </FormControl>
                 <h2>OR</h2>
                 <WorkoutForm />
-                <WorkoutList programDay={programDay}/>
+                <WorkoutList programDay={programDay} />
                 <div className="begin">
-                    <Button variant="contained" color="primary" onClick={postWorkout}>Begin</Button>
+                    <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={postWorkout}>Begin</Button>
                 </div>
             </div>
         </>

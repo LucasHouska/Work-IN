@@ -147,5 +147,9 @@ input {
 }
 
 #workout-form {
+  text-align: center;
+}
+
+#workout-form-inputs {
   display: inline-flex;
 }
