@@ -84,4 +84,22 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.put('/max_weight', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `
+    UPDATE "maxes"
+    SET "weight" = $1
+    WHERE "id" = $2;
+    `;
+
+    const values = [req.body.maxWeight, req.body.maxId]
+
+    pool.query(queryText, values).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error in max_weight PUT', error);
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;

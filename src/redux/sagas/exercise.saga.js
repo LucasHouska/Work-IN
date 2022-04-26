@@ -17,6 +17,12 @@ function* getMaxes() {
     yield put({type: 'SET_MAXES', payload: maxes.data});
 }
 
+function* updateMaxWeight(action) {
+    yield axios.put('/api/exercise/max_weight', action.payload);
+
+    yield put({type: 'GET_MAXES'})
+}
+
 function* updateFavorite(action) {
     yield axios.put('/api/exercise', action.payload);
 
@@ -35,6 +41,8 @@ function* exerciseSaga() {
     yield takeEvery('CREATE_EXERCISE', createExercise);
 
     yield takeEvery('GET_MAXES', getMaxes);
+
+    yield takeEvery('UPDATE_MAX_WEIGHT', updateMaxWeight);
 
     yield takeEvery('UPDATE_FAVORITE', updateFavorite);
 
