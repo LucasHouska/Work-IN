@@ -42,15 +42,17 @@ function UserPage() {
 
   return (
     <div className="container user-page">
-      <h2>Welcome, {user.username}!</h2>
+      <h1>Welcome, {user.username}!</h1>
       <br />
       <div>
-        {/* In the future,  */}
-        <h3>Maxes</h3>
+        <h2>Your Maxes</h2>
         <div id="max-display">
           {favorites.map(max => {
             return (
-              <p key={max.id}>{max.name_of_exercise}: <span>{max.weight}</span></p>
+              <div className="max-item">
+                <h3>{max.name_of_exercise}</h3>
+                <p>{max.weight}</p>
+            </div>
             )
           })}
         </div>

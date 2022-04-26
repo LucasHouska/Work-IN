@@ -3,11 +3,31 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
+router.get('/progress/:exercise_id', rejectUnauthenticated, (req, res) => {
+    console.log(Number(req.params.exercise_id))
+
+    const queryText = `
+    SELECT "workouts".date, "workouts-exercises".weight FROM "workouts"
+    JOIN "workouts-exercises" ON "workouts".id = "workouts-exercises".workout_id
+    WHERE "workouts".user_id = $1
+    AND "workouts-exercises".exercise_id = $2
+    AND "workouts-exercises".set_number = 1
+    ORDER BY "workouts".date;
+    `;
+
+    const values = [req.user.id, Number(req.params.exercise_id)];
+
+    pool.query(queryText, values).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+})
+
 router.get('/', rejectUnauthenticated, (req, res) => {
-    
+
     const queryText = `
     SELECT "id", "name_of_exercise", "weight", "favorite" FROM "maxes"
     WHERE "user_id" = $1;`;

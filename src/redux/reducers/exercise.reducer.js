@@ -16,7 +16,15 @@ const maxReducer = (state = [], action) => {
     return state;
 }
 
+const progressReducer = (state = [], action) => {
+    if(action.type === 'SET_PROGRESS') {
+        return action.payload;
+    }
+    return state;
+}
+
 export default combineReducers({
     exerciseReducer,
-    maxReducer
+    maxReducer,
+    progressReducer
 });
