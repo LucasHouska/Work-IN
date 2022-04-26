@@ -30,7 +30,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     const queryText = `
     SELECT "id", "name_of_exercise", "weight", "favorite" FROM "maxes"
-    WHERE "user_id" = $1;`;
+    WHERE "user_id" = $1
+    ORDER BY "name_of_exercise";`;
 
     const value = [req.user.id];
 
