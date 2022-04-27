@@ -29,6 +29,12 @@ function* updateFavorite(action) {
     yield put({type: 'GET_MAXES'})
 }
 
+function* getProgressExercises() {
+    let progressExercises = yield axios.get('/api/exercise/progress_exercises')
+
+    yield put({ type: 'SET_PROGRESS_EXERCISES', payload: progressExercises.data });
+}
+
 function* getProgress(action) {
     let progress = yield axios.get(`/api/exercise/progress/${action.payload}`)
 
@@ -45,6 +51,8 @@ function* exerciseSaga() {
     yield takeEvery('UPDATE_MAX_WEIGHT', updateMaxWeight);
 
     yield takeEvery('UPDATE_FAVORITE', updateFavorite);
+
+    yield takeEvery('GET_PROGRESS_EXERCISES', getProgressExercises)
 
     yield takeEvery('GET_PROGRESS', getProgress);
 }

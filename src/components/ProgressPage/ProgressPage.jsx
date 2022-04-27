@@ -11,17 +11,16 @@ function ProgressPage() {
 
     const dispatch = useDispatch();
 
+    // const exerciseReducer = useSelector(state => state.exercises.exerciseReducer);
     const exercises = useSelector(state => state.exercises.exerciseReducer);
     const progress = useSelector(state => state.exercises.progressReducer);
 
-    // const [exerciseToCheck, setExerciseToCheck] = useState()
-
-    // const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
-    const data = progress
+    const data = progress;
 
     const handleExerciseInput = (event, value) => {
         dispatch({ type: 'GET_PROGRESS', payload: value.id })
     }
+
 
     useEffect(() => {
         dispatch({ type: 'GET_EXERCISES' })
@@ -41,11 +40,11 @@ function ProgressPage() {
                     renderInput={(params) => <TextField {...params} label="Exercises" />}
                 />
                 <br />
-                <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                <LineChart width={350} height={200} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                     <Line type="monotone" dataKey="weight" stroke="#8884d8" />
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                     <XAxis dataKey="date" />
-                    <YAxis dataKey="weight"/>
+                    <YAxis dataKey="weight" />
                     <Tooltip />
                 </LineChart>
             </div>

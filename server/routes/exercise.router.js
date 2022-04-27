@@ -26,6 +26,24 @@ router.get('/progress/:exercise_id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.get('/progress_exercises', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    SELECT "workouts-exercises".exercise_id, "exercises".exercise_name FROM "workouts-exercises"
+    JOIN "exercises" ON "exercises".id = "workouts-exercises".exercise_id
+    JOIN "workouts" ON "workouts".id = "workouts-exercises".workout_id
+    WHERE "workouts".user_id = $1;
+    `;
+
+    const value = [req.user.id];
+
+    pool.query(queryText, value).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        console.log('Error in progress_exercises', error);
+        res.sendStatus(500);
+    })
+})
+
 router.get('/', rejectUnauthenticated, (req, res) => {
 
     const queryText = `

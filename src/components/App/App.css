@@ -151,7 +151,7 @@ input {
 }
 
 #workout-form-inputs {
-  display: inline-flex;
+  display: flex;
 }
 
 #progress-page {

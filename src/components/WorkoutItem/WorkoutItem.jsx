@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+import SaveOutlined from '@material-ui/icons/SaveOutlined';
 
 
 
@@ -54,8 +58,16 @@ function WorkoutItem({ exercise }) {
                     <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_sets} onChange={(event) => setExerciseToUpdate({ ...exerciseToUpdate, sets: Number(event.target.value) })} /></TableCell>
                     <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_reps} onChange={(event) => setExerciseToUpdate({ ...exerciseToUpdate, reps: Number(event.target.value) })} /></TableCell>
                     <TableCell align="center"><TextField variant='outlined' label={exercise.weight} onChange={(event) => setExerciseToUpdate({ ...exerciseToUpdate, weight: Number(event.target.value) })} /></TableCell>
-                    <TableCell align="center"><Button variant='contained' color="default" onClick={handleSave}>Save</Button></TableCell>
-                    <TableCell align="center"><Button variant='contained' color="secondary" onClick={() => { handleDelete(exercise) }}>Delete</Button></TableCell>
+                    <TableCell align="center">
+                        <IconButton aria-label="delete" onClick={handleSave}>
+                            <SaveOutlined fontSize="medium" />
+                        </IconButton>
+                    </TableCell>
+                    <TableCell align="center">
+                        <IconButton aria-label="delete" onClick={() => { handleDelete(exercise) }}>
+                            <Delete fontSize="medium" />
+                        </IconButton>
+                    </TableCell>
                 </TableRow>
                 :
                 <TableRow>
@@ -63,8 +75,16 @@ function WorkoutItem({ exercise }) {
                     <TableCell align="center">{exercise.number_of_sets}</TableCell>
                     <TableCell align="center">{exercise.number_of_reps}</TableCell>
                     <TableCell align="center">{exercise.weight}</TableCell>
-                    <TableCell align="center"><Button variant='contained' color='default' onClick={handleEdit}>Edit</Button></TableCell>
-                    <TableCell align="center"><Button variant='contained' color='secondary' onClick={() => { handleDelete(exercise) }}>Delete</Button></TableCell>
+                    <TableCell align="center">
+                        <IconButton aria-label="edit" onClick={handleEdit}>
+                            <Edit fontSize="medium" />
+                        </IconButton>
+                    </TableCell>
+                    <TableCell align="center">
+                        <IconButton aria-label="delete" onClick={() => { handleDelete(exercise) }}>
+                            <Delete fontSize="medium" />
+                        </IconButton>
+                    </TableCell>
                 </TableRow>}
         </>
     )
