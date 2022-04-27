@@ -150,7 +150,7 @@ input {
   text-align: center;
 }
 
-#workout-form-inputs {
+.form-inputs {
   display: flex;
 }
 

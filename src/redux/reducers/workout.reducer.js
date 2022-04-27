@@ -103,7 +103,7 @@ const programReducer = (state = [], action) => {
     return state;
 }
 
-const weeksReducer = (state = {weeks: 0, startDate: '', frequency: 0}, action) => {
+const weeksReducer = (state = {weeks: '', startDate: '', frequency: ''}, action) => {
     if(action.type === 'HOLD_WEEKS') {
         return {...state, weeks: action.payload};
     } else if(action.type === 'HOLD_START_DATE') {
