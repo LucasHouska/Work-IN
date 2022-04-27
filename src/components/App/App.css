@@ -124,15 +124,14 @@ input {
 }
 
 .max-item {
-  text-align: center;
-  margin-bottom: 50px;
-  margin-left: 150px;
-  margin-right: 150px;
+  display: flex;
+  flex-direction: column;
 }
 
 #max-display {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin: 50px
 }
 
