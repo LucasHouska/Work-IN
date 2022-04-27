@@ -26,10 +26,11 @@ function ProgramPage() {
 
     return (
         <>
-
-            <ProgramForm programDay={programDay} setProgramDay={setProgramDay} />
-            <ProgramList programDay={programDay} setProgramDay={setProgramDay} />
-            <Button onClick={postProgram}>Create Program</Button>
+            <div id="program-page">
+                <ProgramForm programDay={programDay} setProgramDay={setProgramDay} />
+                <ProgramList programDay={programDay} setProgramDay={setProgramDay} />
+                <Button onClick={postProgram}>Create Program</Button>
+            </div>
         </>
     )
 }

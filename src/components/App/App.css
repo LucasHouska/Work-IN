@@ -146,6 +146,25 @@ input {
   align-items: center;
 }
 
+#program-page {
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  align-items: center;
+}
+
+#program-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-inputs {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
 #workout-form {
   text-align: center;
 }

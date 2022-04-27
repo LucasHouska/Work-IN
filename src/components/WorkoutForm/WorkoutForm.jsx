@@ -83,11 +83,10 @@ function WorkoutForm() {
                     <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToWorkout.number_of_reps} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
                     <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToWorkout.weight} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
                 </div>
-                <br />
-                <Button variant="contained" color='primary' type="submit" style={{ margin: 20 }}>Add Exercise</Button>
+                <Button variant="contained" color='primary' type="submit" style={{ margin: 10 }}>Add Exercise</Button>
                 {user.access_level > 0 &&
                     <div>
-                        <Button variant="contained" color='default' style={{ margin: 20 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
+                        <Button variant="contained" color='default' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
                     </div>}
             </form>
         </>

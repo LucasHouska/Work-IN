@@ -43,8 +43,6 @@ function ProgramForm({ programDay, setProgramDay }) {
     })
 
 
-    console.log('time', time)
-
     const addExerciseToProgram = (event) => {
         event.preventDefault();
 
@@ -121,15 +119,15 @@ function ProgramForm({ programDay, setProgramDay }) {
     return (
         <>
             <form className="program-form" onSubmit={addExerciseToProgram}>
-                <div>
+                <div className="time-inputs">
                     <TextField id="number-of-weeks" type="number" label="Weeks" style={{ width: 70 }} value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
                     {/* event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value }) */}
                     <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => { dispatch({ type: 'HOLD_START_DATE', payload: event.target.value }) }} />
                     <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} style={{ width: 100 }} type="number" label="Frequency" value={time.frequency} variant="standard" onChange={handleFrequencyChange} />
                 </div>
-                <div>
+                <div className="time-inputs">
                     <FormControl component="fieldset">
-                        <FormLabel component="legend">Day</FormLabel>
+                        <FormLabel component="legend">Program Day</FormLabel>
                         <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                             {frequencyToDays && frequencyToDays.map((day, i) => {
                                 return (
@@ -151,8 +149,10 @@ function ProgramForm({ programDay, setProgramDay }) {
                     <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToProgram.number_of_reps} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_reps: Number(event.target.value) })} />
                     <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToProgram.weight} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
                 </div>
-                <Button variant="contained" type="submit">Add Exercise</Button>
-                {user.access_level > 0 && <Button variant="contained" onClick={goToCreateExercise}>Create a new Exercise</Button>}
+                <div id="program-buttons">
+                    <Button className="button" variant="contained"  color="primary" style={{margin: 10}} type="submit">Add Exercise</Button>
+                    {user.access_level > 0 && <Button variant="contained"  color="default" style={{margin: 10}} onClick={goToCreateExercise}>Create a new Exercise</Button>}
+                </div>
             </form>
         </>
     )
