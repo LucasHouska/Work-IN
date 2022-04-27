@@ -43,7 +43,7 @@ function ProgramForm({ programDay, setProgramDay }) {
     })
 
 
- console.log('time', time)
+    console.log('time', time)
 
     const addExerciseToProgram = (event) => {
         event.preventDefault();
@@ -83,7 +83,7 @@ function ProgramForm({ programDay, setProgramDay }) {
         }
         setFrequencyToDays(programDays);
 
-        dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value)})
+        dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value) })
     }
 
     const handleDayChange = (event) => {
@@ -101,7 +101,7 @@ function ProgramForm({ programDay, setProgramDay }) {
 
         // numberOfWeeks = weeks;
 
-        dispatch({ type: 'HOLD_WEEKS', payload: weeks})
+        dispatch({ type: 'HOLD_WEEKS', payload: weeks })
 
     }
 
@@ -123,7 +123,7 @@ function ProgramForm({ programDay, setProgramDay }) {
             <form className="program-form" onSubmit={addExerciseToProgram}>
                 <TextField id="number-of-weeks" type="number" label="Weeks" value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
                 {/* event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value }) */}
-                <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => {dispatch({ type: 'HOLD_START_DATE', payload: event.target.value})}} /> 
+                <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => { dispatch({ type: 'HOLD_START_DATE', payload: event.target.value }) }} />
                 <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} type="number" label="Frequency" value={time.frequency} variant="standard" onChange={handleFrequencyChange} />
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Day</FormLabel>
@@ -142,9 +142,11 @@ function ProgramForm({ programDay, setProgramDay }) {
                     onChange={handleExerciseInput}
                     renderInput={(params) => <TextField {...params} label="Exercises" margin="normal" />}
                 />
-                <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToProgram.number_of_sets} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_sets: Number(event.target.value) })} />
-                <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToProgram.number_of_reps} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_reps: Number(event.target.value) })} />
-                <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToProgram.weight} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
+                <div className='form-inputs'>
+                    <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToProgram.number_of_sets} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_sets: Number(event.target.value) })} />
+                    <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToProgram.number_of_reps} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_reps: Number(event.target.value) })} />
+                    <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToProgram.weight} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
+                </div>
                 <Button variant="contained" type="submit">Add Exercise</Button>
                 {user.access_level > 0 && <Button variant="contained" onClick={goToCreateExercise}>Create a new Exercise</Button>}
             </form>
