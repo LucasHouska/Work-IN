@@ -23,6 +23,10 @@ function UserPage() {
     history.push('/program');
   }
 
+  const goToAbout = () => {
+    history.push('/about');
+  }
+
 
   useEffect(() => {
     dispatch({ type: 'GET_MAXES' });
@@ -62,9 +66,11 @@ function UserPage() {
           {/* Add view to the user's current program */}
       </div>
       <br />
-      <Button variant="contained" color="primary" onClick={goToProgram}>Program</Button>
-
-      {/* <LogOutButton className="btn" /> */}
+      <Button variant="contained" color="primary" style={{margin: 20}} onClick={goToProgram}>Program</Button>
+      <br />
+      <Button variant="contained" color="primary" style={{margin: 20}} onClick={goToAbout}>About</Button>
+      <br />
+      <LogOutButton className="btn" />
     </div>
   );
 }
