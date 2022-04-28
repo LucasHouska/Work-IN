@@ -13,7 +13,7 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 
 
 
-function ProgramList({programDay, setProgramDay}) {
+function ProgramList({ programDay, setProgramDay }) {
 
     const dispatch = useDispatch();
 
@@ -22,12 +22,18 @@ function ProgramList({programDay, setProgramDay}) {
     const [day, setDay] = useState([]);
 
 
+
+    useEffect(() => {
+        dispatch({ type: 'GET_PROGRAM' })
+    }, [])
+
+
     useEffect(() => {
 
         let temporaryProgramDay = [];
 
         for (const exercise of program) {
-            if(exercise.program_day == programDay) {
+            if (exercise.program_day == programDay) {
                 temporaryProgramDay.push(exercise);
             }
             setDay(temporaryProgramDay);
@@ -35,20 +41,17 @@ function ProgramList({programDay, setProgramDay}) {
 
     }, [program])
 
+
     useEffect(() => {
         let temporaryProgramDay = [];
 
         for (const exercise of program) {
-            if(exercise.program_day == programDay) {
+            if (exercise.program_day == programDay) {
                 temporaryProgramDay.push(exercise);
             }
             setDay(temporaryProgramDay);
         }
     }, [programDay])
-
-    useEffect(() => {
-        dispatch({ type: 'GET_PROGRAM' })
-    }, [])
 
     return (
         <>
