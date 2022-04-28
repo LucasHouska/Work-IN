@@ -9,17 +9,36 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import WorkoutItem from '../WorkoutItem/WorkoutItem';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 
 
 
-function ProgramList({ programDay, setProgramDay }) {
+function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
 
     const dispatch = useDispatch();
 
     const program = useSelector(state => state.workout.programReducer);
+    const time = useSelector(store => store.workout.weeksReducer)
+
+    const programDay = time.programDay
 
     const [day, setDay] = useState([]);
+    const [frequencyToDays, setFrequencyToDays] = useState([]);
+
+
+
+    const handleDayChange = (event) => {
+        const day = Number(event.target.value)
+
+        dispatch({ type: 'SET_PROGRAM_DAY', payload: day })
+
+        setExerciseToAddToProgram({ ...exerciseToAddToProgram, program_day: day })
+    };
 
 
 
@@ -53,8 +72,47 @@ function ProgramList({ programDay, setProgramDay }) {
         }
     }, [programDay])
 
+
+    useEffect(() => {
+        let programDays = [];
+
+        for (let day of program) {
+            if (programDays.includes(day.program_day) === false) {
+                programDays.push(day.program_day);
+            }
+        }
+        setFrequencyToDays(programDays);
+
+        dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
+    }, []);
+
+    useEffect(() => {
+        let programDays = [];
+        let count = 1
+        const frequency = time.frequency;
+        console.log('length', frequency)
+
+        for (let i = 0; i < frequency; i++) {
+            programDays.push(count);
+            count++
+        }
+        setFrequencyToDays(programDays);
+    }, [time])
+
     return (
         <>
+            <div className="time-inputs">
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Program Day</FormLabel>
+                    <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
+                        {frequencyToDays && frequencyToDays.map((day, i) => {
+                            return (
+                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
+                            )
+                        })}
+                    </RadioGroup>
+                </FormControl>
+            </div>
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
                     <TableHead>

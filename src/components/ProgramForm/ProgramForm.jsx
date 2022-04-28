@@ -4,16 +4,11 @@ import { useHistory } from 'react-router-dom';
 
 import { Button, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 
 
 
 
-function ProgramForm({ programDay, setProgramDay }) {
+function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -24,24 +19,9 @@ function ProgramForm({ programDay, setProgramDay }) {
     const user = useSelector(store => store.user);
     const time = useSelector(store => store.workout.weeksReducer)
 
-    //Move weeks and start date to reducer to hold it over renders
-    // let numberOfWeeks = 0;
+    const programDay = time.programDay
 
-    //moved to props
-    // const [programDay, setProgramDay] = useState(1)
-    const [frequencyToDays, setFrequencyToDays] = useState([]);
 
-    const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
-        number_of_weeks: '',
-        start_date: '',
-        program_day: programDay,
-        exerciseNumberInWorkout: 1,
-        exercise_id: '',
-        exercise_name: '',
-        number_of_sets: '',
-        number_of_reps: '',
-        weight: ''
-    })
 
 
     const addExerciseToProgram = (event) => {
@@ -51,8 +31,8 @@ function ProgramForm({ programDay, setProgramDay }) {
 
 
         setExerciseToAddToProgram({
-            number_of_weeks: time.weeks,
-            start_date: time.startDate,
+            // number_of_weeks: time.weeks,
+            // start_date: time.startDate,
             program_day: programDay,
             exerciseNumberInWorkout: exerciseNumber,
             exercise_id: '',
@@ -74,35 +54,27 @@ function ProgramForm({ programDay, setProgramDay }) {
 
     const handleFrequencyChange = (event) => {
 
-        let renderFrequency = Number(event.target.value) + 1;
-        let programDays = [];
+        // let renderFrequency = Number(event.target.value) + 1;
+        // let programDays = [];
 
-        for (let i = 1; i < renderFrequency; i++) {
-            programDays.push(i);
-        }
-        setFrequencyToDays(programDays);
+        // for (let i = 1; i < renderFrequency; i++) {
+        //     programDays.push(i);
+        // }
+        // setFrequencyToDays(programDays);
 
         dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value) })
     }
 
-    const handleDayChange = (event) => {
-        const day = Number(event.target.value)
+    // const handleChangeWeeks = (event) => {
+    //     let weeks = Number(event.target.value);
 
-        setProgramDay(day);
+    //     setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_weeks: weeks });
 
-        setExerciseToAddToProgram({ ...exerciseToAddToProgram, program_day: day })
-    };
+    //     // numberOfWeeks = weeks;
 
-    const handleChangeWeeks = (event) => {
-        let weeks = Number(event.target.value);
+    //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
 
-        setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_weeks: weeks });
-
-        // numberOfWeeks = weeks;
-
-        dispatch({ type: 'HOLD_WEEKS', payload: weeks })
-
-    }
+    // }
 
 
     const goToCreateExercise = () => {
@@ -112,10 +84,6 @@ function ProgramForm({ programDay, setProgramDay }) {
 
     useEffect(() => {
         dispatch({ type: 'GET_EXERCISES' })
-    }, []);
-
-
-    useEffect(() => {
         dispatch({ type: 'GET_PROGRAM' })
     }, []);
 
@@ -124,34 +92,22 @@ function ProgramForm({ programDay, setProgramDay }) {
         let programDays = [];
 
         for (let day of program) {
-            programDays.push(day.program_day);
+            if (programDays.includes(day.program_day) === false) {
+                programDays.push(day.program_day);
+            }
         }
-        setFrequencyToDays(programDays);
+        // setFrequencyToDays(programDays);
 
         dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
-    }, [program]);
-
+    }, []);
 
     return (
         <>
             <form className="program-form" onSubmit={addExerciseToProgram}>
                 <div className="time-inputs">
-                    <TextField id="number-of-weeks" type="number" label="Weeks" style={{ width: 70 }} value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
-                    {/* event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, start_date: event.target.value }) */}
-                    <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => { dispatch({ type: 'HOLD_START_DATE', payload: event.target.value }) }} />
+                    {/* <TextField id="number-of-weeks" type="number" label="Weeks" style={{ width: 70 }} value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
+                    <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => { dispatch({ type: 'HOLD_START_DATE', payload: event.target.value }) }} /> */}
                     <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} style={{ width: 100 }} type="number" label="Frequency" value={time.frequency} variant="standard" onChange={handleFrequencyChange} />
-                </div>
-                <div className="time-inputs">
-                    <FormControl component="fieldset">
-                        <FormLabel component="legend">Program Day</FormLabel>
-                        <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
-                            {frequencyToDays && frequencyToDays.map((day, i) => {
-                                return (
-                                    <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
-                                )
-                            })}
-                        </RadioGroup>
-                    </FormControl>
                 </div>
                 <Autocomplete
                     id="exercise-options"
@@ -166,8 +122,8 @@ function ProgramForm({ programDay, setProgramDay }) {
                     <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToProgram.weight} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
                 </div>
                 <div id="program-buttons">
-                    <Button className="button" variant="contained"  color="primary" style={{margin: 10}} type="submit">Add Exercise</Button>
-                    {user.access_level > 0 && <Button variant="contained"  color="default" style={{margin: 10}} onClick={goToCreateExercise}>Create a new Exercise</Button>}
+                    <Button className="button" variant="contained" color="primary" style={{ margin: 10 }} type="submit">Add Exercise</Button>
+                    {user.access_level > 0 && <Button variant="contained" color="default" style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>}
                 </div>
             </form>
         </>
