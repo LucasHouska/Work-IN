@@ -27,6 +27,7 @@ import CreateExercise from '../CreateExercise/CreateExercise';
 import MaxPage from '../MaxPage/MaxPage';
 import ProgramPage from '../ProgramPage/ProgramPage';
 import ProgressPage from '../ProgressPage/ProgressPage';
+import {Container} from '@material-ui/core'
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
   return (
     <Router>
       <div>
+        <Container style={{margin: 56}}>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -165,6 +167,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        </Container>
         <Nav />
       </div>
     </Router>

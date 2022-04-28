@@ -78,6 +78,12 @@ Button
   color: #008183;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
@@ -178,4 +184,10 @@ input {
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+#finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

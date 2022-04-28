@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,6 +14,8 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 
 
 function ProgramList({programDay, setProgramDay}) {
+
+    const dispatch = useDispatch();
 
     const program = useSelector(state => state.workout.programReducer);
 
@@ -43,6 +45,10 @@ function ProgramList({programDay, setProgramDay}) {
             setDay(temporaryProgramDay);
         }
     }, [programDay])
+
+    useEffect(() => {
+        dispatch({ type: 'GET_PROGRAM' })
+    }, [])
 
     return (
         <>

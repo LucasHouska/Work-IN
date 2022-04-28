@@ -47,6 +47,26 @@ function WorkoutPage() {
     console.log('program exercises', programExercises);
 
 
+    useEffect(() => {
+        dispatch({ type: 'GET_PROGRAM' })
+    }, []);
+
+
+    useEffect(() => {
+        let numberOfDays = [];
+
+        for (const day of program) {
+            if (numberOfDays.includes(day.program_day) === false) {
+                numberOfDays.push(day.program_day);
+            }
+        }
+
+        console.log('Number of days', numberOfDays);
+
+        setProgramDays(numberOfDays)
+
+    }, [program])
+
 
     useEffect(() => {
 
@@ -64,25 +84,6 @@ function WorkoutPage() {
         dispatch({ type: 'EXERCISES_FOR_PROGRAM_DAY', payload: exercisesForProgramDay })
 
     }, [programDay])
-
-
-    useEffect(() => {
-        let numberOfDays = [];
-
-        for (const day of program) {
-            if (numberOfDays.includes(day.program_day) === false) {
-                numberOfDays.push(day.program_day);
-            }
-        }
-
-        setProgramDays(numberOfDays)
-
-    }, [program])
-
-
-    useEffect(() => {
-        dispatch({ type: 'GET_PROGRAM' })
-    }, []);
 
 
     return (

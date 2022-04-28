@@ -10,9 +10,10 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  router.get('/program', rejectUnauthenticated, (req, res) => {
     const queryText = `
     SELECT "program".id, "program".program_day, "program"."exerciseNumberInWorkout", "program".exercise_id, "program".number_of_sets, 
-    "program".number_of_reps, "program".weight 
+    "program".number_of_reps, "program".weight, "exercises".exercise_name
     FROM "program" 
-    JOIN "exercises" ON "program".exercise_id = "exercises".id;`
+    JOIN "exercises" ON "program".exercise_id = "exercises".id
+    ORDER BY "program".program_day;`
 
     pool.query(queryText).then(result => {
         res.send(result.rows);

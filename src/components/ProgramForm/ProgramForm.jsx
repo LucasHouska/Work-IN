@@ -19,6 +19,7 @@ function ProgramForm({ programDay, setProgramDay }) {
     const history = useHistory();
 
     const exercises = useSelector(store => store.exercises.exerciseReducer);
+    const program = useSelector(store => store.workout.programReducer)
     const exerciseNumber = useSelector(store => store.workout.exerciseNumber);
     const user = useSelector(store => store.user);
     const time = useSelector(store => store.workout.weeksReducer)
