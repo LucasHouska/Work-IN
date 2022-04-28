@@ -73,6 +73,7 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
     }, [programDay])
 
 
+    //
     useEffect(() => {
         let programDays = [];
 
@@ -84,13 +85,15 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
         setFrequencyToDays(programDays);
 
         dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
-    }, []);
+    }, [program]);
 
+
+    //This useEffect turns the frequency number in the workout reducer into
+    //an array of numbers for the RadioGroup .map to loop over
     useEffect(() => {
         let programDays = [];
         let count = 1
         const frequency = time.frequency;
-        console.log('length', frequency)
 
         for (let i = 0; i < frequency; i++) {
             programDays.push(count);

@@ -31,6 +31,7 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
 
 
         setExerciseToAddToProgram({
+            //In case I want to add a time-keeper for users
             // number_of_weeks: time.weeks,
             // start_date: time.startDate,
             program_day: programDay,
@@ -42,8 +43,6 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
             weight: ''
         })
 
-        console.log('program workout', exerciseToAddToProgram)
-
         dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
 
     }
@@ -53,18 +52,10 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
     };
 
     const handleFrequencyChange = (event) => {
-
-        // let renderFrequency = Number(event.target.value) + 1;
-        // let programDays = [];
-
-        // for (let i = 1; i < renderFrequency; i++) {
-        //     programDays.push(i);
-        // }
-        // setFrequencyToDays(programDays);
-
         dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value) })
     }
 
+    //In case I want to add a time-keeper for users
     // const handleChangeWeeks = (event) => {
     //     let weeks = Number(event.target.value);
 
@@ -81,13 +72,14 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
         history.push('/create-exercise')
     };
 
-
+    // This useEffect GETS the exercises for the Autocomplete and the program for
+    //the table
     useEffect(() => {
         dispatch({ type: 'GET_EXERCISES' })
         dispatch({ type: 'GET_PROGRAM' })
     }, []);
 
-
+    // This useEffect fills the frequency input should there already be a program
     useEffect(() => {
         let programDays = [];
 
@@ -99,7 +91,7 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
         // setFrequencyToDays(programDays);
 
         dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
-    }, []);
+    }, [program]);
 
     return (
         <>
