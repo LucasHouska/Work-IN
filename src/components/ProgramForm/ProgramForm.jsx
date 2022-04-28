@@ -74,13 +74,13 @@ function ProgramForm({ programDay, setProgramDay }) {
 
     const handleFrequencyChange = (event) => {
 
-        // let renderFrequency = Number(event.target.value) + 1;
-        // let programDays = [];
+        let renderFrequency = Number(event.target.value) + 1;
+        let programDays = [];
 
-        // for (let i = 1; i < renderFrequency; i++) {
-        //     programDays.push(i);
-        // }
-        // setFrequencyToDays(programDays);
+        for (let i = 1; i < renderFrequency; i++) {
+            programDays.push(i);
+        }
+        setFrequencyToDays(programDays);
 
         dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value) })
     }
@@ -127,6 +127,8 @@ function ProgramForm({ programDay, setProgramDay }) {
             programDays.push(day.program_day);
         }
         setFrequencyToDays(programDays);
+
+        dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
     }, [program]);
 
 
