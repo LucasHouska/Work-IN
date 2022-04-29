@@ -99,7 +99,6 @@ const programReducer = (state = [], action) => {
             weight: action.payload.weight
         });
 
-        console.log(temporaryState)
         return temporaryState;
 
     } else if (action.type === 'CLEAR_WORKOUT') {

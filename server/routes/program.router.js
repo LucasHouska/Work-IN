@@ -14,7 +14,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     FROM "program" 
     JOIN "exercises" ON "program".exercise_id = "exercises".id
     WHERE "program".user_id = $1
-    ORDER BY "program".program_day;`
+    ORDER BY "program".program_day,
+    "program"."exerciseNumberInWorkout";`
 
     const value = [req.user.id]
 

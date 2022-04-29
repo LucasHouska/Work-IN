@@ -22,10 +22,8 @@ function* postProgram(action) {
 
 function* editProgram(action) {
     try {
-        console.log('editProgram', action.payload)
-        // yield axios.put('/api/program', action.payload);
         yield put({ type: 'DELETE_PROGRAM' })
-        
+
         yield put({ type: 'POST_PROGRAM', payload: action.payload })
 
     } catch (error) {

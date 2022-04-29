@@ -29,10 +29,8 @@ function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
     })
 
 
-console.log('exercise', exercise)
 
     const handleDelete = (exercise) => {
-        console.log('exercise:', exercise)
         dispatch({ type: 'DELETE_EXERCISE_FROM_PROGRAM', payload: exercise.exerciseNumberInWorkout })
     }
 
