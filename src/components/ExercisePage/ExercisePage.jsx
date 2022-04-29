@@ -150,7 +150,7 @@ function ExercisePage() {
     useEffect(() => {
         dispatch({ type: `GET_WORKOUT`, payload: workoutId });
 
-    }, [workoutId])
+    }, [])
 
     const classes = useStyles();
 
@@ -221,8 +221,9 @@ function ExercisePage() {
                     </TableBody>
                 </Table>
             </TableContainer>
-
-            {lastExercise ? <Button onClick={handleFinish}>Finish</Button> : <Button onClick={handleNextExercise}>Next Exercise</Button>}
+            <div className='button'>
+                {lastExercise ? <Button className='button' variant='contained' color='primary' onClick={handleFinish}>Finish</Button> : <Button className='button' variant='contained' color='primary' onClick={handleNextExercise}>Next Exercise</Button>}
+            </div>
         </>
     )
 }

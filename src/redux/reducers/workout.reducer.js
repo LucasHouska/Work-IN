@@ -103,13 +103,18 @@ const programReducer = (state = [], action) => {
     return state;
 }
 
-const weeksReducer = (state = {weeks: '', startDate: '', frequency: ''}, action) => {
-    if(action.type === 'HOLD_WEEKS') {
-        return {...state, weeks: action.payload};
-    } else if(action.type === 'HOLD_START_DATE') {
-        return {...state, startDate: action.payload};
-    } else if(action.type === 'HOLD_FREQUENCY') {
+const weeksReducer = (state = {frequency: '', programDay: 1}, action) => {
+    // if(action.type === 'HOLD_WEEKS') {
+    //     return {...state, weeks: action.payload};
+    // } else if(action.type === 'HOLD_START_DATE') {
+    //     return {...state, startDate: action.payload};
+    // } else 
+    if(action.type === 'HOLD_FREQUENCY') {
+        console.log('frequency', action.payload);
         return {...state, frequency: action.payload};
+    } else if(action.type === 'SET_PROGRAM_DAY') {
+        console.log('programDay', action.payload)
+        return {...state, programDay: action.payload};
     }
     return state;
 }

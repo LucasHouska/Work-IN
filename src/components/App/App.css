@@ -7,12 +7,16 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  padding-bottom: 56px;
+  /* padding-bottom: 56px; */
 }
 
 img {
   display: inline-block;
   max-width: 100%;
+}
+
+#switch {
+  padding-bottom: 56px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -78,6 +82,12 @@ Button
   color: #008183;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
@@ -130,7 +140,7 @@ input {
 
 #max-display {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin: 50px
 }
@@ -146,6 +156,25 @@ input {
   align-items: center;
 }
 
+#program-page {
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  align-items: center;
+}
+
+#program-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-inputs {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
 #workout-form {
   text-align: center;
 }
@@ -159,4 +188,10 @@ input {
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+#finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

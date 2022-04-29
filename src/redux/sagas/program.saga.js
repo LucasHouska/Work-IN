@@ -12,6 +12,7 @@ function* getProgram() {
 
 function* postProgram(action) {
     try {
+        console.log(action.payload)
     yield axios.post('/api/program/program', action.payload);
 
     } catch(error) {
