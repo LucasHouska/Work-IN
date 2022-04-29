@@ -150,7 +150,7 @@ function ExercisePage() {
     useEffect(() => {
         dispatch({ type: `GET_WORKOUT`, payload: workoutId });
 
-    }, [workoutId])
+    }, [])
 
     const classes = useStyles();
 

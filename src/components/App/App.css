@@ -7,12 +7,16 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  padding-bottom: 56px;
+  /* padding-bottom: 56px; */
 }
 
 img {
   display: inline-block;
   max-width: 100%;
+}
+
+#switch {
+  padding-bottom: 56px;
 }
 
 /* --------------------------------------------------------------------------------

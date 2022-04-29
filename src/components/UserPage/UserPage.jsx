@@ -15,7 +15,6 @@ function UserPage() {
   const user = useSelector((store) => store.user);
 
   const [favorites, setFavorites] = useState([]);
-  const [programDay, setProgramDay] = useState(1)
 
 
   const goToMaxes = () => {
@@ -66,7 +65,8 @@ function UserPage() {
         <Button variant="outlined" color="primary" onClick={goToMaxes}>Max</Button>
       </div>
       <div id="program-display">
-        {/* <ProgramList programDay={programDay} setProgramDay={setProgramDay} /> */}
+        <h2>Your Program</h2>
+        <ProgramList  />
 
       </div>
       <br />
