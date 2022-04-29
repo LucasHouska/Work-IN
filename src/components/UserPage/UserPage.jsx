@@ -17,6 +17,7 @@ function UserPage() {
   const [favorites, setFavorites] = useState([]);
 
 
+
   const goToMaxes = () => {
     history.push('/max');
   }
@@ -66,12 +67,9 @@ function UserPage() {
       </div>
       <div id="program-display">
         <h2>Your Program</h2>
-        <ProgramList  />
-
+        <ProgramList />
+        <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Program</Button>
       </div>
-      <br />
-      <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Program</Button>
-      <br />
       <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToAbout}>About</Button>
       <br />
       <LogOutButton className="btn" />

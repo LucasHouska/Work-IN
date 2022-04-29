@@ -34,6 +34,7 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
             //In case I want to add a time-keeper for users
             // number_of_weeks: time.weeks,
             // start_date: time.startDate,
+            program_number: 1,
             program_day: programDay,
             exerciseNumberInWorkout: exerciseNumber,
             exercise_id: '',

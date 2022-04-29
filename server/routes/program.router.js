@@ -29,16 +29,15 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
  router.post('/program', rejectUnauthenticated, (req, res) => {
     const queryText = `
-    INSERT INTO "program" ("program_day", "exerciseNumberInWorkout", "exercise_id", "number_of_sets", "number_of_reps", "weight")
-    VALUES ($1, $2, $3, $4, $5, $6);`;
+    INSERT INTO "program" ("program_day", "exerciseNumberInWorkout", "exercise_id", "number_of_sets", "number_of_reps", "weight", "program_number")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
     const program = req.body;
-
-    console.log(program)
+    const program_number = req.body[0].program_number
 
     for (const day of program) {
-        const values = [day.program_day, day.exerciseNumberInWorkout, day.exercise_id, day.number_of_sets, day.number_of_reps, day.weight];
-
+        const values = [day.program_day, day.exerciseNumberInWorkout, day.exercise_id, day.number_of_sets, day.number_of_reps, day.weight, program_number];
+        console.log(program_number)
         pool.query(queryText, values).then(result => {
 
         }).catch(error => {

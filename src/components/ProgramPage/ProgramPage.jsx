@@ -18,8 +18,9 @@ function ProgramPage() {
     const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
     const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
-        number_of_weeks: '',
-        start_date: '',
+        // number_of_weeks: '',
+        // start_date: '',
+        program_number: 1,
         program_day: programDay,
         exerciseNumberInWorkout: 1,
         exercise_id: '',
