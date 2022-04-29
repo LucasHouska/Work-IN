@@ -7,15 +7,15 @@ function* getProgram() {
 
     console.log('program:', program.data);
 
-    yield put({ type: 'SET_PROGRAM', payload: program.data});
+    yield put({ type: 'SET_PROGRAM', payload: program.data });
 }
 
 function* postProgram(action) {
     try {
         console.log(action.payload)
-    yield axios.post('/api/program/program', action.payload);
+        yield axios.post('/api/program/program', action.payload);
 
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -24,19 +24,20 @@ function* editProgram(action) {
     try {
         console.log('editProgram', action.payload)
         // yield axios.put('/api/program', action.payload);
-        // yield put({type: 'DELETE_PROGRAM'})
-        // yield put({type:'POST_PROGRAM', payload: action.payload})
-    
-        } catch(error) {
-            console.log(error);
-        }
+        yield put({ type: 'DELETE_PROGRAM' })
+        
+        yield put({ type: 'POST_PROGRAM', payload: action.payload })
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function* deleteProgram() {
     try {
-    yield axios.delete('/api/program');
+        yield axios.delete('/api/program');
 
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }

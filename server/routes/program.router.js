@@ -55,7 +55,10 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.put('/', rejectUnauthenticated, (req,res) => {
     const queryText = `
     UPDATE "program"
-    SET
+    SET "number_of_sets" = $1
+    "number_of_reps" = $2,
+    "weight" = $3
+    WHERE "id" = $4
     `
 })
 

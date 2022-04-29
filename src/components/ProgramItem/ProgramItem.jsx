@@ -45,7 +45,25 @@ console.log('exercise', exercise)
 
         console.log(exerciseToUpdate);
 
-        dispatch({ type: 'EDIT_PROGRAM', payload: exerciseToUpdate })
+        dispatch({ type: 'SAVE_PROGRAM', payload: exerciseToUpdate })
+    }
+
+    const handleSetChange = (event) => {
+        setExerciseToUpdate({...exerciseToUpdate, sets: Number(event.target.value)})
+
+        {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, sets: Number(event.target.value)} })}
+    }
+
+    const handleRepChange = (event) => {
+        setExerciseToUpdate({...exerciseToUpdate, reps: Number(event.target.value)})
+
+        {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, reps: Number(event.target.value)} })}
+    }
+
+    const handleWeightChange = (event) => {
+        setExerciseToUpdate({...exerciseToUpdate, weight: Number(event.target.value)})
+
+        {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, weight: Number(event.target.value)} })}
     }
 
 
@@ -55,9 +73,9 @@ console.log('exercise', exercise)
             {edit ?
                 <TableRow>
                     <TableCell component="th" scope="row"> {exercise.exercise_name} </TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_sets} onChange={event => {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, sets: Number(event.target.value)} })}} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_reps} onChange={event => {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, reps: Number(event.target.value)} })}} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.weight} onChange={event => {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, weight: Number(event.target.value)} })}} /></TableCell>
+                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_sets} onChange={handleSetChange} /></TableCell>
+                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_reps} onChange={handleRepChange} /></TableCell>
+                    <TableCell align="center"><TextField variant='outlined' label={exercise.weight} onChange={handleWeightChange} /></TableCell>
                     {editProgramItem ?
                         <div>
                             <TableCell align="center">

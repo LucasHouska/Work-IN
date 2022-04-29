@@ -76,19 +76,8 @@ const programReducer = (state = [], action) => {
     } else if (action.type === 'DELETE_EXERCISE_FROM_PROGRAM') {
         return state.filter(exercise => exercise.exerciseNumberInWorkout != action.payload).sort();
     } else if (action.type === 'EDIT_PROGRAM') {
-        let exerciseToIndex = 0;
-        // let index = state.indexOf(exerciseToIndex);
         let temporaryState = [...state];
         let temporaryArray = [];
-
-        console.log('action.payload', action.payload);
-
-        // for (const exercise of state) {
-        //     console.log(exercise.exerciseNumberInWorkout)
-        //     if (exercise.exerciseNumberInWorkout == action.payload.exerciseNumberInWorkout) {
-        //         exerciseToIndex = exercise;
-        //     }
-        // }
 
         for (const exercise of temporaryState) {
             temporaryArray.push(exercise.exerciseNumberInWorkout)
