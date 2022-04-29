@@ -12,9 +12,11 @@ function UserPage() {
   const history = useHistory();
 
   const maxes = useSelector(state => state.exercises.maxReducer);
+  const program = useSelector(state => state.workout.programReducer)
   const user = useSelector((store) => store.user);
 
   const [favorites, setFavorites] = useState([]);
+  const [programExists, setProgramExists] = useState(false);
 
 
 
@@ -33,7 +35,15 @@ function UserPage() {
 
   useEffect(() => {
     dispatch({ type: 'GET_MAXES' });
+    dispatch({ type: 'GET_PROGRAM' })
   }, [])
+
+  useEffect(() => {
+    console.log('i', program)
+    if (program[0] && program[0].program_number == 1) {
+        setProgramExists(true);
+    }
+  }, [program])
 
   useEffect(() => {
 
@@ -66,9 +76,14 @@ function UserPage() {
         <Button variant="outlined" color="primary" onClick={goToMaxes}>Max</Button>
       </div>
       <div id="program-display">
-        <h2>Your Program</h2>
-        <ProgramList />
-        <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Program</Button>
+        {programExists ?
+          <div>
+            <h2>Your Program</h2>
+            <ProgramList />
+            <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Program</Button>
+          </div>
+          :
+          <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Create a Program</Button>}
       </div>
       <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToAbout}>About</Button>
       <br />
