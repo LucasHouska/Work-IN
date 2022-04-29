@@ -20,10 +20,21 @@ function* postProgram(action) {
     }
 }
 
+function* deleteProgram() {
+    try {
+    yield axios.delete('/api/program');
+
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 function* programSaga() {
     yield takeEvery('GET_PROGRAM', getProgram);
 
     yield takeEvery('POST_PROGRAM', postProgram);
+
+    yield takeEvery('DELETE_PROGRAM', deleteProgram);
 }
 
 export default programSaga;

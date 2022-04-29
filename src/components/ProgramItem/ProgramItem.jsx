@@ -13,11 +13,11 @@ import SaveOutlined from '@material-ui/icons/SaveOutlined';
 
 
 
-function ProgramItem({ exercise, editProgramItem }) {
+function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
 
     const dispatch = useDispatch();
 
-    const [edit, setEdit] = useState(false);
+    // const [edit, setEdit] = useState(false);
     const [exerciseToUpdate, setExerciseToUpdate] = useState({
         exerciseNumberInWorkout: exercise.exerciseNumberInWorkout,
         exercise_id: exercise.exercise_id,

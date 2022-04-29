@@ -19,7 +19,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem }) {
+function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem, edit, setEdit }) {
 
     const dispatch = useDispatch();
 
@@ -141,6 +141,8 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
                             <ProgramItem
                                 key={exercise.exercise_id}
                                 exercise={exercise}
+                                edit={edit} 
+                                setEdit={setEdit}
                                 editProgramItem={editProgramItem}
                             />
                         ))}

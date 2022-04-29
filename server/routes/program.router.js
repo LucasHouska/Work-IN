@@ -50,4 +50,22 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     }
 })
 
+
+
+router.delete('/', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    DELETE FROM "program"
+    WHERE "user_id" = $1;
+    `
+
+    const value = [req.user.id];
+
+    pool.query(queryText, value).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error in Program DELETE', error);
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;
