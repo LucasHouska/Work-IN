@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ function ProgramPage() {
 
     const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
+    const [programExists, setProgramExists] = useState(false);
     const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
         // number_of_weeks: '',
         // start_date: '',
@@ -38,11 +39,28 @@ function ProgramPage() {
     }
 
 
+
+    useEffect(() => {
+        console.log('i', program)
+        if (program[0] && program[0].program_number == 1) {
+            setProgramExists(true);
+        }
+    }, [program])
+
+
     return (
         <>
             <div id="program-page">
-                <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram}/>
-                <ProgramList programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram}/>
+                <div>
+                    {programExists ?
+                        <div>
+                            <Button>Edit Program</Button>
+                            <Button>Delete Program</Button>
+                        </div>
+                        :
+                        <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />}
+                </div>
+                <ProgramList programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 <Button onClick={postProgram}>Create Program</Button>
             </div>
         </>

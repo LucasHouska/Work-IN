@@ -146,6 +146,12 @@ function ExercisePage() {
 
     }, [exerciseList])
 
+    // useEffect(() => {
+
+    //     exerciseOrder();
+
+    // }, [index])
+
 
     useEffect(() => {
         dispatch({ type: `GET_WORKOUT`, payload: workoutId });
