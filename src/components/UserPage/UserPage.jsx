@@ -80,7 +80,7 @@ function UserPage() {
           <div>
             <h2>Your Program</h2>
             <ProgramList />
-            <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Program</Button>
+            <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Manage Program</Button>
           </div>
           :
           <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Create a Program</Button>}
