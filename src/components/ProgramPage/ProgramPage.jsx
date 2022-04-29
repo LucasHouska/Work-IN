@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -17,6 +17,9 @@ function ProgramPage() {
 
     const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [programExists, setProgramExists] = useState(false);
+    const [editProgramItem, setEditProgramItem] = useState(false);
     const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
         // number_of_weeks: '',
         // start_date: '',
@@ -37,13 +40,55 @@ function ProgramPage() {
         history.push('/user');
     }
 
+    const handleEditProgram = () => {
+        setEdit(true);
+    }
+
+    const handleSaveProgram = () => {
+        dispatch({ type: 'SAVE_PROGRAM', payload: program })
+
+        setEdit(false);
+    }
+
+    const handleDeleteProgram = () => {
+        dispatch({ type: 'DELETE_PROGRAM' })
+    }
+
+    const goToProfile = () => {
+        history.push('/user');
+    }
+
+
+
+    useEffect(() => {
+        if (program[0] && program[0].program_number == 1) {
+            setProgramExists(true);
+        }
+    }, [program])
+
 
     return (
         <>
             <div id="program-page">
-                <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram}/>
-                <ProgramList programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram}/>
-                <Button onClick={postProgram}>Create Program</Button>
+                <div>
+                    {programExists ?
+                        null
+                        :
+                        <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />}
+                </div>
+                <ProgramList edit={edit} setEdit={setEdit} editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
+                {programExists ?
+                    <div>
+                        <div>
+                            {edit ? <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleSaveProgram}>Save Program</Button> : <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleEditProgram}>Edit Program</Button>}
+                            <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
+                        </div>
+                        <div className='button'>
+                            <Button variant='contained' color='primary' onClick={goToProfile}>Back to Profile</Button>
+                        </div>
+                    </div>
+                    :
+                    <Button onClick={postProgram}>Create Program</Button>}
             </div>
         </>
     )

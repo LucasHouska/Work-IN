@@ -14,7 +14,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     FROM "program" 
     JOIN "exercises" ON "program".exercise_id = "exercises".id
     WHERE "program".user_id = $1
-    ORDER BY "program".program_day;`
+    ORDER BY "program".program_day,
+    "program"."exerciseNumberInWorkout";`
 
     const value = [req.user.id]
 
@@ -48,6 +49,36 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
             res.sendStatus(500);
         })
     }
+})
+
+
+
+router.put('/', rejectUnauthenticated, (req,res) => {
+    const queryText = `
+    UPDATE "program"
+    SET "number_of_sets" = $1
+    "number_of_reps" = $2,
+    "weight" = $3
+    WHERE "id" = $4
+    `
+})
+
+
+
+router.delete('/', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    DELETE FROM "program"
+    WHERE "user_id" = $1;
+    `
+
+    const value = [req.user.id];
+
+    pool.query(queryText, value).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error in Program DELETE', error);
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;

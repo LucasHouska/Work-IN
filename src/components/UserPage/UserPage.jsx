@@ -17,6 +17,7 @@ function UserPage() {
 
   const [favorites, setFavorites] = useState([]);
   const [programExists, setProgramExists] = useState(false);
+  const [editProgramItem, setEditProgramItem] = useState(false);
 
 
 
@@ -79,7 +80,7 @@ function UserPage() {
         {programExists ?
           <div>
             <h2>Your Program</h2>
-            <ProgramList />
+            <ProgramList editProgramItem={editProgramItem}/>
             <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Manage Program</Button>
           </div>
           :

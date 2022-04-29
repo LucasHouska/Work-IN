@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ProgramItem from '../ProgramItem/ProgramItem';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,7 +10,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import WorkoutItem from '../WorkoutItem/WorkoutItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,7 +19,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
+function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem, edit, setEdit }) {
 
     const dispatch = useDispatch();
 
@@ -124,15 +125,25 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
                             <TableCell align="right">Sets</TableCell>
                             <TableCell align="right">Reps&nbsp;</TableCell>
                             <TableCell align="right">Weight&nbsp;</TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
+                            <div>
+                                {editProgramItem ?
+                                    <div>
+                                        <TableCell align="center"></TableCell>
+                                        <TableCell align="center"></TableCell>
+                                    </div>
+                                    :
+                                    null}
+                            </div>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {day.map((exercise) => (
-                            <WorkoutItem
+                            <ProgramItem
                                 key={exercise.exercise_id}
                                 exercise={exercise}
+                                edit={edit} 
+                                setEdit={setEdit}
+                                editProgramItem={editProgramItem}
                             />
                         ))}
                     </TableBody>
