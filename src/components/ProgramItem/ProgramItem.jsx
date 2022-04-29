@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
@@ -19,6 +19,7 @@ function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
 
     // const [edit, setEdit] = useState(false);
     const [exerciseToUpdate, setExerciseToUpdate] = useState({
+        program_day: exercise.program_day,
         exerciseNumberInWorkout: exercise.exerciseNumberInWorkout,
         exercise_id: exercise.exercise_id,
         exercise_name: exercise.exercise_name,
@@ -28,7 +29,7 @@ function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
     })
 
 
-
+console.log('exercise', exercise)
 
     const handleDelete = (exercise) => {
         console.log('exercise:', exercise)
@@ -49,15 +50,14 @@ function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
 
 
 
-
     return (
         <>
             {edit ?
                 <TableRow>
                     <TableCell component="th" scope="row"> {exercise.exercise_name} </TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_sets} onChange={(event) => setExerciseToUpdate({ ...exerciseToUpdate, sets: Number(event.target.value) })} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_reps} onChange={(event) => setExerciseToUpdate({ ...exerciseToUpdate, reps: Number(event.target.value) })} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.weight} onChange={(event) => setExerciseToUpdate({ ...exerciseToUpdate, weight: Number(event.target.value) })} /></TableCell>
+                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_sets} onChange={event => {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, sets: Number(event.target.value)} })}} /></TableCell>
+                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_reps} onChange={event => {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, reps: Number(event.target.value)} })}} /></TableCell>
+                    <TableCell align="center"><TextField variant='outlined' label={exercise.weight} onChange={event => {dispatch({ type: 'EDIT_PROGRAM', payload: {...exerciseToUpdate, weight: Number(event.target.value)} })}} /></TableCell>
                     {editProgramItem ?
                         <div>
                             <TableCell align="center">

@@ -45,6 +45,8 @@ function ProgramPage() {
     }
 
     const handleSaveProgram = () => {
+        dispatch({ type: 'SAVE_PROGRAM', payload: program })
+
         setEdit(false);
     }
 
@@ -59,7 +61,6 @@ function ProgramPage() {
 
 
     useEffect(() => {
-        console.log('i', program)
         if (program[0] && program[0].program_number == 1) {
             setProgramExists(true);
         }

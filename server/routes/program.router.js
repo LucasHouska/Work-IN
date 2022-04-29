@@ -52,6 +52,15 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 
+router.put('/', rejectUnauthenticated, (req,res) => {
+    const queryText = `
+    UPDATE "program"
+    SET
+    `
+})
+
+
+
 router.delete('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
     DELETE FROM "program"

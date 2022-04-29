@@ -20,6 +20,18 @@ function* postProgram(action) {
     }
 }
 
+function* editProgram(action) {
+    try {
+        console.log('editProgram', action.payload)
+        // yield axios.put('/api/program', action.payload);
+        // yield put({type: 'DELETE_PROGRAM'})
+        // yield put({type:'POST_PROGRAM', payload: action.payload})
+    
+        } catch(error) {
+            console.log(error);
+        }
+}
+
 function* deleteProgram() {
     try {
     yield axios.delete('/api/program');
@@ -33,6 +45,8 @@ function* programSaga() {
     yield takeEvery('GET_PROGRAM', getProgram);
 
     yield takeEvery('POST_PROGRAM', postProgram);
+
+    yield takeEvery('SAVE_PROGRAM', editProgram);
 
     yield takeEvery('DELETE_PROGRAM', deleteProgram);
 }
