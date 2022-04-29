@@ -64,6 +64,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         INSERT INTO "workouts-exercises" ("workout_id", "exercise_number_in_workout", "exercise_id", "set_number", "repetitions", "weight")
         VALUES ($1, $2, $3, $4, $5, $6);
         `;
+        const promiseArray = [];
+        const promise = Promise.all(promiseArray);
 
         for (let i = 0; i < req.body.length; i++) {
 
@@ -82,17 +84,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
                 let values = [workoutId, exerciseNumberInWorkout, exerciseId, count, numberOfReps, weight];
 
-                pool.query(queryText, values).then(result => {
-                    console.log('result', result);
-                }).catch(error => {
-                    console.log(error);
-                    // res.sendStatus(500)
-                })
-                console.log(count);
+
+                promiseArray.push(
+                    pool.query(queryText, values).then(result => {
+                        console.log('result', result);
+                    }).catch(error => {
+                        console.log(error);
+                        // res.sendStatus(500)
+                    }))
             }
         }
 
-        res.send({ workoutId })
+        promise.then(result => {
+            res.send({ workoutId })
+        }).catch(error => {
+            console.log('Error in workout GET baby', error)
+            res.sendStatus(500);
+        })
+
 
     }).catch(error => {
         console.log('Error in workoutPOST', error)

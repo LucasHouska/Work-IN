@@ -102,20 +102,16 @@ function ExercisePage() {
     }
 
 
-    //In case the user deletes an exercise in the WorkoutList, this function 
-    //ensures that the exercises will still render in order written
-    const exerciseOrder = () => {
+    useEffect(() => {
+
+        //In case the user deletes an exercise in the WorkoutList, this function 
+        //ensures that the exercises will still render in order written
         let exerciseNumbersInOrder = [];
         let temporaryCurrentExercise = [];
-        let count = 1;
 
         for (const exercise of exerciseList) {
             if (exerciseNumbersInOrder.includes(exercise.exercise_number_in_workout) === false) {
                 exerciseNumbersInOrder.push(exercise.exercise_number_in_workout)
-                count = count++;
-            }
-            else {
-                count = count++;
             }
         }
 
@@ -135,22 +131,7 @@ function ExercisePage() {
             setLastExercise(true);
         }
 
-        console.log('exerciseNumbersInOrder', exerciseNumbersInOrder);
-
-    }
-
-
-    useEffect(() => {
-
-        exerciseOrder();
-
     }, [exerciseList])
-
-    // useEffect(() => {
-
-    //     exerciseOrder();
-
-    // }, [index])
 
 
     useEffect(() => {
