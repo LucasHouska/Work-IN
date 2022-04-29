@@ -23,7 +23,6 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
 
 
 
-
     const addExerciseToProgram = (event) => {
         event.preventDefault();
 
@@ -53,6 +52,16 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
     };
 
     const handleFrequencyChange = (event) => {
+
+
+        let renderFrequency = Number(event.target.value) + 1;
+        let programDays = [];
+
+        for (let i = 1; i < renderFrequency; i++) {
+            programDays.push(i);
+        }
+        setFrequencyToDays(programDays);
+
         dispatch({ type: 'HOLD_FREQUENCY', payload: Number(event.target.value) })
     }
 
@@ -64,6 +73,9 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
 
     //     // numberOfWeeks = weeks;
 
+    //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
+
+    // }
     //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
 
     // }
