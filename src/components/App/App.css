@@ -17,6 +17,10 @@ img {
   max-width: 100%;
 }
 
+li {
+  list-style-type: none;
+}
+
 #switch {
   padding-bottom: 56px;
 }
@@ -196,4 +200,14 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#about {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-list {
+  padding-right: 50px;
 }

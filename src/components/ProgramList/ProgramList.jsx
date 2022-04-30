@@ -111,7 +111,7 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                         {frequencyToDays && frequencyToDays.map((day, i) => {
                             return (
-                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
+                                <FormControlLabel key={i} color='primary' labelPlacement="top" value={day} control={<Radio />} label={day} />
                             )
                         })}
                     </RadioGroup>
