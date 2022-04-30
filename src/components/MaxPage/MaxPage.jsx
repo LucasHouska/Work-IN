@@ -28,9 +28,9 @@ function MaxPage() {
                     return (<MaxItem key={max.id} max={max} />)
                 })}
             </div>
-
-            {/* Delete this when you make bottom nav bar */}
-            <Button variant="contained" color="primary" onClick={goToProfile}>Back to Profile</Button>
+            <div className='button'>
+            <Button variant="contained" color="primary" style={{margin: 20}} onClick={goToProfile}>Back to Profile</Button>
+            </div>
         </>
     )
 }

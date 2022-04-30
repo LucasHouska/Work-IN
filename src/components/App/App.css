@@ -211,3 +211,9 @@ input {
 .about-list {
   padding-right: 50px;
 }
+
+#program-on-workout-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
