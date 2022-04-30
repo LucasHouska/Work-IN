@@ -84,15 +84,18 @@ router.post('/create-exercise', rejectUnauthenticated, (req, res) => {
     }
 })
 
+//This updates the favorite column in the maxes table when the "favorite"
+//icon is clicked on the max page
 router.put('/', rejectUnauthenticated, (req, res) => {
 
     const queryText = `
     UPDATE "maxes"
     SET "favorite" = $1
-    WHERE "id" = $2;
+    WHERE "id" = $2 AND
+    "user_id" = $3;
     `;
 
-    const values = [!req.body.favorite, req.body.id]
+    const values = [!req.body.favorite, req.body.id, req.user.id]
 
     pool.query(queryText, values).then(result => {
         res.sendStatus(200);
@@ -102,15 +105,18 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+
+//This updates the weight column in the maxes table
 router.put('/max_weight', rejectUnauthenticated, (req, res) => {
 
     const queryText = `
     UPDATE "maxes"
     SET "weight" = $1
-    WHERE "id" = $2;
+    WHERE "id" = $2 AND
+    "user_id" = $3;
     `;
 
-    const values = [req.body.maxWeight, req.body.maxId]
+    const values = [req.body.maxWeight, req.body.maxId, req.user.id]
 
     pool.query(queryText, values).then(result => {
         res.sendStatus(200);
