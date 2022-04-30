@@ -89,7 +89,9 @@ function WorkoutPage() {
     return (
         <>
             <div id="workout-page">
-                <FormControl component="fieldset">
+                {programDays[0] && 
+                <div id='program-on-workout-page'>
+                    <FormControl component="fieldset">
                     <FormLabel component="legend">Program Day</FormLabel>
                     <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
                         {programDays.map((day, i) => {
@@ -100,6 +102,7 @@ function WorkoutPage() {
                     </RadioGroup>
                 </FormControl>
                 <h2>OR</h2>
+                </div>}
                 <WorkoutForm />
                 <WorkoutList programDay={programDay} />
                 <div className="begin">

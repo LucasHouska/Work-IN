@@ -94,6 +94,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
                     }))
             }
         }
+        console.log('promise array', promiseArray)
 
         promise.then(result => {
             res.send({ workoutId })

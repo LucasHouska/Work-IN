@@ -53,7 +53,9 @@ function ExercisePage() {
             flexWrap: 'nowrap',
             // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
             transform: 'translateZ(0)',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            background:
+                'linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)',
         },
         title: {
             color: theme.palette.primary.light,
@@ -188,8 +190,8 @@ function ExercisePage() {
                 </Modal>
             </div>
 
-            <TableContainer component={Paper}>
-                <Table aria-label="simple table">
+            <TableContainer component={Paper} >
+                <Table aria-label="simple table" >
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Sets</TableCell>
