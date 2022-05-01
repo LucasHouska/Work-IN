@@ -104,10 +104,12 @@ function WorkoutPage() {
                 <h2>OR</h2>
                 </div>}
                 <WorkoutForm />
-                <WorkoutList programDay={programDay} />
+                {workout[0] ? <WorkoutList programDay={programDay} /> : null}
+                {workout[0] ? 
                 <div className='begin'>
                     <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={postWorkout}>Begin</Button>
-                </div>
+                </div> 
+                : null}
             </div>
         </>
     )

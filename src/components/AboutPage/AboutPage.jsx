@@ -15,6 +15,11 @@ function AboutPage() {
           <li>Node.js</li>
           <li>PostgreSQL</li>
         </ul>
+        <h1>Going forward...</h1>
+        <ul className='about-list'>
+          <li>Show the progress of the exercises done in the workout on the finish page</li>
+          <li></li>
+        </ul>
         <h1>Big Thanks</h1>
         <ul className='about-list'>
           <li>Dane</li>
