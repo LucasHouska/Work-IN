@@ -37,6 +37,7 @@ function* deleteProgram() {
     try {
         yield axios.delete('/api/program');
 
+        yield put({ type: 'GET_PROGRAM'})
     } catch (error) {
         console.log(error);
     }

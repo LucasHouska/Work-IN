@@ -7,8 +7,8 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  margin-top:20px;
-  background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  margin-top: 20px;
+  background: linear-gradient(90deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
   /* padding-bottom: 56px; */
 }
 
@@ -18,7 +18,7 @@ img {
 }
 
 li {
-  list-style-type: none;
+  margin-bottom: 5px;
 }
 
 #switch {
@@ -136,7 +136,7 @@ input {
 .max-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .max-item {
@@ -203,17 +203,29 @@ input {
 }
 
 #about {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .about-list {
   padding-right: 50px;
+  list-style-type: none;
 }
 
 #program-on-workout-page {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.max-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#going-forward-list {
+  padding-right: 50px;
+  list-style-type: circle;
 }

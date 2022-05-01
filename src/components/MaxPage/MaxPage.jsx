@@ -36,14 +36,16 @@ function MaxPage() {
     return (
         <>
             <h1 id='maxes-title'>Maxes</h1>
-            {editNewMax ?
-                <div>
-                    <TextField type='text' label='Exercise Name' variant='standard' onChange={(event) => { setNewMax({ ...newMax, name_of_exercise: event.target.value }) }} />
-                    <TextField type='number' label='Weight' variant='standard' onChange={(event) => { setNewMax({ ...newMax, weight: Number(event.target.value) }) }} />
-                    <Button onClick={addNewMax}>Add New Max</Button>
-                </div>
-                :
-                <Button onClick={createNewMax}>New Max</Button>}
+            <div className='max-input'>
+                {editNewMax ?
+                    <div className='max-input'>
+                        <TextField type='text' label='Exercise Name' variant='standard' onChange={(event) => { setNewMax({ ...newMax, name_of_exercise: event.target.value }) }} />
+                        <TextField type='number' label='Weight' variant='standard' onChange={(event) => { setNewMax({ ...newMax, weight: Number(event.target.value) }) }} />
+                        <Button className='max-input' onClick={addNewMax}>Add New Max</Button>
+                    </div>
+                    :
+                    <Button onClick={createNewMax}>New Max</Button>}
+            </div>
             <div className='max-list'>
                 {maxes.map(max => {
                     return (<MaxItem key={max.id} max={max} />)

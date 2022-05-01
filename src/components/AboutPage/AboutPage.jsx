@@ -16,9 +16,11 @@ function AboutPage() {
           <li>PostgreSQL</li>
         </ul>
         <h1>Going forward...</h1>
-        <ul className='about-list'>
-          <li>Show the progress of the exercises done in the workout on the finish page</li>
-          <li></li>
+        <ul id='going-forward-list'>
+          <li>Show the progress of the exercises done in the workout 
+          on the finish page</li>
+          <li>Add body weight, water, and mood tracker</li>
+          <li>Fix minor bugs</li>
         </ul>
         <h1>Big Thanks</h1>
         <ul className='about-list'>

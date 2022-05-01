@@ -93,7 +93,8 @@ function ProgramPage() {
                         </div>
                     </div>
                     :
-                    <Button onClick={postProgram}>Create Program</Button>}
+                    <Button onClick={postProgram}>Create Program</Button>
+                    }
             </div>
         </>
     )
