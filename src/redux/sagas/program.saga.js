@@ -22,9 +22,11 @@ function* postProgram(action) {
 
 function* editProgram(action) {
     try {
-        yield put({ type: 'DELETE_PROGRAM' })
+        yield put({ type: 'DELETE_PROGRAM' });
 
-        yield put({ type: 'POST_PROGRAM', payload: action.payload })
+        yield put({ type: 'POST_PROGRAM', payload: action.payload });
+
+        yield put({ type: 'GET_PROGRAM'})
 
     } catch (error) {
         console.log(error);

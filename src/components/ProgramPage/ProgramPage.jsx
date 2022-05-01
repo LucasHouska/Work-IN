@@ -32,6 +32,7 @@ function ProgramPage() {
         number_of_reps: '',
         weight: ''
     })
+    let isEdit = false;
 
 
     const postProgram = () => {
@@ -41,12 +42,13 @@ function ProgramPage() {
     }
 
     const handleEditProgram = () => {
+        isEdit = true;
         setEdit(true);
     }
 
     const handleSaveProgram = () => {
         dispatch({ type: 'SAVE_PROGRAM', payload: program })
-
+        isEdit = false;
         setEdit(false);
     }
 
@@ -55,6 +57,8 @@ function ProgramPage() {
     }
 
     const goToProfile = () => {
+        dispatch({ type: 'SAVE_PROGRAM', payload: program })
+
         history.push('/user');
     }
 
@@ -71,21 +75,17 @@ function ProgramPage() {
         <>
             <div id='program-page'>
                 <div>
-                    {/* {programExists ?
-                        null
-                        : */}
-                        <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
-                        {/* } */}
+                    <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 </div>
                 <ProgramList edit={edit} setEdit={setEdit} editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 {programExists ?
                     <div>
                         <div>
-                            {/* {edit ?  */}
-                            <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleSaveProgram}>Save Program</Button>
-                            {/*  : 
-                            <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleEditProgram}>Edit Program</Button>
-                            } */}
+                            {edit ?
+                                <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleSaveProgram}>Save Program</Button>
+                                :
+                                <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleEditProgram}>Edit Program</Button>
+                            }
                             <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
                         </div>
                         <div className='button'>
