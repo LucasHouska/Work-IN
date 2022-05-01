@@ -18,7 +18,7 @@ img {
 }
 
 li {
-  list-style-type: none;
+  margin-bottom: 5px;
 }
 
 #switch {
@@ -210,6 +210,7 @@ input {
 
 .about-list {
   padding-right: 50px;
+  list-style-type: none;
 }
 
 #program-on-workout-page {
@@ -222,4 +223,9 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#going-forward-list {
+  padding-right: 50px;
+  list-style-type: circle;
 }
