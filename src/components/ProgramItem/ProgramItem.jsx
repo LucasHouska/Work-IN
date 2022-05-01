@@ -70,20 +70,20 @@ function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
         <>
             {edit ?
                 <TableRow>
-                    <TableCell component="th" scope="row"> {exercise.exercise_name} </TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_sets} onChange={handleSetChange} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.number_of_reps} onChange={handleRepChange} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise.weight} onChange={handleWeightChange} /></TableCell>
+                    <TableCell component='th' scope='row'> {exercise.exercise_name} </TableCell>
+                    <TableCell align='center'><TextField variant='outlined' label={exercise.number_of_sets} onChange={handleSetChange} /></TableCell>
+                    <TableCell align='center'><TextField variant='outlined' label={exercise.number_of_reps} onChange={handleRepChange} /></TableCell>
+                    <TableCell align='center'><TextField variant='outlined' label={exercise.weight} onChange={handleWeightChange} /></TableCell>
                     {editProgramItem ?
                         <div>
-                            <TableCell align="center">
-                                <IconButton aria-label="delete" onClick={handleSave}>
-                                    <SaveOutlined fontSize="medium" />
+                            <TableCell align='center'>
+                                <IconButton aria-label='delete' onClick={handleSave}>
+                                    <SaveOutlined fontSize='medium' />
                                 </IconButton>
                             </TableCell>
-                            <TableCell align="center">
-                                <IconButton aria-label="delete" onClick={() => { handleDelete(exercise) }}>
-                                    <Delete fontSize="medium" />
+                            <TableCell align='center'>
+                                <IconButton aria-label='delete' onClick={() => { handleDelete(exercise) }}>
+                                    <Delete fontSize='medium' />
                                 </IconButton>
                             </TableCell>
                         </div>
@@ -92,20 +92,20 @@ function ProgramItem({ exercise, editProgramItem, edit, setEdit }) {
                 </TableRow>
                 :
                 <TableRow>
-                    <TableCell component="th" scope="row"> {exercise.exercise_name} </TableCell>
-                    <TableCell align="center">{exercise.number_of_sets}</TableCell>
-                    <TableCell align="center">{exercise.number_of_reps}</TableCell>
-                    <TableCell align="center">{exercise.weight}</TableCell>
+                    <TableCell component='th' scope='row'> {exercise.exercise_name} </TableCell>
+                    <TableCell align='center'>{exercise.number_of_sets}</TableCell>
+                    <TableCell align='center'>{exercise.number_of_reps}</TableCell>
+                    <TableCell align='center'>{exercise.weight}</TableCell>
                     {editProgramItem ?
                         <div>
-                            <TableCell align="center">
-                                <IconButton aria-label="edit" onClick={handleEdit}>
-                                    <Edit fontSize="medium" />
+                            <TableCell align='center'>
+                                <IconButton aria-label='edit' onClick={handleEdit}>
+                                    <Edit fontSize='medium' />
                                 </IconButton>
                             </TableCell>
-                            <TableCell align="center">
-                                <IconButton aria-label="delete" onClick={() => { handleDelete(exercise) }}>
-                                    <Delete fontSize="medium" />
+                            <TableCell align='center'>
+                                <IconButton aria-label='delete' onClick={() => { handleDelete(exercise) }}>
+                                    <Delete fontSize='medium' />
                                 </IconButton>
                             </TableCell>
                         </div>

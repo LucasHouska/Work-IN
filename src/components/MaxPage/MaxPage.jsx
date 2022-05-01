@@ -29,7 +29,7 @@ function MaxPage() {
                 })}
             </div>
             <div className='button'>
-            <Button variant="contained" color="primary" style={{margin: 20}} onClick={goToProfile}>Back to Profile</Button>
+            <Button variant='contained' color='primary' style={{margin: 20}} onClick={goToProfile}>Back to Profile</Button>
             </div>
         </>
     )

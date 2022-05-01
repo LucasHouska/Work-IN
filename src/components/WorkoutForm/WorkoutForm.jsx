@@ -66,27 +66,27 @@ function WorkoutForm() {
 
     return (
         <>
-            <form id="workout-form" onSubmit={addExerciseToWorkout}>
+            <form id='workout-form' onSubmit={addExerciseToWorkout}>
                 <Autocomplete
-                    id="exercise-options"
+                    id='exercise-options'
                     options={exercises}
                     getOptionLabel={(option) => option.exercise_name}
                     onChange={handleExerciseInput}
                     // style={{ width: 300 }}
                     fullWidth
-                    renderInput={(params) => <TextField {...params} label="Exercises" />}
+                    renderInput={(params) => <TextField {...params} label='Exercises' />}
                 />
                 <br />
 
                 <div className='form-inputs'>
-                    <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToWorkout.number_of_sets} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_sets: Number(event.target.value) })} />
-                    <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToWorkout.number_of_reps} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
-                    <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToWorkout.weight} variant="standard" onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
+                    <TextField id='number-of-sets' type='number' label='Sets' value={exerciseToAddToWorkout.number_of_sets} variant='standard' onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_sets: Number(event.target.value) })} />
+                    <TextField id='number-of-reps' type='number' label='Reps' value={exerciseToAddToWorkout.number_of_reps} variant='standard' onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, number_of_reps: Number(event.target.value) })} />
+                    <TextField id='weight' type='number' label='Target Weight' value={exerciseToAddToWorkout.weight} variant='standard' onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
                 </div>
-                <Button variant="contained" color='primary' type="submit" style={{ margin: 10 }}>Add Exercise</Button>
+                <Button variant='contained' color='primary' type='submit' style={{ margin: 10 }}>Add Exercise</Button>
                 {user.access_level > 0 &&
                     <div>
-                        <Button variant="contained" color='default' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
+                        <Button variant='contained' color='default' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
                     </div>}
             </form>
         </>

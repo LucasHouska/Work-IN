@@ -59,36 +59,36 @@ function UserPage() {
   }, [maxes])
 
   return (
-    <div className="container user-page">
+    <div className='container user-page'>
       <h1>Welcome, {user.username}!</h1>
       <br />
       <div>
         <h2>Your Maxes</h2>
-        <div id="max-display">
+        <div id='max-display'>
           {favorites.map((max, i) => {
             return (
-              <div className="max-item" key={i}>
+              <div className='max-item' key={i}>
                 <h3>{max.name_of_exercise}</h3>
                 <p>{max.weight}</p>
               </div>
             )
           })}
         </div>
-        <Button variant="outlined" color="primary" onClick={goToMaxes}>Max</Button>
+        <Button variant='outlined' color='primary' onClick={goToMaxes}>Max</Button>
       </div>
-      <div id="program-display">
+      <div id='program-display'>
         {programExists ?
           <div>
             <h2>Your Program</h2>
             <ProgramList editProgramItem={editProgramItem}/>
-            <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Manage Program</Button>
+            <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProgram}>Manage Program</Button>
           </div>
           :
-          <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToProgram}>Create a Program</Button>}
+          <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProgram}>Create a Program</Button>}
       </div>
-      <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={goToAbout}>About</Button>
+      <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToAbout}>About</Button>
       <br />
-      <LogOutButton className="btn" />
+      <LogOutButton className='btn' />
     </div>
   );
 }

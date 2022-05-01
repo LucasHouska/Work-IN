@@ -8,7 +8,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 
-function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
+function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram, frequencyToDays, setFrequencyToDays }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -108,27 +108,27 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram }) {
 
     return (
         <>
-            <form className="program-form" onSubmit={addExerciseToProgram}>
-                <div className="time-inputs">
-                    {/* <TextField id="number-of-weeks" type="number" label="Weeks" style={{ width: 70 }} value={time.weeks} variant="standard" onChange={handleChangeWeeks} />
-                    <TextField id="start-date" type="date" label="Start Date" InputLabelProps={{ shrink: true }} value={time.startDate} variant="standard" onChange={event => { dispatch({ type: 'HOLD_START_DATE', payload: event.target.value }) }} /> */}
-                    <TextField id="frequency" InputProps={{ inputProps: { min: 0, max: 7 } }} style={{ width: 100 }} type="number" label="Frequency" value={time.frequency} variant="standard" onChange={handleFrequencyChange} />
+            <form className='program-form' onSubmit={addExerciseToProgram}>
+                <div className='time-inputs'>
+                    {/* <TextField id='number-of-weeks' type='number' label='Weeks' style={{ width: 70 }} value={time.weeks} variant='standard' onChange={handleChangeWeeks} />
+                    <TextField id='start-date' type='date' label='Start Date' InputLabelProps={{ shrink: true }} value={time.startDate} variant='standard' onChange={event => { dispatch({ type: 'HOLD_START_DATE', payload: event.target.value }) }} /> */}
+                    <TextField id='frequency' InputProps={{ inputProps: { min: 0, max: 7 } }} style={{ width: 100 }} type='number' label='Frequency' value={time.frequency} variant='standard' onChange={handleFrequencyChange} />
                 </div>
                 <Autocomplete
-                    id="exercise-options"
+                    id='exercise-options'
                     options={exercises}
                     getOptionLabel={(option) => option.exercise_name}
                     onChange={handleExerciseInput}
-                    renderInput={(params) => <TextField {...params} label="Exercises" margin="normal" />}
+                    renderInput={(params) => <TextField {...params} label='Exercises' margin='normal' />}
                 />
                 <div className='form-inputs'>
-                    <TextField id="number-of-sets" type="number" label="Sets" value={exerciseToAddToProgram.number_of_sets} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_sets: Number(event.target.value) })} />
-                    <TextField id="number-of-reps" type="number" label="Reps" value={exerciseToAddToProgram.number_of_reps} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_reps: Number(event.target.value) })} />
-                    <TextField id="weight" type="number" label="Target Weight" value={exerciseToAddToProgram.weight} variant="standard" onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
+                    <TextField id='number-of-sets' type='number' label='Sets' value={exerciseToAddToProgram.number_of_sets} variant='standard' onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_sets: Number(event.target.value) })} />
+                    <TextField id='number-of-reps' type='number' label='Reps' value={exerciseToAddToProgram.number_of_reps} variant='standard' onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_reps: Number(event.target.value) })} />
+                    <TextField id='weight' type='number' label='Target Weight' value={exerciseToAddToProgram.weight} variant='standard' onChange={event => setExerciseToAddToProgram({ ...exerciseToAddToProgram, weight: Number(event.target.value) })} />
                 </div>
-                <div id="program-buttons">
-                    <Button className="button" variant="contained" color="primary" style={{ margin: 10 }} type="submit">Add Exercise</Button>
-                    {user.access_level > 0 && <Button variant="contained" color="default" style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>}
+                <div id='program-buttons'>
+                    <Button className='button' variant='contained' color='primary' style={{ margin: 10 }} type='submit'>Add Exercise</Button>
+                    {user.access_level > 0 && <Button variant='contained' color='default' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>}
                 </div>
             </form>
         </>

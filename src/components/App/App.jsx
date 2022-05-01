@@ -14,7 +14,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -27,7 +26,6 @@ import CreateExercise from '../CreateExercise/CreateExercise';
 import MaxPage from '../MaxPage/MaxPage';
 import ProgramPage from '../ProgramPage/ProgramPage';
 import ProgressPage from '../ProgressPage/ProgressPage';
-import { Paper } from '@material-ui/core'
 
 function App() {
   const dispatch = useDispatch();
@@ -44,13 +42,13 @@ function App() {
         <div id='switch'>
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-              <Redirect exact from="/" to="/home" />
+              <Redirect exact from='/' to='/home' />
 
               {/* Visiting localhost:3000/about will show the about page. */}
               <Route
                 // shows AboutPage at all times (logged in or not)
                 exact
-                path="/about"
+                path='/about'
               >
                 <AboutPage />
               </Route>
@@ -62,72 +60,71 @@ function App() {
               <ProtectedRoute
                 // logged in shows UserPage else shows LoginPage
                 exact
-                path="/user"
+                path='/user'
               >
                 <UserPage />
               </ProtectedRoute>
 
               <ProtectedRoute
                 exact
-                path="/create-exercise"
+                path='/create-exercise'
               >
                 {user.access_level > 0 ?
                   <CreateExercise />
                   :
-                  <Redirect to="/home" />}
+                  <Redirect to='/home' />}
               </ProtectedRoute>
 
               <ProtectedRoute
-                // logged in shows InfoPage else shows LoginPage
                 exact
-                path="/workout"
+                path='/workout'
               >
                 <WorkoutPage />
               </ProtectedRoute>
 
               <ProtectedRoute
                 exact
-                path="/exercise/:workoutId/:exerciseNumber"
+                path='/exercise/:workoutId/:exerciseNumber'
               >
                 <ExercisePage />
               </ProtectedRoute>
 
               <ProtectedRoute
                 exact
-                path="/finish"
+                path='/finish'
               >
                 <FinishPage />
               </ProtectedRoute>
 
               <ProtectedRoute
                 exact
-                path="/progress"
+                path='/progress'
               >
                 <ProgressPage />
               </ProtectedRoute>
 
               <ProtectedRoute
                 exact
-                path="/max"
+                path='/max'
               >
                 <MaxPage />
               </ProtectedRoute>
 
               <ProtectedRoute
                 exact
-                path="/program"
+                path='/program'
               >
                 <ProgramPage />
               </ProtectedRoute>
 
               <Route
                 exact
-                path="/login"
+                path='/login'
               >
                 {user.id ?
                   // If the user is already logged in, 
                   // redirect to the /user page
-                  <Redirect to="/workout" />
+                  <Redirect to='/workout' />
                   :
                   // Otherwise, show the login page
                   <LoginPage />
@@ -136,12 +133,12 @@ function App() {
 
               <Route
                 exact
-                path="/registration"
+                path='/registration'
               >
                 {user.id ?
                   // If the user is already logged in, 
                   // redirect them to the /user page
-                  <Redirect to="/workout" />
+                  <Redirect to='/workout' />
                   :
                   // Otherwise, show the registration page
                   <RegisterPage />
@@ -150,12 +147,12 @@ function App() {
 
               <Route
                 exact
-                path="/home"
+                path='/home'
               >
                 {user.id ?
                   // If the user is already logged in, 
                   // redirect them to the /user page
-                  <Redirect to="/workout" />
+                  <Redirect to='/workout' />
                   :
                   // Otherwise, show the Landing page
                   <LandingPage />

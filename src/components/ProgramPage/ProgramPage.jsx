@@ -69,18 +69,23 @@ function ProgramPage() {
 
     return (
         <>
-            <div id="program-page">
+            <div id='program-page'>
                 <div>
-                    {programExists ?
+                    {/* {programExists ?
                         null
-                        :
-                        <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />}
+                        : */}
+                        <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
+                        {/* } */}
                 </div>
                 <ProgramList edit={edit} setEdit={setEdit} editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 {programExists ?
                     <div>
                         <div>
-                            {edit ? <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleSaveProgram}>Save Program</Button> : <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleEditProgram}>Edit Program</Button>}
+                            {/* {edit ?  */}
+                            <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleSaveProgram}>Save Program</Button>
+                            {/*  : 
+                            <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleEditProgram}>Edit Program</Button>
+                            } */}
                             <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
                         </div>
                         <div className='button'>

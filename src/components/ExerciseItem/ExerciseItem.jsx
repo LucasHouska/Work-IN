@@ -46,33 +46,33 @@ function ExerciseItem({ exercise }) {
         <>
             {edit ?
                 <TableRow>
-                    <TableCell align="center">{exercise?.set_number}</TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise?.repetitions} onChange={(event) => setSetToUpdate({ ...setToUpdate, reps: event.target.value })} /></TableCell>
-                    <TableCell align="center"><TextField variant='outlined' label={exercise?.weight} onChange={(event) => setSetToUpdate({ ...setToUpdate, weight: event.target.value })} /></TableCell>
-                    <TableCell align="center">
-                        <IconButton aria-label="delete" onClick={handleSave}>
-                            <SaveOutlined fontSize="medium" />
+                    <TableCell align='center'>{exercise?.set_number}</TableCell>
+                    <TableCell align='center'><TextField variant='outlined' label={exercise?.repetitions} onChange={(event) => setSetToUpdate({ ...setToUpdate, reps: event.target.value })} /></TableCell>
+                    <TableCell align='center'><TextField variant='outlined' label={exercise?.weight} onChange={(event) => setSetToUpdate({ ...setToUpdate, weight: event.target.value })} /></TableCell>
+                    <TableCell align='center'>
+                        <IconButton aria-label='delete' onClick={handleSave}>
+                            <SaveOutlined fontSize='medium' />
                         </IconButton>
                     </TableCell>
-                    <TableCell align="center">
-                        <IconButton aria-label="delete" onClick={() => { handleDelete(exercise) }}>
-                            <Delete fontSize="medium" />
+                    <TableCell align='center'>
+                        <IconButton aria-label='delete' onClick={() => { handleDelete(exercise) }}>
+                            <Delete fontSize='medium' />
                         </IconButton>
                     </TableCell>
                 </TableRow>
                 :
                 <TableRow>
-                    <TableCell align="center">{exercise?.set_number}</TableCell>
-                    <TableCell align="center">{exercise?.repetitions}</TableCell>
-                    <TableCell align="center">{exercise?.weight}</TableCell>
-                    <TableCell align="center">
-                        <IconButton aria-label="edit" onClick={handleEdit}>
-                            <Edit fontSize="medium" />
+                    <TableCell align='center'>{exercise?.set_number}</TableCell>
+                    <TableCell align='center'>{exercise?.repetitions}</TableCell>
+                    <TableCell align='center'>{exercise?.weight}</TableCell>
+                    <TableCell align='center'>
+                        <IconButton aria-label='edit' onClick={handleEdit}>
+                            <Edit fontSize='medium' />
                         </IconButton>
                     </TableCell>
-                    <TableCell align="center">
-                        <IconButton aria-label="delete" onClick={() => { handleDelete(exercise) }}>
-                            <Delete fontSize="medium" />
+                    <TableCell align='center'>
+                        <IconButton aria-label='delete' onClick={() => { handleDelete(exercise) }}>
+                            <Delete fontSize='medium' />
                         </IconButton>
                     </TableCell>
                 </TableRow>}

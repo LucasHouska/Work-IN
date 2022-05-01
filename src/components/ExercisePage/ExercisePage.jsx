@@ -166,12 +166,12 @@ function ExercisePage() {
             </div>
 
             <div className='details'>
-                <Button variant="contained" color="primary" onClick={handleOpen}>
+                <Button variant='contained' color='primary' onClick={handleOpen}>
                     Details
                 </Button>
                 <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
+                    aria-labelledby='transition-modal-title'
+                    aria-describedby='transition-modal-description'
                     className={classes.modal}
                     open={open}
                     onClose={handleClose}
@@ -183,21 +183,21 @@ function ExercisePage() {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <h2 id="transition-modal-title">Instructions:</h2>
-                            <p id="transition-modal-description">{currentExercise[0]?.exercise_instructions}</p>
+                            <h2 id='transition-modal-title'>Instructions:</h2>
+                            <p id='transition-modal-description'>{currentExercise[0]?.exercise_instructions}</p>
                         </div>
                     </Fade>
                 </Modal>
             </div>
 
             <TableContainer component={Paper} >
-                <Table aria-label="simple table" >
+                <Table aria-label='simple table' >
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center">Sets</TableCell>
-                            <TableCell align="center">Reps&nbsp;</TableCell>
-                            <TableCell align="center">Weight&nbsp;</TableCell>
-                            <TableCell align="center"></TableCell>
+                            <TableCell align='center'>Sets</TableCell>
+                            <TableCell align='center'>Reps&nbsp;</TableCell>
+                            <TableCell align='center'>Weight&nbsp;</TableCell>
+                            <TableCell align='center'></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

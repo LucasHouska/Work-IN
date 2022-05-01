@@ -9,8 +9,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-import WorkoutList from "../WorkoutList/WorkoutList";
-import WorkoutForm from "../WorkoutForm/WorkoutForm";
+import WorkoutList from '../WorkoutList/WorkoutList';
+import WorkoutForm from '../WorkoutForm/WorkoutForm';
 
 
 function WorkoutPage() {
@@ -88,15 +88,15 @@ function WorkoutPage() {
 
     return (
         <>
-            <div id="workout-page">
+            <div id='workout-page'>
                 {programDays[0] && 
                 <div id='program-on-workout-page'>
-                    <FormControl component="fieldset">
-                    <FormLabel component="legend">Program Day</FormLabel>
-                    <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
+                    <FormControl component='fieldset'>
+                    <FormLabel component='legend'>Program Day</FormLabel>
+                    <RadioGroup row aria-label='Day' name='day' value={Number(programDay)} onChange={handleDayChange}>
                         {programDays.map((day, i) => {
                             return (
-                                <FormControlLabel key={i} labelPlacement="top" value={day} control={<Radio />} label={day} />
+                                <FormControlLabel key={i} labelPlacement='top' value={day} control={<Radio />} label={day} />
                             )
                         })}
                     </RadioGroup>
@@ -105,8 +105,8 @@ function WorkoutPage() {
                 </div>}
                 <WorkoutForm />
                 <WorkoutList programDay={programDay} />
-                <div className="begin">
-                    <Button variant="contained" color="primary" style={{ margin: 20 }} onClick={postWorkout}>Begin</Button>
+                <div className='begin'>
+                    <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={postWorkout}>Begin</Button>
                 </div>
             </div>
         </>
