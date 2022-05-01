@@ -63,6 +63,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 });
 
+router.post('/add-max', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    INSERT INTO "maxes" ("user_id", "name_of_exercise", "weight")
+    VALUES ($1, $2, $3);
+    `
+
+    const values = [req.user.id, req.body.name_of_exercise, req.body.weight];
+
+    pool.query(queryText, values).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+})
+
 router.post('/create-exercise', rejectUnauthenticated, (req, res) => {
 
     const queryText = `
