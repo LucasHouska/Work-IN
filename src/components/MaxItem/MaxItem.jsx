@@ -28,6 +28,7 @@ function MaxItem({ max }) {
 
     const classes = useStyles();
 
+
     const handleClick = () => {
         setOpen((prev) => !prev);
     };
@@ -35,6 +36,7 @@ function MaxItem({ max }) {
     const handleClickAway = () => {
         setOpen(false);
 
+        //ensures premature dispatches
         if(maxWeight != '') {
             dispatch({type: 'UPDATE_MAX_WEIGHT', payload: {maxId: max.id, maxWeight: maxWeight} })
         } 

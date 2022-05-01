@@ -11,7 +11,7 @@ function FinishPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-
+    //Clears workout and returns user to workout page
     const handleClose = () => {
         dispatch({ type: 'CLEAR_WORKOUT' })
 

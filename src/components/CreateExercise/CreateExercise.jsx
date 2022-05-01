@@ -35,7 +35,7 @@ function CreateExercise() {
         exercise_image_2: ''
     });
 
-    //
+    //Sends new exercise to exercise saga and moves user to workout page
     const handleSubmit = () => {
         dispatch({ type: 'CREATE_EXERCISE', payload: exerciseToCreate });
 
@@ -56,8 +56,6 @@ function CreateExercise() {
                         value={exerciseToCreate.exercise_type}
                         onChange={event => setExerciseToCreate({ ...exerciseToCreate, exercise_type: event.target.value })}
                     >
-                        //In the future, add the ability to create a new type if needed
-                        //Loop through all of the types from the database and place them in their respective MenuItem
                         <MenuItem value='Cardio'>Cardio</MenuItem>
                         <MenuItem value={'Olympic Weightlifting'}>Olympic Weightlifting</MenuItem>
                         <MenuItem value={'Plyometrics'}>Plyometrics</MenuItem>
@@ -75,8 +73,6 @@ function CreateExercise() {
                         value={exerciseToCreate.main_muscle_worked}
                         onChange={event => setExerciseToCreate({ ...exerciseToCreate, main_muscle_worked: event.target.value })}
                     >
-                        //In the future, add the ability to create a new main_muscle_worked if needed
-                        //Loop through all of the types from the database and place them in their respective MenuItem
                         <MenuItem value='Abdominals'>Abdominals</MenuItem>
                         <MenuItem value={'Abductors'}>Abductors</MenuItem>
                         <MenuItem value={'Adductors'}>Adductors</MenuItem>
@@ -104,8 +100,6 @@ function CreateExercise() {
                         value={exerciseToCreate.exercise_equipment_needed}
                         onChange={event => setExerciseToCreate({ ...exerciseToCreate, exercise_equipment_needed: event.target.value })}
                     >
-                        //In the future, add the ability to create a new main_muscle_worked if needed
-                        //Loop through all of the types from the database and place them in their respective MenuItem
                         <MenuItem value='Bands'>Bands</MenuItem>
                         <MenuItem value={'Barbell'}>Barbell</MenuItem>
                         <MenuItem value={'Body Only'}>Body Only</MenuItem>
@@ -129,8 +123,6 @@ function CreateExercise() {
                         value={exerciseToCreate.difficulty_level}
                         onChange={event => setExerciseToCreate({ ...exerciseToCreate, difficulty_level: event.target.value })}
                     >
-                        //In the future, add the ability to create a new main_muscle_worked if needed
-                        //Loop through all of the types from the database and place them in their respective MenuItem
                         <MenuItem value='Beginner'>Beginner</MenuItem>
                         <MenuItem value={'Intermediate'}>Intermediate</MenuItem>
                         <MenuItem value={'Expert'}>Expert</MenuItem>

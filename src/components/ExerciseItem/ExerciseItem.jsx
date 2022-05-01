@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
@@ -16,6 +15,7 @@ function ExerciseItem({ exercise }) {
     const dispatch = useDispatch();
 
     const [edit, setEdit] = useState(false);
+
     const [setToUpdate, setSetToUpdate] = useState({
         id: exercise.id,
         reps: exercise.repetitions,
@@ -24,17 +24,17 @@ function ExerciseItem({ exercise }) {
 
 
 
-
+    //Deletes set from DB in workout Saga
     const handleDelete = (exercise) => {
-        dispatch({ type: 'DELETE_SET', payload: exercise.id })
+        dispatch({ type: 'DELETE_SET', payload: exercise.id });
     }
 
-
+    //Renders inputs
     const handleEdit = () => {
         setEdit(true);
     }
 
-
+    //Unrenders inputs and sends Put through workout Saga
     const handleSave = () => {
         setEdit(false);
 
