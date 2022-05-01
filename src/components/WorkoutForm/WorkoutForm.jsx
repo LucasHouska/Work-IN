@@ -52,6 +52,11 @@ function WorkoutForm() {
         setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, exercise_id: value.id, exercise_name: value.exercise_name })
     }
 
+    const clearWorkout = () => {
+        dispatch({ type: 'CLEAR_WORKOUT' })
+        dispatch({type: 'GET_PROGRAM'})
+    }
+
     const goToCreateExercise = () => {
         history.push('/create-exercise')
     }
@@ -84,6 +89,7 @@ function WorkoutForm() {
                     <TextField id='weight' type='number' label='Target Weight' value={exerciseToAddToWorkout.weight} variant='standard' onChange={event => setExerciseToAddToWorkout({ ...exerciseToAddToWorkout, weight: Number(event.target.value) })} />
                 </div>
                 <Button variant='contained' color='primary' type='submit' style={{ margin: 10 }}>Add Exercise</Button>
+                <Button variant='outlined' color='default' onClick={clearWorkout}>Clear</Button>
                 {user.access_level > 0 &&
                     <div>
                         <Button variant='contained' color='default' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
