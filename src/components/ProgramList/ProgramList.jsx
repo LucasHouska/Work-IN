@@ -105,31 +105,31 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
 
     return (
         <>
-            <div className="time-inputs">
-                <FormControl component="fieldset">
-                    <FormLabel component="legend">Program Day</FormLabel>
-                    <RadioGroup row aria-label="Day" name="day" value={Number(programDay)} onChange={handleDayChange}>
+            <div className='time-inputs'>
+                <FormControl component='fieldset'>
+                    <FormLabel component='legend'>Program Day</FormLabel>
+                    <RadioGroup row aria-label='Day' name='day' value={Number(programDay)} onChange={handleDayChange}>
                         {frequencyToDays && frequencyToDays.map((day, i) => {
                             return (
-                                <FormControlLabel key={i} color='primary' labelPlacement="top" value={day} control={<Radio />} label={day} />
+                                <FormControlLabel key={i} color='primary' labelPlacement='top' value={day} control={<Radio />} label={day} />
                             )
                         })}
                     </RadioGroup>
                 </FormControl>
             </div>
             <TableContainer component={Paper}>
-                <Table aria-label="simple table">
+                <Table aria-label='simple table'>
                     <TableHead>
                         <TableRow>
                             <TableCell>Exercise</TableCell>
-                            <TableCell align="right">Sets</TableCell>
-                            <TableCell align="right">Reps&nbsp;</TableCell>
-                            <TableCell align="right">Weight&nbsp;</TableCell>
+                            <TableCell align='right'>Sets</TableCell>
+                            <TableCell align='right'>Reps&nbsp;</TableCell>
+                            <TableCell align='right'>Weight&nbsp;</TableCell>
                             <div>
                                 {editProgramItem ?
                                     <div>
-                                        <TableCell align="center"></TableCell>
-                                        <TableCell align="center"></TableCell>
+                                        <TableCell align='center'></TableCell>
+                                        <TableCell align='center'></TableCell>
                                     </div>
                                     :
                                     null}

@@ -28,23 +28,23 @@ function ProgressPage() {
 
     return (
         <>
-            <div id="progress-page">
+            <div id='progress-page'>
                 <h1>Your Progression</h1>
                 <br />
                 <Autocomplete
-                    id="exercise-options"
+                    id='exercise-options'
                     options={exercises}
                     getOptionLabel={(option) => option.exercise_name}
                     onChange={handleExerciseInput}
                     style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Exercises" />}
+                    renderInput={(params) => <TextField {...params} label='Exercises' />}
                 />
                 <br />
                 <LineChart width={350} height={200} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                    <Line type="monotone" dataKey="weight" stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                    <XAxis dataKey="date" />
-                    <YAxis dataKey="weight" />
+                    <Line type='monotone' dataKey='weight' stroke='#8884d8' />
+                    <CartesianGrid stroke='#ccc' strokeDasharray='5 5' />
+                    <XAxis dataKey='date' />
+                    <YAxis dataKey='weight' />
                     <Tooltip />
                 </LineChart>
             </div>

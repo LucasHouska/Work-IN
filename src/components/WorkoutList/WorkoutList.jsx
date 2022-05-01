@@ -21,15 +21,15 @@ function WorkoutList({programDay}) {
     return (
         <>
             <TableContainer component={Paper}>
-                <Table aria-label="simple table">
+                <Table aria-label='simple table'>
                     <TableHead>
                         <TableRow>
                             <TableCell>Exercise</TableCell>
-                            <TableCell align="right">Sets</TableCell>
-                            <TableCell align="right">Reps&nbsp;</TableCell>
-                            <TableCell align="right">Weight&nbsp;</TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
+                            <TableCell align='right'>Sets</TableCell>
+                            <TableCell align='right'>Reps&nbsp;</TableCell>
+                            <TableCell align='right'>Weight&nbsp;</TableCell>
+                            <TableCell align='center'></TableCell>
+                            <TableCell align='center'></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

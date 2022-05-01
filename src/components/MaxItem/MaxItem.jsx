@@ -12,7 +12,7 @@ function MaxItem({ max }) {
 
     const dispatch = useDispatch();
 
-    const concernedElement = document.querySelector(".click-text");
+    const concernedElement = document.querySelector('.click-text');
 
     const [maxWeight, setMaxWeight] = useState('');
     const [open, setOpen] = useState(false);
@@ -28,6 +28,7 @@ function MaxItem({ max }) {
 
     const classes = useStyles();
 
+
     const handleClick = () => {
         setOpen((prev) => !prev);
     };
@@ -35,6 +36,7 @@ function MaxItem({ max }) {
     const handleClickAway = () => {
         setOpen(false);
 
+        //ensures premature dispatches
         if(maxWeight != '') {
             dispatch({type: 'UPDATE_MAX_WEIGHT', payload: {maxId: max.id, maxWeight: maxWeight} })
         } 
@@ -46,11 +48,11 @@ function MaxItem({ max }) {
 
     }
 
-    document.addEventListener("mousedown", (event) => {
+    document.addEventListener('mousedown', (event) => {
         if (concernedElement?.contains(event.target)) {
-            console.log("Clicked Inside");
+            console.log('Clicked Inside');
         } else {
-            console.log("Clicked Outside / Elsewhere");
+            console.log('Clicked Outside / Elsewhere');
         }
     });
 
@@ -59,10 +61,10 @@ function MaxItem({ max }) {
         <>
             <ClickAwayListener onClickAway={handleClickAway}>
                 <div className={classes.root}>
-                <h3>{max.name_of_exercise}<span> {max.favorite ? <Star color="primary" onClick={handleFavorite}></Star> : <StarBorder color="primary" onClick={handleFavorite}></StarBorder>}</span></h3>
+                <h3>{max.name_of_exercise}<span> {max.favorite ? <Star color='primary' onClick={handleFavorite}></Star> : <StarBorder color='primary' onClick={handleFavorite}></StarBorder>}</span></h3>
                     {open ? (
                         <div >
-                            <TextField type="number" label={max.weight} variant="standard" onChange={(event) => {setMaxWeight(event.target.value)}} onBlur={() => {handleClickAway()}} />
+                            <TextField type='number' label={max.weight} variant='standard' onChange={(event) => {setMaxWeight(event.target.value)}} onBlur={() => {handleClickAway()}} />
                         </div>
                     ) : <p onClick={handleClick}>{max.weight}</p>}
                 </div>

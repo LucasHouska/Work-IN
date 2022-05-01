@@ -22,8 +22,8 @@ function Nav() {
       background: 'linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)',
     },
     stickToBottom: {
-      width: "100%",
-      position: "fixed",
+      width: '100%',
+      position: 'fixed',
       bottom: 0,
     }
   });
@@ -42,9 +42,9 @@ function Nav() {
         <>
           <BottomNavigation className={classes.stickToBottom}
             value={value} onChange={handleChange} >
-            <BottomNavigationAction label="Home" value="user" icon={<Home />} />
-            <BottomNavigationAction label="FitnessCenter" value="workout" icon={<FitnessCenter />} />
-            <BottomNavigationAction label="Progress" value="progress" icon={<TrendingUp />} />
+            <BottomNavigationAction label='Home' value='user' icon={<Home />} />
+            <BottomNavigationAction label='FitnessCenter' value='workout' icon={<FitnessCenter />} />
+            <BottomNavigationAction label='Progress' value='progress' icon={<TrendingUp />} />
           </BottomNavigation>
         </>
       )}
