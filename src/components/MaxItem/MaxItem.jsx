@@ -23,6 +23,7 @@ function MaxItem({ max }) {
     const useStyles = makeStyles((theme) => ({
         root: {
             position: 'relative',
+            margin: 10
         },
     }));
 
