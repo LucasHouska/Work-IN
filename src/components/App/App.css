@@ -225,7 +225,6 @@ input {
   align-items: center;
 }
 
-#going-forward-list {
-  padding-right: 50px;
-  list-style-type: circle;
+#bottom-buttons {
+  margin: 60px;
 }

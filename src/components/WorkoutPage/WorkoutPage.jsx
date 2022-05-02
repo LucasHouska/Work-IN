@@ -89,7 +89,8 @@ function WorkoutPage() {
     return (
         <>
             <div id='workout-page'>
-                {programDays[0] && 
+                {/* Program feature coming soon! */}
+                {/* {programDays[0] && 
                 <div id='program-on-workout-page'>
                     <FormControl component='fieldset'>
                     <FormLabel component='legend'>Program Day</FormLabel>
@@ -102,7 +103,7 @@ function WorkoutPage() {
                     </RadioGroup>
                 </FormControl>
                 <h2>OR</h2>
-                </div>}
+                </div>} */}
                 <WorkoutForm />
                 {workout[0] ? <WorkoutList programDay={programDay} /> : null}
                 {workout[0] ? 

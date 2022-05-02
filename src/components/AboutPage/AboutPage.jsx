@@ -17,7 +17,7 @@ function AboutPage() {
           <li>Passport</li>
         </ul>
         <h1>Going forward...</h1>
-        <ul id='going-forward-list'>
+        <ul className='about-list'>
           <li>Show the progress of the exercises done in the workout
             on the finish page</li>
           <li>Add body weight, water, and mood tracker</li>
