@@ -42,7 +42,7 @@ function UserPage() {
   useEffect(() => {
     console.log('i', program)
     if (program[0] && program[0].program_number == 1) {
-        setProgramExists(true);
+      setProgramExists(true);
     }
   }, [program])
 
@@ -76,7 +76,8 @@ function UserPage() {
         </div>
         <Button variant='outlined' color='primary' onClick={goToMaxes}>Max</Button>
       </div>
-      <div id='program-display'>
+      {/* Program feature coming soon! */}
+      {/* <div id='program-display'>
         {programExists ?
           <div>
             <h2>Your Program</h2>
@@ -85,10 +86,12 @@ function UserPage() {
           </div>
           :
           <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProgram}>Create a Program</Button>}
+      </div> */}
+      <div id='bottom-buttons'>
+        <Button variant='outlined' color='primary' style={{ margin: 20 }} onClick={goToAbout}>About</Button>
+        <br />
+        <LogOutButton className='btn' />
       </div>
-      <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToAbout}>About</Button>
-      <br />
-      <LogOutButton className='btn' />
     </div>
   );
 }

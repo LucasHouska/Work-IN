@@ -41,10 +41,10 @@ function MaxPage() {
                     <div className='max-input'>
                         <TextField type='text' label='Exercise Name' variant='standard' onChange={(event) => { setNewMax({ ...newMax, name_of_exercise: event.target.value }) }} />
                         <TextField type='number' label='Weight' variant='standard' onChange={(event) => { setNewMax({ ...newMax, weight: Number(event.target.value) }) }} />
-                        <Button className='max-input' onClick={addNewMax}>Add New Max</Button>
+                        <Button className='max-input' variant='outlined' color='primary' onClick={addNewMax}>Add New Max</Button>
                     </div>
                     :
-                    <Button onClick={createNewMax}>New Max</Button>}
+                    <Button variant='outlined' color='primary' onClick={createNewMax}>New Max</Button>}
             </div>
             <div className='max-list'>
                 {maxes.map(max => {
