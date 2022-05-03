@@ -24,6 +24,16 @@ Create a new database called Work-In, copy and paste the database.sql in Postico
 - Run npm run client
 - Navigate to localhost:3000
 
+
 ## Acknowledgements
 
-I'd like to thank a whole swath of people. I'll start will my instructor Dane Smith, who has made learning all of this an absolute pleasure. I'd also like to thank all of my 
+- Dane Smith, for bringing my knowledge and skills to the next level
+- My classmates, for being there for me and with me along the way
+- Prime Digital Academy, for providing the best learning experience I've experienced to date
+- My girlfriend, family, and friends; for supporting and encouraging me all the way through
+
+
+    I couldn't have gotten this far without these wonderful humans by my side.
+
+
+    Sincerely,  thank you.

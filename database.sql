@@ -23,7 +23,7 @@ CREATE TABLE "exercises" (
 );
 
 
-UPDATE exercises
+UPDATE "exercises"
 SET  exercise_name = LOWER(exercise_name);
 
 
@@ -54,7 +54,8 @@ CREATE TABLE "program" (
 "exercise_id" INT REFERENCES "exercises" NOT NULL,
 "number_of_sets" INT NOT NULL,
 "number_of_reps" INT NOT NULL,
-"weight" INT
+"weight" INT,
+"user_id" INT REFERENCES "user" NOT NULL,
 );
 
 
