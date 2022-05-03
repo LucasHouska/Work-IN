@@ -22,18 +22,20 @@ import Button from '@material-ui/core/Button';
 
 
 
-function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem, frequencyToDays, setFrequencyToDays }) {
+function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem, frequencyToDays, setFrequencyToDays, edit, setEdit, isUserPage }) {
 
     const dispatch = useDispatch();
 
     const program = useSelector(state => state.workout.programReducer);
+    const programLength = useSelector(state => state.workout.programLengthInDays);
     const time = useSelector(store => store.workout.weeksReducer)
 
     const programDay = time.programDay
 
     const [day, setDay] = useState([]);
+    // const [isUserPage, setIsUserPage] = useState(false);
     // const [frequencyToDays, setFrequencyToDays] = useState([]);
-    const [edit, setEdit] = useState(false);
+    // const [edit, setEdit] = useState(false);
 
 
 
@@ -97,21 +99,12 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
 
 
 
-//Dane says these two conflicting with each other screams refactor. Have on source
-//of truth for setFrequencyToDays
+    //Dane says these two conflicting with each other screams refactor. Have on source
+    //of truth for setFrequencyToDays
 
-    // useEffect(() => {
-    //         let programDays = [];
-
-    //         for (let day of program) {
-    //             if (programDays.includes(day.program_day) === false) {
-    //                 programDays.push(day.program_day);
-    //             }
-    //         }
-    //         setFrequencyToDays(programDays);
-
-    //         dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
-    // }, [program]);
+    useEffect(() => {
+        dispatch({ type: 'HOLD_FREQUENCY', payload: programLength })
+    }, [programLength]);
 
 
     // //This useEffect turns the frequency number in the workout reducer into
@@ -143,10 +136,14 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
                 </FormControl>
             </div>
             <div id='program-icons'>
-                {edit ?
-                    <SaveIcon style={{ margin: 10 }} onClick={handleSaveProgram}></SaveIcon>
-                    :
-                    <EditIcon style={{ margin: 10 }} onClick={handleEditProgram}></EditIcon>}
+                {isUserPage ?
+                    null :
+                    <div>
+                        {edit ?
+                            <SaveIcon style={{ margin: 10 }} onClick={handleSaveProgram}></SaveIcon>
+                            :
+                            <EditIcon style={{ margin: 10 }} onClick={handleEditProgram}></EditIcon>}
+                    </div>}
             </div>
             <TableContainer component={Paper}>
                 <Table aria-label='simple table'>
@@ -181,9 +178,11 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
                     </TableBody>
                 </Table>
             </TableContainer>
-            {edit ?
-                <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
-                : null}
+            {
+                edit ?
+                    <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
+                    : null
+            }
         </>
     )
 }

@@ -19,9 +19,10 @@ function ProgramPage() {
 
     const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
-    // const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(false);
     const [programExists, setProgramExists] = useState(false);
     const [editProgramItem, setEditProgramItem] = useState(false);
+    const [isUserPage, setIsUserPage] = useState(false);
     const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
         // number_of_weeks: '',
         // start_date: '',
@@ -86,7 +87,18 @@ function ProgramPage() {
                 <div>
                     <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 </div>
-                <ProgramList editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
+                <ProgramList 
+                editProgramItem={editProgramItem} 
+                programDay={programDay} 
+                setProgramDay={setProgramDay} 
+                frequencyToDays={frequencyToDays} 
+                setFrequencyToDays={setFrequencyToDays} 
+                exerciseToAddToProgram={exerciseToAddToProgram} 
+                setExerciseToAddToProgram={setExerciseToAddToProgram} 
+                edit={edit}
+                setEdit={setEdit}
+                isUserPage={isUserPage}
+                />
                 <Button onClick={postProgram}>Save Program</Button>
             </div>
         </>

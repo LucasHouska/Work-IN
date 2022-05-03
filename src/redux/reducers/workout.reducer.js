@@ -107,6 +107,22 @@ const programReducer = (state = [], action) => {
     return state;
 }
 
+const programLengthInDays = (state = 1, action) => {
+    if (action.type === 'SET_PROGRAM_LENGTH') {
+        let programDays = [];
+
+        for (let exercise of action.payload) {
+            if (programDays.includes(exercise.program_day) === false) {
+                programDays.push(exercise.program_day);
+            }
+        }
+
+
+        return programDays.length;
+    }
+    return state;
+}
+
 const weeksReducer = (state = { frequency: '', programDay: 1 }, action) => {
     // if(action.type === 'HOLD_WEEKS') {
     //     return {...state, weeks: action.payload};
@@ -127,5 +143,6 @@ export default combineReducers({
     exerciseList,
     exerciseNumber,
     programReducer,
-    weeksReducer
+    weeksReducer,
+    programLengthInDays
 });
