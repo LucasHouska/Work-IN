@@ -5,6 +5,7 @@ import MaxItem from '../MaxItem/MaxItem';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function MaxPage() {
 
@@ -25,6 +26,10 @@ function MaxPage() {
         setEditNewMax(false)
     }
 
+    const handleDelete = () => {
+
+    }
+
     const goToProfile = () => {
         history.push('/user')
     }
@@ -35,6 +40,9 @@ function MaxPage() {
 
     return (
         <>
+            <div id='delete-icon'>
+                <DeleteIcon onClick={handleDelete}></DeleteIcon>
+            </div>
             <h1 id='maxes-title'>Maxes</h1>
             <div className='max-input'>
                 {editNewMax ?
