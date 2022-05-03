@@ -15,11 +15,14 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import EditIcon from '@material-ui/icons/Edit';
+import SaveIcon from '@material-ui/icons/Save';
+import Button from '@material-ui/core/Button';
 
 
 
 
-function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem, edit, setEdit }) {
+function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem }) {
 
     const dispatch = useDispatch();
 
@@ -30,6 +33,8 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
 
     const [day, setDay] = useState([]);
     const [frequencyToDays, setFrequencyToDays] = useState([]);
+    const [edit, setEdit] = useState(false);
+
 
 
 
@@ -40,6 +45,20 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
 
         setExerciseToAddToProgram({ ...exerciseToAddToProgram, program_day: day })
     };
+
+    const handleEditProgram = () => {
+        setEdit(true);
+    }
+
+    const handleSaveProgram = () => {
+        dispatch({ type: 'SAVE_PROGRAM', payload: program })
+        setEdit(false);
+    }
+
+    const handleDeleteProgram = () => {
+        dispatch({ type: 'DELETE_PROGRAM' })
+    }
+
 
 
 
@@ -116,6 +135,12 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
                     </RadioGroup>
                 </FormControl>
             </div>
+            <div id='program-icons'>
+                {edit ?
+                    <SaveIcon style={{ margin: 10 }} onClick={handleSaveProgram}></SaveIcon>
+                    :
+                    <EditIcon style={{ margin: 10 }} onClick={handleEditProgram}></EditIcon>}
+            </div>
             <TableContainer component={Paper}>
                 <Table aria-label='simple table'>
                     <TableHead>
@@ -149,6 +174,9 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
                     </TableBody>
                 </Table>
             </TableContainer>
+            {edit ?
+                <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
+                : null}
         </>
     )
 }
