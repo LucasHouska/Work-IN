@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 
+import Button from '@material-ui/core/Button';
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -63,8 +65,10 @@ function LoginForm() {
           />
         </label>
       </div>
+      <br />
       <div>
-        <input className='btn' type='submit' name='submit' value='Log In' />
+        <Button type='submit' variant='outlined' color='primary'>Login</Button>
+        {/* <input className='btn' type='submit' name='submit' value='Log In' /> */}
       </div>
     </form>
   );
