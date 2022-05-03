@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import Swal from 'sweetalert2';
+
 
 
 
@@ -18,6 +20,7 @@ function WorkoutForm() {
     const user = useSelector(store => store.user);
 
 
+    const [exerciseName, setExerciseName] = useState('');
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
         exerciseNumberInWorkout: 1,
         exercise_id: '',
@@ -33,19 +36,28 @@ function WorkoutForm() {
     const addExerciseToWorkout = (event) => {
         event.preventDefault();
 
-        dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
+        if (exerciseToAddToWorkout.exercise_name === '') {
+            Swal.fire(
+                'Hold the phone...',
+                'Please enter a new exercise'
+              )
+        } else {
 
-        setExerciseToAddToWorkout({
-            exerciseNumberInWorkout: exerciseNumber,
-            exercise_id: '',
-            exercise_name: '',
-            number_of_sets: '',
-            number_of_reps: '',
-            weight: ''
-        })
+            dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
-        dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+            setExerciseToAddToWorkout({
+                exerciseNumberInWorkout: exerciseNumber,
+                exercise_id: '',
+                exercise_name: '',
+                number_of_sets: '',
+                number_of_reps: '',
+                weight: ''
+            })
 
+            setExerciseName('');
+
+            dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+        }
     }
 
     const handleExerciseInput = (event, value) => {
@@ -54,7 +66,7 @@ function WorkoutForm() {
 
     const clearWorkout = () => {
         dispatch({ type: 'CLEAR_WORKOUT' })
-        dispatch({type: 'GET_PROGRAM'})
+        dispatch({ type: 'GET_PROGRAM' })
     }
 
     const goToCreateExercise = () => {
@@ -77,7 +89,6 @@ function WorkoutForm() {
                     options={exercises}
                     getOptionLabel={(option) => option.exercise_name}
                     onChange={handleExerciseInput}
-                    // style={{ width: 300 }}
                     fullWidth
                     renderInput={(params) => <TextField {...params} label='Exercises' />}
                 />
