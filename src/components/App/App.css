@@ -240,3 +240,8 @@ input {
 #bottom-buttons {
   margin: 60px;
 }
+
+#program-icons {
+  display: flex;
+  align-self: flex-end;
+}

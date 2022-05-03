@@ -13,11 +13,13 @@ function ProgramPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const program = useSelector(state => state.workout.programReducer)
+    const program = useSelector(state => state.workout.programReducer);
+    const time = useSelector(store => store.workout.weeksReducer);
+
 
     const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
-    const [edit, setEdit] = useState(false);
+    // const [edit, setEdit] = useState(false);
     const [programExists, setProgramExists] = useState(false);
     const [editProgramItem, setEditProgramItem] = useState(false);
     const [exerciseToAddToProgram, setExerciseToAddToProgram] = useState({
@@ -32,7 +34,6 @@ function ProgramPage() {
         number_of_reps: '',
         weight: ''
     })
-    let isEdit = false;
 
 
     const postProgram = () => {
@@ -41,20 +42,18 @@ function ProgramPage() {
         history.push('/user');
     }
 
-    const handleEditProgram = () => {
-        isEdit = true;
-        setEdit(true);
-    }
+    // const handleEditProgram = () => {
+    //     setEdit(true);
+    // }
 
-    const handleSaveProgram = () => {
-        dispatch({ type: 'SAVE_PROGRAM', payload: program })
-        isEdit = false;
-        setEdit(false);
-    }
+    // const handleSaveProgram = () => {
+    //     dispatch({ type: 'SAVE_PROGRAM', payload: program })
+    //     setEdit(false);
+    // }
 
-    const handleDeleteProgram = () => {
-        dispatch({ type: 'DELETE_PROGRAM' })
-    }
+    // const handleDeleteProgram = () => {
+    //     dispatch({ type: 'DELETE_PROGRAM' })
+    // }
 
     const goToProfile = () => {
         dispatch({ type: 'SAVE_PROGRAM', payload: program })
@@ -70,6 +69,18 @@ function ProgramPage() {
         }
     }, [program])
 
+      //This useEffect turns the frequency number in the workout reducer into
+    //an array of numbers for the RadioGroup .map to loop over
+    useEffect(() => {
+        let programDays = [];
+        const frequency = time.frequency;
+
+        for (let i = 0; i < frequency; i++) {
+            programDays.push(i + 1);
+        }
+        setFrequencyToDays(programDays);
+    }, [time])
+
 
     return (
         <>
@@ -77,24 +88,8 @@ function ProgramPage() {
                 <div>
                     <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 </div>
-                <ProgramList edit={edit} setEdit={setEdit} editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
-                {programExists ?
-                    <div>
-                        <div>
-                            {edit ?
-                                <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleSaveProgram}>Save Program</Button>
-                                :
-                                <Button variant='contained' color='default' style={{ margin: 5 }} onClick={handleEditProgram}>Edit Program</Button>
-                            }
-                            <Button variant='contained' color='secondary' style={{ margin: 5 }} onClick={handleDeleteProgram}>Delete Program</Button>
-                        </div>
-                        <div className='button'>
-                            <Button variant='contained' color='primary' onClick={goToProfile}>Back to Profile</Button>
-                        </div>
-                    </div>
-                    :
-                    <Button onClick={postProgram}>Create Program</Button>
-                    }
+                <ProgramList editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
+                    <Button onClick={postProgram}>Save Program</Button>
             </div>
         </>
     )
