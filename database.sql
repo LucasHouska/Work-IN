@@ -55,7 +55,7 @@ CREATE TABLE "program" (
 "number_of_sets" INT NOT NULL,
 "number_of_reps" INT NOT NULL,
 "weight" INT,
-"user_id" INT REFERENCES "user" NOT NULL,
+"user_id" INT REFERENCES "user" NOT NULL
 );
 
 
