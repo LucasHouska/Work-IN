@@ -58,8 +58,8 @@ function RegisterForm() {
         </div>
         <br />
         <div>
-          <Button type='submit' variant='outlined' color='primary'>Register</Button>
-          {/* <input className='btn' type='submit' name='submit' value='Register' /> */}
+          {/* <Button type='submit' variant='outlined' color='primary'>Register</Button> */}
+          <input className='btn' type='submit' name='submit' value='Register' />
         </div>
       </form>
     </>

@@ -21,9 +21,6 @@ function* loginUser(action) {
     // get the user information from the server
     yield put({ type: 'FETCH_USER' });
 
-    //bring the user to the Workout Page
-    yield action.callback()
-
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
