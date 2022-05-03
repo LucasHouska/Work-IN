@@ -120,28 +120,29 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
             <TableContainer component={Paper}>
                 <Table aria-label='simple table'>
                     <TableHead>
-                        <TableRow>
-                            <TableCell>Exercise</TableCell>
-                            <TableCell align='right'>Sets</TableCell>
-                            <TableCell align='right'>Reps&nbsp;</TableCell>
-                            <TableCell align='right'>Weight&nbsp;</TableCell>
-                            <div>
-                                {editProgramItem ?
-                                    <div>
-                                        <TableCell align='center'></TableCell>
-                                        <TableCell align='center'></TableCell>
-                                    </div>
-                                    :
-                                    null}
-                            </div>
-                        </TableRow>
+                        {editProgramItem ?
+                            <TableRow>
+                                <TableCell>Exercise</TableCell>
+                                <TableCell align='right'>Sets</TableCell>
+                                <TableCell align='right'>Reps&nbsp;</TableCell>
+                                <TableCell align='right'>Weight&nbsp;</TableCell>
+                                <TableCell align='center'></TableCell>
+                                <TableCell align='center'></TableCell>
+                            </TableRow>
+                            :
+                            <TableRow>
+                                <TableCell>Exercise</TableCell>
+                                <TableCell align='right'>Sets</TableCell>
+                                <TableCell align='right'>Reps&nbsp;</TableCell>
+                                <TableCell align='right'>Weight&nbsp;</TableCell>
+                            </TableRow>}
                     </TableHead>
                     <TableBody>
                         {day.map((exercise) => (
                             <ProgramItem
                                 key={exercise.exercise_id}
                                 exercise={exercise}
-                                edit={edit} 
+                                edit={edit}
                                 setEdit={setEdit}
                                 editProgramItem={editProgramItem}
                             />
