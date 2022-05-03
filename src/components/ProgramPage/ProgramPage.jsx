@@ -13,7 +13,9 @@ function ProgramPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const program = useSelector(state => state.workout.programReducer)
+    const program = useSelector(state => state.workout.programReducer);
+    const time = useSelector(store => store.workout.weeksReducer);
+
 
     const [programDay, setProgramDay] = useState(1)
     const [frequencyToDays, setFrequencyToDays] = useState([]);
@@ -66,6 +68,18 @@ function ProgramPage() {
             setProgramExists(true);
         }
     }, [program])
+
+      //This useEffect turns the frequency number in the workout reducer into
+    //an array of numbers for the RadioGroup .map to loop over
+    useEffect(() => {
+        let programDays = [];
+        const frequency = time.frequency;
+
+        for (let i = 0; i < frequency; i++) {
+            programDays.push(i + 1);
+        }
+        setFrequencyToDays(programDays);
+    }, [time])
 
 
     return (

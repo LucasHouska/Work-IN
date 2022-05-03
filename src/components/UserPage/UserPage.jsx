@@ -18,6 +18,7 @@ function UserPage() {
   const [favorites, setFavorites] = useState([]);
   const [programExists, setProgramExists] = useState(false);
   const [editProgramItem, setEditProgramItem] = useState(false);
+  const [frequencyToDays, setFrequencyToDays] = useState([]);
 
 
 
@@ -58,6 +59,19 @@ function UserPage() {
     setFavorites(temporaryFavorites);
   }, [maxes])
 
+  useEffect(() => {
+    let programDays = [];
+
+    for (let day of program) {
+      if (programDays.includes(day.program_day) === false) {
+        programDays.push(day.program_day);
+      }
+    }
+    setFrequencyToDays(programDays);
+
+    dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
+  }, [program]);
+
   return (
     <div className='container user-page'>
       <h1>Welcome, {user.username}!</h1>
@@ -81,7 +95,8 @@ function UserPage() {
         {programExists ?
           <div>
             <h2>Your Program</h2>
-            <ProgramList editProgramItem={editProgramItem}/>
+            <ProgramList editProgramItem={editProgramItem} frequencyToDays={frequencyToDays}
+              setFrequencyToDays={setFrequencyToDays} />
             <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProgram}>Manage Program</Button>
           </div>
           :

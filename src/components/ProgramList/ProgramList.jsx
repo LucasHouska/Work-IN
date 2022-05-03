@@ -22,7 +22,7 @@ import Button from '@material-ui/core/Button';
 
 
 
-function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem }) {
+function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editProgramItem, frequencyToDays, setFrequencyToDays }) {
 
     const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
     const programDay = time.programDay
 
     const [day, setDay] = useState([]);
-    const [frequencyToDays, setFrequencyToDays] = useState([]);
+    // const [frequencyToDays, setFrequencyToDays] = useState([]);
     const [edit, setEdit] = useState(false);
 
 
@@ -93,6 +93,11 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
     }, [programDay])
 
 
+
+
+//Dane says these two conflicting with each other screams refactor. Have on source
+//of truth for setFrequencyToDays
+
     // useEffect(() => {
     //         let programDays = [];
 
@@ -107,19 +112,19 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
     // }, [program]);
 
 
-    //This useEffect turns the frequency number in the workout reducer into
-    //an array of numbers for the RadioGroup .map to loop over
-    useEffect(() => {
-        let programDays = [];
-        let count = 1
-        const frequency = time.frequency;
+    // //This useEffect turns the frequency number in the workout reducer into
+    // //an array of numbers for the RadioGroup .map to loop over
+    // useEffect(() => {
+    //     let programDays = [];
+    //     let count = 1
+    //     const frequency = time.frequency;
 
-        for (let i = 0; i < frequency; i++) {
-            programDays.push(count);
-            count++
-        }
-        setFrequencyToDays(programDays);
-    }, [time])
+    //     for (let i = 0; i < frequency; i++) {
+    //         programDays.push(count);
+    //         count++
+    //     }
+    //     setFrequencyToDays(programDays);
+    // }, [time])
 
     return (
         <>
