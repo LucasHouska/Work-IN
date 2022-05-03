@@ -139,9 +139,14 @@ function ExercisePage() {
 
 
     useEffect(() => {
-        dispatch({ type: `GET_WORKOUT`, payload: workoutId });
+        // dispatch({ type: `GET_WORKOUT`, payload: workoutId });
 
+        setTimeout(getWorkout, 500);
     }, [])
+
+    const getWorkout = () => {
+        dispatch({ type: `GET_WORKOUT`, payload: workoutId });
+    }
 
     const classes = useStyles();
 
@@ -203,9 +208,9 @@ function ExercisePage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {currentExercise && currentExercise.map((exercise) => (
+                        {currentExercise && currentExercise.map((exercise, i) => (
                             <ExerciseItem
-                                key={exercise?.id}
+                                key={i}
                                 exercise={exercise}
                             />
                         ))}

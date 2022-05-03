@@ -87,6 +87,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
                 promiseArray.push(
                     pool.query(queryText, values).then(result => {
+                        
                     }).catch(error => {
                         console.log(error);
                         res.sendStatus(500)
