@@ -39,7 +39,7 @@ function ProgramPage() {
     const postProgram = () => {
         dispatch({ type: 'POST_PROGRAM', payload: program });
 
-        history.push('/user');
+        setTimeout(goToProfile, 500);
     }
 
     // const handleEditProgram = () => {
@@ -56,8 +56,6 @@ function ProgramPage() {
     // }
 
     const goToProfile = () => {
-        dispatch({ type: 'SAVE_PROGRAM', payload: program })
-
         history.push('/user');
     }
 
@@ -69,7 +67,7 @@ function ProgramPage() {
         }
     }, [program])
 
-      //This useEffect turns the frequency number in the workout reducer into
+    //This useEffect turns the frequency number in the workout reducer into
     //an array of numbers for the RadioGroup .map to loop over
     useEffect(() => {
         let programDays = [];
@@ -89,7 +87,7 @@ function ProgramPage() {
                     <ProgramForm programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
                 </div>
                 <ProgramList editProgramItem={editProgramItem} programDay={programDay} setProgramDay={setProgramDay} frequencyToDays={frequencyToDays} setFrequencyToDays={setFrequencyToDays} exerciseToAddToProgram={exerciseToAddToProgram} setExerciseToAddToProgram={setExerciseToAddToProgram} />
-                    <Button onClick={postProgram}>Save Program</Button>
+                <Button onClick={postProgram}>Save Program</Button>
             </div>
         </>
     )

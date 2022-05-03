@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { useCallback } from 'react';
 
 
 function* getProgram() {
@@ -15,6 +16,13 @@ function* postProgram(action) {
         console.log(action.payload)
         yield axios.post('/api/program/program', action.payload);
 
+        yield ({ type: 'GET_PROGRAM'});
+
+        console.log('got here...');
+
+        yield action.callback;
+
+        console.log('but not here...');
     } catch (error) {
         console.log(error);
     }

@@ -56,7 +56,9 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
     }
 
     const handleDeleteProgram = () => {
-        dispatch({ type: 'DELETE_PROGRAM' })
+        dispatch({ type: 'DELETE_PROGRAM' });
+
+        setDay([]);
     }
 
 

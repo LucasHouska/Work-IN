@@ -101,7 +101,7 @@ const programReducer = (state = [], action) => {
 
         return temporaryState;
 
-    } else if (action.type === 'CLEAR_WORKOUT') {
+    } else if (action.type === 'CLEAR_PROGRAM') {
         return [];
     }
     return state;

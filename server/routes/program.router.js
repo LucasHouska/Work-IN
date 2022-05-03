@@ -59,9 +59,12 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     WHERE "user_id" = $1;
     `
 
+    console.log('deleting...');
+
     const value = [req.user.id];
 
     pool.query(queryText, value).then(result => {
+        console.log('deleted');
         res.sendStatus(200);
     }).catch(error => {
         console.log('Error in Program DELETE', error);
