@@ -7,6 +7,8 @@ function LoginPage() {
 
   return (
     <div>
+      <h1 className='button'>Welcome!</h1>
+      <br />
       <LoginForm />
 
       <center>

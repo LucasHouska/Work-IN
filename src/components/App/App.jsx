@@ -155,7 +155,7 @@ function App() {
                   <Redirect to='/workout' />
                   :
                   // Otherwise, show the Landing page
-                  <LandingPage />
+                  <LoginPage />
                 }
               </Route>
 
