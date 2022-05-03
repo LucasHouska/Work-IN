@@ -29,6 +29,12 @@ function* updateMaxWeight(action) {
     yield put({ type: 'GET_MAXES' })
 }
 
+function* deleteMax(action) {
+    yield axios.delete(`/api/exercise/${action.payload}`);
+
+    yield put({ type: 'GET_MAXES' });
+}
+
 function* updateFavorite(action) {
     yield axios.put('/api/exercise', action.payload);
 
@@ -57,6 +63,8 @@ function* exerciseSaga() {
     yield takeEvery('POST_MAX', postMax);
 
     yield takeEvery('UPDATE_MAX_WEIGHT', updateMaxWeight);
+
+    yield takeEvery('DELETE_MAX', deleteMax);
 
     yield takeEvery('UPDATE_FAVORITE', updateFavorite);
 

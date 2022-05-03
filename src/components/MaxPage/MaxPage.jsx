@@ -6,6 +6,8 @@ import MaxItem from '../MaxItem/MaxItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+
 
 function MaxPage() {
 
@@ -14,6 +16,7 @@ function MaxPage() {
 
     const maxes = useSelector(state => state.exercises.maxReducer)
     const [editNewMax, setEditNewMax] = useState(false);
+    const [deleteScreen, setDeleteScreen] = useState(false);
     const [newMax, setNewMax] = useState({ name_of_exercise: '', weight: 0 });
 
     const createNewMax = () => {
@@ -27,7 +30,11 @@ function MaxPage() {
     }
 
     const handleDelete = () => {
+        setDeleteScreen(true);
+    }
 
+    const handleSavedDelete = () => {
+        setDeleteScreen(false);
     }
 
     const goToProfile = () => {
@@ -41,7 +48,10 @@ function MaxPage() {
     return (
         <>
             <div id='delete-icon'>
-                <DeleteIcon onClick={handleDelete}></DeleteIcon>
+                {deleteScreen ?
+                    null
+                    :
+                    <DeleteIcon onClick={handleDelete}></DeleteIcon>}
             </div>
             <h1 id='maxes-title'>Maxes</h1>
             <div className='max-input'>
@@ -56,11 +66,19 @@ function MaxPage() {
             </div>
             <div className='max-list'>
                 {maxes.map(max => {
-                    return (<MaxItem key={max.id} max={max} />)
+                    return (<MaxItem
+                        key={max.id}
+                        max={max}
+                        deleteScreen={deleteScreen}
+                        setDeleteScreen={setDeleteScreen} />)
                 })}
             </div>
+            <br />
             <div className='button'>
-                <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProfile}>Back to Profile</Button>
+                {deleteScreen ?
+                    <Button variant='outlined' color='primary' onClick={handleSavedDelete}>Save</Button>
+                    :
+                    <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProfile}>Back to Profile</Button>}
             </div>
         </>
     )
