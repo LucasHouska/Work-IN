@@ -139,8 +139,6 @@ function ExercisePage() {
 
 
     useEffect(() => {
-        // dispatch({ type: `GET_WORKOUT`, payload: workoutId });
-
         setTimeout(getWorkout, 500);
     }, [])
 
