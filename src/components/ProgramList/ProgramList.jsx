@@ -74,19 +74,18 @@ function ProgramList({ exerciseToAddToProgram, setExerciseToAddToProgram, editPr
     }, [programDay])
 
 
-    //
-    useEffect(() => {
-        let programDays = [];
+    // useEffect(() => {
+    //         let programDays = [];
 
-        for (let day of program) {
-            if (programDays.includes(day.program_day) === false) {
-                programDays.push(day.program_day);
-            }
-        }
-        setFrequencyToDays(programDays);
+    //         for (let day of program) {
+    //             if (programDays.includes(day.program_day) === false) {
+    //                 programDays.push(day.program_day);
+    //             }
+    //         }
+    //         setFrequencyToDays(programDays);
 
-        dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
-    }, [program]);
+    //         dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
+    // }, [program]);
 
 
     //This useEffect turns the frequency number in the workout reducer into
