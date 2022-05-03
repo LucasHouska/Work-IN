@@ -134,7 +134,8 @@ input {
 }
 
 #maxes-title {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .max-list {
@@ -191,6 +192,13 @@ input {
 
 .form-inputs {
   display: flex;
+}
+
+#delete-icon {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 #progress-page {

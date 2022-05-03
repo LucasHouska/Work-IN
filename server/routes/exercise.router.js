@@ -142,4 +142,21 @@ router.put('/max_weight', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.delete('/:maxId', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+    DELETE FROM "maxes" 
+    WHERE "user_id" = $1 AND
+    "id" = $2;
+    `
+
+    const values = [req.user.id, req.params.maxId];
+
+    pool.query(queryText, values).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;
