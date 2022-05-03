@@ -87,17 +87,17 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
                 promiseArray.push(
                     pool.query(queryText, values).then(result => {
-                        console.log('result', result);
                     }).catch(error => {
                         console.log(error);
-                        // res.sendStatus(500)
+                        res.sendStatus(500)
                     }))
             }
         }
         console.log('promise array', promiseArray)
 
         promise.then(result => {
-            res.send({ workoutId })
+            console.log('result', result)
+            res.send({ workoutId, result })
         }).catch(error => {
             console.log('Error in workout GET baby', error)
             res.sendStatus(500);

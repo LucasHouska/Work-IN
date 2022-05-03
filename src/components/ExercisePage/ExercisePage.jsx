@@ -115,6 +115,7 @@ function ExercisePage() {
             if (exerciseNumbersInOrder.includes(exercise.exercise_number_in_workout) === false) {
                 exerciseNumbersInOrder.push(exercise.exercise_number_in_workout)
             }
+            console.log('in for loop', exerciseNumbersInOrder)
         }
 
         for (const exercise of exerciseList) {
@@ -130,6 +131,7 @@ function ExercisePage() {
         setCurrentExercise(temporaryCurrentExercise);
 
         if (index === (exerciseNumbersInOrder.length - 1)) {
+            console.log('in if', exerciseNumbersInOrder)
             setLastExercise(true);
         }
 
