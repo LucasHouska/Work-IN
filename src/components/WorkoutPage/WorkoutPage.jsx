@@ -89,6 +89,7 @@ function WorkoutPage() {
     return (
         <>
             <div id='workout-page'>
+                <h2>What are we doing today?</h2>
                 {/* Program feature coming soon! */}
                 {/* {programDays[0] && 
                 <div id='program-on-workout-page'>

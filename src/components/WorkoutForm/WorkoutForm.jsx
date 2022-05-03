@@ -92,7 +92,7 @@ function WorkoutForm() {
                 <Button variant='outlined' color='default' onClick={clearWorkout}>Clear</Button>
                 {user.access_level > 0 &&
                     <div>
-                        <Button variant='contained' color='default' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
+                        <Button variant='contained' color='primary' style={{ margin: 10 }} onClick={goToCreateExercise}>Create a new Exercise</Button>
                     </div>}
             </form>
         </>
