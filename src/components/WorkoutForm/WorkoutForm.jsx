@@ -20,7 +20,7 @@ function WorkoutForm() {
     const user = useSelector(store => store.user);
 
 
-    const [exerciseName, setExerciseName] = useState('');
+    // const [exerciseName, setExerciseName] = useState('');
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
         exerciseNumberInWorkout: 1,
         exercise_id: '',
@@ -30,17 +30,19 @@ function WorkoutForm() {
         weight: ''
     })
 
+    console.log('exerciseToAddToWorkout.exercise_name', exerciseToAddToWorkout);
 
 
 
     const addExerciseToWorkout = (event) => {
         event.preventDefault();
 
-        if (exerciseToAddToWorkout.exercise_name === '') {
+
+        if (exerciseToAddToWorkout.exercise_name == "") {
             Swal.fire(
                 'Hold the phone...',
                 'Please enter a new exercise'
-              )
+            )
         } else {
 
             dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
