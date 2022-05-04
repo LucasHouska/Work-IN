@@ -18,15 +18,13 @@ function AboutPage() {
         </ul>
         <h1>Going forward...</h1>
         <ul className='about-list'>
-          <li>Show the progress of the exercises done in the workout
-            on the finish page</li>
+          <li>Show the progress for exercises done after workout</li>
           <li>Add body weight, water, and mood tracker</li>
-          <li>Fix minor bugs</li>
         </ul>
         <h1>Big Thanks</h1>
         <ul className='about-list'>
-          <li>Dane</li>
-          <li>My cohort</li>
+          <li>Dane Smith</li>
+          <li>Butler cohort</li>
           <li>Prime Digital Academy</li>
           <li>My girlfriend, friends, and family</li>
         </ul>

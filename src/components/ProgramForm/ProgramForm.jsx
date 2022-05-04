@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import Swal from 'sweetalert2';
 
 
 
@@ -26,24 +27,32 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram, freque
     const addExerciseToProgram = (event) => {
         event.preventDefault();
 
-        dispatch({ type: 'ADD_EXERCISE_TO_PROGRAM', payload: exerciseToAddToProgram });
+        if (exerciseToAddToProgram.exercise_name == "") {
+            Swal.fire(
+                'Hold the phone...',
+                'Please enter a new exercise'
+            )
+        } else {
+
+            dispatch({ type: 'ADD_EXERCISE_TO_PROGRAM', payload: exerciseToAddToProgram });
 
 
-        setExerciseToAddToProgram({
+            setExerciseToAddToProgram({
             //In case I want to add a time-keeper for users
-            // number_of_weeks: time.weeks,
-            // start_date: time.startDate,
-            program_number: 1,
-            program_day: programDay,
-            exerciseNumberInWorkout: exerciseNumber,
-            exercise_id: '',
-            exercise_name: '',
-            number_of_sets: '',
-            number_of_reps: '',
-            weight: ''
-        })
+                // number_of_weeks: time.weeks,
+                // start_date: time.startDate,
+                program_number: 1,
+                program_day: programDay,
+                exerciseNumberInWorkout: exerciseNumber,
+                exercise_id: '',
+                exercise_name: '',
+                number_of_sets: '',
+                number_of_reps: '',
+                weight: ''
+            })
 
-        dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+            dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+        }
 
     }
 
@@ -66,19 +75,19 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram, freque
     }
 
     //In case I want to add a time-keeper for users
-    // const handleChangeWeeks = (event) => {
-    //     let weeks = Number(event.target.value);
+        // const handleChangeWeeks = (event) => {
+        //     let weeks = Number(event.target.value);
 
-    //     setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_weeks: weeks });
+        //     setExerciseToAddToProgram({ ...exerciseToAddToProgram, number_of_weeks: weeks });
 
-    //     // numberOfWeeks = weeks;
+        //     // numberOfWeeks = weeks;
 
-    //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
+        //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
 
-    // }
-    //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
+        // }
+        //     dispatch({ type: 'HOLD_WEEKS', payload: weeks })
 
-    // }
+        // }
 
 
     const goToCreateExercise = () => {
@@ -91,20 +100,6 @@ function ProgramForm({ exerciseToAddToProgram, setExerciseToAddToProgram, freque
         dispatch({ type: 'GET_EXERCISES' })
         dispatch({ type: 'GET_PROGRAM' })
     }, []);
-
-    // This useEffect fills the frequency input should there already be a program
-    // useEffect(() => {
-    //         let programDays = [];
-
-    //         for (let day of program) {
-    //             if (programDays.includes(day.program_day) === false) {
-    //                 programDays.push(day.program_day);
-    //             }
-    //         }
-    //         setFrequencyToDays(programDays);
-
-    //         dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
-    // }, [program]);
 
     return (
         <>

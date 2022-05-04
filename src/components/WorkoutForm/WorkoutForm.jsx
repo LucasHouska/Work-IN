@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import Swal from 'sweetalert2';
+
 
 
 
@@ -28,24 +30,30 @@ function WorkoutForm() {
     })
 
 
-
-
     const addExerciseToWorkout = (event) => {
         event.preventDefault();
 
-        dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
-        setExerciseToAddToWorkout({
-            exerciseNumberInWorkout: exerciseNumber,
-            exercise_id: '',
-            exercise_name: '',
-            number_of_sets: '',
-            number_of_reps: '',
-            weight: ''
-        })
+        if (exerciseToAddToWorkout.exercise_name == "") {
+            Swal.fire(
+                'Hold the phone...',
+                'Please enter a new exercise'
+            )
+        } else {
 
-        dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+            dispatch({ type: 'ADD_EXERCISE_TO_WORKOUT', payload: exerciseToAddToWorkout });
 
+            setExerciseToAddToWorkout({
+                exerciseNumberInWorkout: exerciseNumber,
+                exercise_id: '',
+                exercise_name: '',
+                number_of_sets: '',
+                number_of_reps: '',
+                weight: ''
+            })
+
+            dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
+        }
     }
 
     const handleExerciseInput = (event, value) => {
@@ -54,7 +62,7 @@ function WorkoutForm() {
 
     const clearWorkout = () => {
         dispatch({ type: 'CLEAR_WORKOUT' })
-        dispatch({type: 'GET_PROGRAM'})
+        dispatch({ type: 'GET_PROGRAM' })
     }
 
     const goToCreateExercise = () => {
@@ -77,7 +85,6 @@ function WorkoutForm() {
                     options={exercises}
                     getOptionLabel={(option) => option.exercise_name}
                     onChange={handleExerciseInput}
-                    // style={{ width: 300 }}
                     fullWidth
                     renderInput={(params) => <TextField {...params} label='Exercises' />}
                 />

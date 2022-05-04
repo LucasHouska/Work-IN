@@ -24,8 +24,10 @@ function FinishPage() {
     return (
         <>
             <div id='finish'>
-                <h1>YOU DID IT</h1>
-                <Button variant='contained' color='primary' onClick={handleClose}>Close</Button>
+                <h1>That's it!</h1>
+                <h2>All done!</h2>
+                <br/>
+                <Button variant='contained' color='primary' onClick={handleClose}>End Workout</Button>
             </div>
         </>
     )

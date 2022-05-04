@@ -101,8 +101,24 @@ const programReducer = (state = [], action) => {
 
         return temporaryState;
 
-    } else if (action.type === 'CLEAR_WORKOUT') {
+    } else if (action.type === 'CLEAR_PROGRAM') {
         return [];
+    }
+    return state;
+}
+
+const programLengthInDays = (state = 1, action) => {
+    if (action.type === 'SET_PROGRAM_LENGTH') {
+        let programDays = [];
+
+        for (let exercise of action.payload) {
+            if (programDays.includes(exercise.program_day) === false) {
+                programDays.push(exercise.program_day);
+            }
+        }
+
+
+        return programDays.length;
     }
     return state;
 }
@@ -127,5 +143,6 @@ export default combineReducers({
     exerciseList,
     exerciseNumber,
     programReducer,
-    weeksReducer
+    weeksReducer,
+    programLengthInDays
 });

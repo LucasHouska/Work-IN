@@ -19,6 +19,8 @@ function UserPage() {
   const [programExists, setProgramExists] = useState(false);
   const [editProgramItem, setEditProgramItem] = useState(false);
   const [frequencyToDays, setFrequencyToDays] = useState([]);
+  const [edit, setEdit] = useState(false);
+  const [isUserPage, setIsUserPage] = useState(true);
 
 
 
@@ -69,6 +71,8 @@ function UserPage() {
     }
     setFrequencyToDays(programDays);
 
+    console.log('userpage programday.length', programDays.length)
+
     dispatch({ type: 'HOLD_FREQUENCY', payload: programDays.length })
   }, [program]);
 
@@ -95,8 +99,13 @@ function UserPage() {
         {programExists ?
           <div>
             <h2>Your Program</h2>
-            <ProgramList editProgramItem={editProgramItem} frequencyToDays={frequencyToDays}
-              setFrequencyToDays={setFrequencyToDays} />
+            <ProgramList
+              editProgramItem={editProgramItem}
+              frequencyToDays={frequencyToDays}
+              setFrequencyToDays={setFrequencyToDays}
+              edit={edit}
+              isUserPage={isUserPage}
+            />
             <Button variant='contained' color='primary' style={{ margin: 20 }} onClick={goToProgram}>Manage Program</Button>
           </div>
           :
