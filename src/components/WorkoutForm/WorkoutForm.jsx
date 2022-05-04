@@ -20,7 +20,6 @@ function WorkoutForm() {
     const user = useSelector(store => store.user);
 
 
-    // const [exerciseName, setExerciseName] = useState('');
     const [exerciseToAddToWorkout, setExerciseToAddToWorkout] = useState({
         exerciseNumberInWorkout: 1,
         exercise_id: '',
@@ -29,9 +28,6 @@ function WorkoutForm() {
         number_of_reps: '',
         weight: ''
     })
-
-    console.log('exerciseToAddToWorkout.exercise_name', exerciseToAddToWorkout);
-
 
 
     const addExerciseToWorkout = (event) => {
@@ -55,8 +51,6 @@ function WorkoutForm() {
                 number_of_reps: '',
                 weight: ''
             })
-
-            setExerciseName('');
 
             dispatch({ type: 'ADD_TO_EXERCISE_NUMBER' })
         }
